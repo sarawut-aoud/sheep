@@ -1,0 +1,4 @@
+id -> varchar (200)
+ip_address -> varchar(50)
+timestamp -> varchar(50)
+data ->text
