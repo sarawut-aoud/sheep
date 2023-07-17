@@ -1050,3 +1050,6 @@ function reverseTextColor(rgb) {
 	return luminance > threshold ? "black" : "white";
 }
 console.log(navigator.userAgent);
+$(document).on("click", ".btngoback", async (e) => {
+	window.history.back();
+});

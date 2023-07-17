@@ -21,10 +21,10 @@ class CRUD_Controller extends CI_Controller
 		$data['user_prefix_name']	= $this->session->userdata('user_prefix_name');
 		$data['user_fullname']		= $this->session->userdata('user_fullname');
 		$data['user_lastname']		= $this->session->userdata('user_lastname');
-		$data['title_html'] = 'SARAWUT : Online';
-		$data['application_name'] = 'SARAWUT';
+		$data['title_html'] = 'Sheep : Online';
+		$data['application_name'] = 'Sheep';
 		$data['application_sub_name'] = 'Online';
-		$data['application_varsion'] = 'SARAWUT : Online ' . date('Y') . '  Version 1.0 ';
+		$data['application_varsion'] = 'Sheep : Online ' . date('Y') . '  Version 1.0 ';
 		$data['text_loading'] =  'L O A D I N G . . .';
 
 		$data['base_url'] = base_url();

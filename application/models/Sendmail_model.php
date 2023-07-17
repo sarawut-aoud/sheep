@@ -11,7 +11,7 @@ class Sendmail_model extends CI_Model
 			$mail->IsSMTP();
 			$mail->SMTPDebug = 0;
 			$mail->SMTPAuth = true;
-			$mail->Username = "noreply@geerang.com"; // account SMTP
+			$mail->Username = "noreply@noreply.com"; // account SMTP
 			$mail->Password = "P@ssw0rd2017"; // รหัสผ่าน SMTP 
 			$mail->Host = 'mail.geerang.com';
 			// $mail->SMTPSecure = 'tls';

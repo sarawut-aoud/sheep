@@ -161,7 +161,7 @@ if (!in_array($_SERVER['SERVER_NAME'], $localhost)) {
 	} else {
 		$mysql_port = 3306;
 	}
-	$DB_NAME = 'db_sarawut';
+	$DB_NAME = 'db_sheep';
 	$DB_USER = '@tar';
 	$DB_PASS = 'P@ssw0rd0979284920';
 }

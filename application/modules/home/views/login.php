@@ -10,35 +10,31 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
 
-                        <h3 class="mb-5">Sign in</h3>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label class="font-float" for="floatingInput">Email </label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label class="font-float" for="floatingPassword">Password</label>
-                        </div>
-
-                        <!-- Checkbox -->
-                        <div class="row mb-4">
-                            <div class="col d-flex justify-content-center">
-                                <!-- Checkbox -->
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                    <label class="form-check-label" for="form2Example31"> Remember me </label>
-                                </div>
+                        <div class="mb-5 d-flex justify-content-center w-100 align-items-center  gap-3">
+                            <div style="width: 85px;">
+                                <img src="{base_url}/assets/images/sheep.png" class="w-100">
                             </div>
-
-                            <div class="col">
-                                <!-- Simple link -->
-                                <a href="#!">Forgot password?</a>
+                            <div>
+                                <h3>เข้าสู่ระบบ</h3>
                             </div>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="inputUser" placeholder="name@example.com">
+                            <label class="font-float" for="inputUser">Email or Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <label class="font-float" for="inputPassword">Password</label>
+                        </div>
 
-                        <button class="btn btn-primary btn-lg btn-block mb-4" type="button">Login</button>
+                        <div class="d-flex justify-content-end mb-4">
+                            <!-- Simple link -->
+                            <a href="{base_url}home/forgetpassword">ลืมรหัสผ่าน ?</a>
+                        </div>
+
+                        <button class="btn btn-primary  btn-block mb-4" type="button">เข้าสู่ระบบ</button>
                         <div class="text-center">
-                            <p>Not a member? <a href="#!">Register</a></p>
+                            <p>ยังไม่ได้ลงทะเบียน ? <a href="{base_url}home/register">ลงทเะบียน</a></p>
                         </div>
 
                     </div>

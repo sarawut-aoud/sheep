@@ -57,11 +57,11 @@
     <div id="wrapper">
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column w-100">
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="w-100">
                 <!-- Begin Page Content -->
-                <div class="main-container">
+                <div class="main-container" class="w-100">
                     {page_content}
                 </div>
                 <!-- Begin Page Content -->

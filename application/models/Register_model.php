@@ -34,25 +34,18 @@ class Register_model extends CI_Model
 		return password_hash($key_encrypt, PASSWORD_BCRYPT, $options);
 	}
 
-	public function savepd($post)
+	public function register($post)
 	{
 		$data = array(
 			'title' 			=> $post['title'],
-			'first_name' 		=> $post['first_name'],
-			'last_name' 		=> $post['last_name'],
+			'firstname' 		=> $post['firstname'],
+			'lastname' 			=> $post['lastname'],
 			'email' 			=> $post['email'],
-			'id_card' 			=> str_replace('-', '', $post['id_card']),
 			'username' 			=> $post['username'],
 			'password' 			=> $this->secure_pass($post['password']),
-			'phone_number' 		=> str_replace('-', '', $post['phone_number']),
-			'birthday' 			=> date("Y-m-d", strtotime(str_replace('/', '-', $post['birthday']))),
-			'lineid' 			=> $post['lineid'],
-			'facebook' 			=> $post['facebook'],
-			'id_passport'   	=> $post['id_passport'],
-			'id_non_thai'   	=> $post['driver_license'],
-			'id_driver_license' => $post['non_id_card'],
+			'phone' 			=> NULL,
 		);
-		$this->db->insert('geerang_gts.personaldocument', $data);
-		$insert_id = $this->db->insert_id();
+		$this->db->insert('db_sheep.personaldocument', $data);
+		return $this->db->insert_id();
 	}
 }

@@ -5,7 +5,9 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
 
-                        <h3 class="mb-5">Sign in</h3>
+                        <div class="mb-5">
+                            <img src="{base_url}/assets/images/sheep.png" alt="">
+                        </div>
 
                         <div class="form-outline mb-4">
                             <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
