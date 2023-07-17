@@ -152,7 +152,7 @@ if (!in_array($_SERVER['SERVER_NAME'], $localhost)) {
 	$mysql_port = 3306;
 	$DB_USER = 'admin@tar'; //Database Username
 	$DB_PASS = 'P@ssw0rd0979284920';
-	$DB_NAME = 'db_sarawut'; // Database Name
+	$DB_NAME = 'db_sheep'; // Database Name
 } else {
 
 	// IN Localhost

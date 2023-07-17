@@ -104,7 +104,7 @@
     <div class="sidebar-bottom">
         <hr class="sidebar-divider d-none d-md-block">
         <div class="logout-content-bottom">
-            <a href="{base_url}/Process/logout">
+            <a href="{base_url}Process/logout">
                 <button class="btn btn-danger bottombtnlogout" type="button">
                     <div class="icon"> <i class="fas fa-sign-out-alt"></i> </div>
                     <div class="text">ออกจากระบบ</div>

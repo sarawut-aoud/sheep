@@ -11,7 +11,7 @@ class Process extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Register_model', 'regis');
-        $this->load->model('sendmail/Send_email_model', 'sendmail');
+        $this->load->model('Sendmail_model', 'sendmail');
     }
 
 
