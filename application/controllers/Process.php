@@ -1,10 +1,6 @@
 <?php
 if (!defined('BASEPATH'))  exit('No direct script access allowed');
 
-/**
- * [ Controller File name : Dashboard.php ]
- * สำหรับ Front-End
- */
 class Process extends MY_Controller
 {
     public function __construct()
@@ -12,11 +8,22 @@ class Process extends MY_Controller
         parent::__construct();
         $this->load->model('Register_model', 'regis');
         $this->load->model('Sendmail_model', 'sendmail');
+        $this->load->model('Users_login_model', 'login');
     }
 
 
     public function Login()
     {
+        
+        $result = $this->login->user_validate();
+        if ($result) {
+            $status = true;
+            $msg = 'ล็อกอินสำเร็จ';
+        } else {
+            $status = false;
+            $msg = 'ไม่พบผู้ใช้งานนี้';
+        }
+        echo json_encode(['status' => $status, 'msg' => $msg]);
     }
     public function register()
     {

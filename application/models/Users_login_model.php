@@ -37,12 +37,9 @@ class Users_login_model extends CI_Model
 	public function db_validate($username, $password, $table)
 	{
 		$key_encrypt = $this->encrypt_md5_salt($password);
-		$this->db->select("u.*,keep.user_id");
-		$this->db->from("$table as u");
-		$this->db->join("geerang_gts.position_keep as keep", "u.pd_id = keep.pd_id", "left");
-		$this->db->where('u.username', $username);
-		$this->db->limit(1);
-		$query = $this->db->get();
+		$query = $this->db->query(
+			"SELECT * FROM $table WHERE username = '$username' OR email = '$username' LIMIT 1"
+		);
 
 		if ($query->num_rows() == 1) {
 			if ($row = $query->row()) {
@@ -58,13 +55,9 @@ class Users_login_model extends CI_Model
 	public function db_changepass_validate($username, $password, $table)
 	{
 		$key_encrypt = $this->encrypt_md5_salt($password);
-		$this->db->select("u.*,keep.user_id");
-		$this->db->from("$table as u");
-		$this->db->join("geerang_gts.position_keep as keep", "u.pd_id = keep.pd_id", "left");
-		$this->db->where('u.username', $username);
-		$this->db->limit(1);
-		$query = $this->db->get();
-
+		$query = $this->db->query(
+			"SELECT * FROM $table WHERE username = `$username` OR email = `$username` LIMIT 1"
+		);
 		if ($query->num_rows() == 1) {
 			if ($row = $query->row()) {
 				//echo $this->secure_pass($password);
@@ -110,9 +103,35 @@ class Users_login_model extends CI_Model
 		$username = $this->security->xss_clean($this->input->post('input_username') ? $this->input->post('input_username') : $this->input->get('username'));
 		$password = $this->security->xss_clean($this->input->post('input_password') ? $this->input->post('input_password') : $this->input->get('password'));
 
-		$query_users = $this->db_validate($username, $password, 'geerang_gts.personaldocument');
-
+		$query_users = $this->db_validate($username, $password, 'db_sheep.personaldocument');
+		$status = false;
+		if ($query_users) {
+			$status = true;
+			self::create_session($query_users);
+		}
+		
 		// create seesion
-		return FALSE;
+		return 	$status;
+	}
+	private function create_session($data)
+	{
+		$this->load->config('preallocate');;
+		$title = '';
+		foreach ($this->config->item('title_option_th') as $key => $val) {
+			if ($data->title == $val['value']) {
+				$title = $val['label'];
+			}
+		};
+		
+
+
+		$date_set = [
+			'pd_id'	 			=> $data->pd_id,
+			'first_name' 		=> $data->firstname,
+			'last_name'			=> $data->lastname,
+			'email'				=> $data->email,
+			'title'				=> $title,
+		];
+		$this->session->set_userdata($date_set);
 	}
 }

@@ -38,6 +38,17 @@ class CRUD_Controller extends CI_Controller
 		$this->breadcrumb_data = $data;
 		$this->left_sidebar_data = $data;
 		$this->check_online =  in_array(explode('.', $_SERVER['HTTP_HOST'])[0], ['gts']);
+
+		// create session mobile
+		if ($this->agent->is_mobile()) {
+			$this->session->set_userdata(
+				[
+					'is_mobile' => 1,
+				]
+			);
+		} else {
+			unset($_SESSION['is_mobile']);
+		}
 	}
 
 

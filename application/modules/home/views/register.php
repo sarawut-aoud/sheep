@@ -25,37 +25,38 @@
                                 <h3>สมัครมาชิก</h3>
                             </div>
                         </div>
-                        <div>
+                        <div class="input-form">
                             <div class="mb-3">
                                 <label for="title" class="form-label">คำนำหน้า</label>
                                 <select class="form-control" id="title">
                                     <?php foreach ($title as $key => $val) : ?>
-                                        <option value="<?=$val['value']?>"><?=$val['label']?></option>
+                                        <option value="<?= $val['value'] ?>"><?= $val['label'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="firstname" class="form-label">ชื่อ</label>
+                                <label for="firstname" class="form-label">ชื่อ : <span style="color:red"> * </span></label>
                                 <input type="text" class="form-control" id="firstname" placeholder="ชื่อ">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">นามสกุล</label>
+                                <label for="lastname" class="form-label">นามสกุล : <span style="color:red"> * </span></label>
                                 <input type="text" class="form-control" id="lastname" placeholder="นามสกุล">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">ชื่อเข้าใช้งาน</label>
+                                <label for="lastname" class="form-label">ชื่อเข้าใช้งาน : <span style="color:red"> * </span></label>
                                 <input type="text" class="form-control" id="username" placeholder="ชื่อเข้าใช้งาน">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">อีเมลล์</label>
+                                <label for="lastname" class="form-label">อีเมลล์ : <span style="color:red"> * </span></label>
                                 <input type="text" class="form-control" id="email" placeholder="อีเมลล์">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">รหัสเข้าใช้งาน</label>
+                                <label for="lastname" class="form-label">รหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
                                 <input type="password" class="form-control" id="password" placeholder="รหัสเข้าใช้งาน">
+                                <small></small>
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">ยืนยันรหัสเข้าใช้งาน</label>
+                                <label for="lastname" class="form-label">ยืนยันรหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
                                 <input type="password" class="form-control" id="checkpassword" placeholder="ยืนยันรหัสเข้าใช้งาน">
                             </div>
                         </div>

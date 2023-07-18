@@ -8,7 +8,12 @@ class Home extends CRUD_Controller
         parent::__construct();
         $this->load->config('preallocate');
     }
-
+    public function check_page()
+    {
+        if (!$this->session->userdata('pd_id')) {
+            redirect('/home', 'refresh');
+        }
+    }
     public function index()
     {
         $this->setJs('/assets/js_modules/login.js?ft=' . time());
@@ -27,9 +32,17 @@ class Home extends CRUD_Controller
     }
     public function preview()
     {
+        $this->check_page();
         $this->setJs('/assets/js/chart.js');
         $this->setJs('/assets/js_modules/dashboard.js?ft=' . time());
         $this->setBread(['class' => '', 'ref' => base_url('home/preview'), 'name' => 'Home'], ['class' => 'active', 'ref' => '#', 'name' => 'Dashboard']);
         $this->renderview('home/view');
+    }
+    public function session()
+    {
+        echo '<pre>';
+
+        print_r($this->session->userdata());
+        die;
     }
 }

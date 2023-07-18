@@ -105,7 +105,7 @@
         $.widget.bridge('uibutton', $.ui.button)
 
         setTimeout(() => {
-            $('.loading-page').fadeOut(3000)
+            $('.loading-page').fadeOut(1000)
         }, 500);
     </script>
 

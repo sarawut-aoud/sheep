@@ -395,6 +395,7 @@ $config['sess_save_path']   = 'ci_sessions';
 $config['sess_match_ip']   = FALSE;
 $config['sess_time_to_update']     = 300;
 $config['sess_regenerate_destroy']   = FALSE;
+$config['sess_match_useragent'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -469,10 +470,9 @@ $config['csrf_exclude_uris'] = array(
   'rest_service/.*+',
   'soap_service/.*+',
   'api/.*+',
-  'https://gtsgeerang.local/api/.*+'
 );
 
-$config['csrf_exclude_uris'] = array('login/do_login');
+$config['csrf_exclude_uris'] = array('home/login');
 
 /*
 |--------------------------------------------------------------------------
@@ -540,7 +540,6 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-
 /*
   |--------------------------------------------------------------------------
   | HMVC Modular

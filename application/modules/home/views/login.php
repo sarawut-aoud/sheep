@@ -19,11 +19,11 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="inputUser" placeholder="name@example.com">
+                            <input type="text" class="form-control" id="inputUser" placeholder="name@example.com" autocomplete="off">
                             <label class="font-float" for="inputUser">Email or Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password" autocomplete="off">
                             <label class="font-float" for="inputPassword">Password</label>
                         </div>
 
@@ -32,9 +32,9 @@
                             <a href="{base_url}home/forgetpassword">ลืมรหัสผ่าน ?</a>
                         </div>
 
-                        <button class="btn btn-primary  btn-block mb-4" type="button">เข้าสู่ระบบ</button>
+                        <button class="btn btn-primary  btn-block mb-4" id="btnlogin" type="button">เข้าสู่ระบบ</button>
                         <div class="text-center">
-                            <p>ยังไม่ได้ลงทะเบียน ? <a href="{base_url}home/register">ลงทเะบียน</a></p>
+                            <p>ยังไม่ได้ลงทะเบียน ? <a href="{base_url}home/register">ลงทะเบียน</a></p>
                         </div>
 
                     </div>

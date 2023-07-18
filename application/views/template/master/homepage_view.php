@@ -152,7 +152,7 @@
             $('#accordionSidebar').hasClass('toggled') ? $('#sidebarToggle i').addClass('active') : $('#sidebarToggle i').removeClass('active')
         })
 
-        $('.loading-page').fadeOut(3000)
+        $('.loading-page').fadeOut(1000)
     </script>
 
     {another_js}
