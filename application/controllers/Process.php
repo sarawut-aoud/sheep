@@ -14,7 +14,7 @@ class Process extends MY_Controller
 
     public function Login()
     {
-        
+
         $result = $this->login->user_validate();
         if ($result) {
             $status = true;
@@ -66,6 +66,45 @@ class Process extends MY_Controller
         );
         $result = $this->Sendmail_model->sendtomail($subject, $datamail);
         return $result;
+    }
+
+    public function usernamecheck()
+    {
+        $post = (object)$this->input->post();
+        $status = false;
+        $msg = 'ไม่สามารถใช้ชื่อเข้าใช้งานนี้ได้';
+        $result = $this->db->query("SELECT username FROM db_sheep.personaldocument WHERE username = '$post->username'");
+        if ($result->num_rows() == 0 ) {
+            $status = true;
+            $msg = '';
+        }
+        if($post->username == ''){
+            $status = false;
+            $msg = '';
+        }
+        echo json_encode(array(
+            'status' => $status,
+            'data' => $msg,
+        ));
+    }
+    public function emailcheck()
+    {
+        $post = (object)$this->input->post();
+        $status = false;
+        $msg = 'ไม่สามารถใช้อีเมลล์นี้ได้';
+        $result = $this->db->query("SELECT email FROM db_sheep.personaldocument WHERE email = '$post->email'");
+        if ($result->num_rows() == 0 ) {
+            $status = true;
+            $msg = '';
+        }
+        if($post->email == ''){
+            $status = false;
+            $msg = '';
+        }
+        echo json_encode(array(
+            'status' => $status,
+            'data' => $msg,
+        ));
     }
     public function Logout()
     {

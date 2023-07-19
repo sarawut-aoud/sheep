@@ -26,6 +26,40 @@ const regis = {
 			}
 			return check;
 		},
+		checkpassword: () => {
+			let pass = $("#password").val();
+			let chkpass = $("#checkpassword");
+			chkpass.removeClass("request active");
+
+			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
+			if (pass) {
+				if (!$("#password").val().match(passw)) {
+					$("#password").addClass("request");
+				} else {
+					$("#password").removeClass("request").addClass("active");
+				}
+			} else {
+				$("#password").removeClass("active").addClass("request");
+			}
+			if (chkpass.val()) {
+				if (pass == chkpass.val() && chkpass.val() != "") {
+					chkpass.removeClass("request").addClass("active");
+				} else {
+					chkpass.addClass("request");
+				}
+			} else {
+				chkpass.addClass("request");
+			}
+		},
+		checkforminput: () => {
+			let status = false;
+			$(".input-form input").each((i, ev) => {
+				if ($(ev).hasClass("request") == true) {
+					status = true;
+				}
+			});
+			$("#btnregister").prop("disabled", status);
+		},
 	},
 	ajax: {
 		register: async () => {
@@ -62,6 +96,46 @@ const regis = {
 			}
 			loading_on_remove($("#btnregister"));
 		},
+		usernamecheck: async () => {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("process/usernamecheck"),
+				data: {
+					username: $("#username").val(),
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (!results.status) {
+						$("#username").removeClass("active").addClass("request");
+						$(".checkusername").text(results.data);
+					} else {
+						$("#username").removeClass("request").addClass("active");
+						$(".checkusername").text("");
+					}
+				},
+			});
+		},
+		emailcheck: async () => {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("process/emailcheck"),
+				data: {
+					email: $("#email").val(),
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (!results.status) {
+						$("#email").removeClass("active").addClass("request");
+						$(".checkemail").text(results.data);
+					} else {
+						$("#email").removeClass("request").addClass("active");
+						$(".checkemail").text("");
+					}
+				},
+			});
+		},
 	},
 	async init() {
 		$(document).on("click", "#btnregister", async (e) => {
@@ -69,6 +143,27 @@ const regis = {
 		});
 		$(document).on("keyup focus", ".input-form input", async (e) => {
 			this.methods.removeRequest($(e.target));
+		
+		});
+		$(document).on("blur", "#username", async (e) => {
+			this.ajax.usernamecheck();
+		});
+		$(document).on("blur", "#email", async (e) => {
+			this.ajax.emailcheck();
+		});
+		$(document).on("blur ", "#password", async (e) => {
+			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
+			if (!e.target.value.match(passw)) {
+				$("#password").addClass("request");
+			} else {
+				$("#password").removeClass("request").addClass("active");
+			}
+			if (e.target.value == "") {
+				$("#password").removeClass(" active");
+			}
+		});
+		$(document).on("keyup ", "#password,#checkpassword", async (e) => {
+			this.methods.checkpassword();
 		});
 	},
 };

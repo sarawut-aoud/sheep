@@ -97,6 +97,9 @@ body {
 .form-control.request {
 	border-color: var(--danger-color) !important;
 }
+.form-control.active {
+	border-color: var(--success-color) !important;
+}
 .form-control:focus {
 	color: unset;
 	background-color: unset;

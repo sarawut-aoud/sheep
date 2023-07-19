@@ -43,20 +43,20 @@
                                 <input type="text" class="form-control" id="lastname" placeholder="นามสกุล">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">ชื่อเข้าใช้งาน : <span style="color:red"> * </span></label>
+                                <label for="username" class="form-label">ชื่อเข้าใช้งาน : <span style="color:red"> * <span class="checkusername"></span></span></label>
                                 <input type="text" class="form-control" id="username" placeholder="ชื่อเข้าใช้งาน">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">อีเมลล์ : <span style="color:red"> * </span></label>
+                                <label for="email" class="form-label">อีเมลล์ : <span style="color:red"> * <span class="checkemail"></span></span></label>
                                 <input type="text" class="form-control" id="email" placeholder="อีเมลล์">
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">รหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
+                                <label for="password" class="form-label">รหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
                                 <input type="password" class="form-control" id="password" placeholder="รหัสเข้าใช้งาน">
-                                <small></small>
+                                <small class="mt-2">รหัสผ่านต้องมีตัวอักษร A-z และมากกว่า 6 หลักขึ้นไป</small>
                             </div>
                             <div class="mb-3">
-                                <label for="lastname" class="form-label">ยืนยันรหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
+                                <label for="checkpassword" class="form-label">ยืนยันรหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
                                 <input type="password" class="form-control" id="checkpassword" placeholder="ยืนยันรหัสเข้าใช้งาน">
                             </div>
                         </div>
