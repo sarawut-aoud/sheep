@@ -1053,3 +1053,24 @@ console.log(navigator.userAgent);
 $(document).on("click", ".btngoback", async (e) => {
 	window.history.back();
 });
+
+async function Getnoti() {
+	await $.ajax({
+		type: "GET",
+		dataType: "json",
+		url: site_url(),
+		success: (results) => {
+			let item = `<a class="dropdown-item d-flex align-items-center" href="#">
+						<div class="mr-3">
+							<div class="icon-circle bg-primary">
+								<i class="fas fa-user-plus text-white"></i>
+							</div>
+						</div>
+						<div>
+							<div class="small text-gray-500">date</div>
+							<span class="font-weight-bold">fullname ได้สมัครเข้าใช้งาน</span>
+						</div>
+					</a>`;
+		},
+	});
+}

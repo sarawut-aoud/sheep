@@ -29,42 +29,19 @@
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">
-                Alerts Center
+                แจ้งเตือน
             </h6>
             <a class="dropdown-item d-flex align-items-center" href="#">
                 <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                        <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                </div>
-                <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                </div>
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
                     <div class="icon-circle bg-success">
-                        <i class="fas fa-donate text-white"></i>
+                        <i class="fas fa-user-plus text-white"></i>
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
+                    <div class="small text-gray-500">date</div>
+                    <span class="font-weight-bold">fullname ได้สมัครเข้าใช้งาน</span>
                 </div>
             </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                </div>
-                <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
-                </div>
-            </a>
-            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
         </div>
     </li>
 
@@ -76,16 +53,16 @@
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="d-flex flex-column gap-1 justify-content-end align-items-end">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> Sarawut Aoudkla</span>
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> Programer</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?= $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name') ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?= $this->session->userdata('position_name') ?></span>
             </div>
 
-            <img class="img-profile rounded-circle" src="{base_url}/assets/images/IMG_7638.jpg">
+            <img class="img-profile rounded-circle" src="<?= $this->session->userdata('picture') ? base_url($this->session->userdata('picture')) : base_url('/assets/images/blank_person.jpg') ?>">
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in menu-profile " aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">
-                <div class="icon primary"><i class="fas fa-user fa-sm fa-fw   "></i></div>
+            <a class="dropdown-item" href="{base_url}profile/">
+                <div class="icon primary"><i class="fas fa-user fa-sm fa-fw "></i></div>
                 <div class="text">ข้อมูลส่วนตัว</div>
             </a>
 

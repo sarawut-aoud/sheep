@@ -109,15 +109,24 @@ class CRUD_Controller extends CI_Controller
 
 	protected function renderview($path)
 	{
-
-		$this->data['top_navbar'] = $this->parser->parse('template/master/top_navbar_view', $this->top_navbar_data, TRUE);
-		$this->data['left_sidebar'] = $this->parser->parse('template/master/left_sidebar_view', $this->left_sidebar_data, TRUE);
-		$this->data['breadcrumb_list'] = $this->parser->parse('template/master/breadcrumb_view', $this->breadcrumb_data, TRUE);
-		$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
 		$this->data['another_css'] = $this->another_css;
-
 		$this->data['another_js'] = $this->another_js;
-		$this->parser->parse('template/master/homepage_view', $this->data);
+		if ($this->agent->is_mobile()) {
+			$this->data['top_navbar'] = $this->parser->parse('template/mobile/top_navbar_view', $this->top_navbar_data, TRUE);
+			$this->data['menu'] = $this->parser->parse('template/mobile/menu_list_view', $this->top_navbar_data, TRUE);
+			$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
+			$this->parser->parse('template/mobile/homepage_view', $this->data);
+		} else {
+			$this->data['top_navbar'] = $this->parser->parse('template/master/top_navbar_view', $this->top_navbar_data, TRUE);
+			$this->data['left_sidebar'] = $this->parser->parse('template/master/left_sidebar_view', $this->left_sidebar_data, TRUE);
+			$this->data['breadcrumb_list'] = $this->parser->parse('template/master/breadcrumb_view', $this->breadcrumb_data, TRUE);
+			$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
+			$this->parser->parse('template/master/homepage_view', $this->data);
+		}
+
+		
+
+		
 	}
 	protected function render_main($path)
 	{

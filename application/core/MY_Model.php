@@ -1,10 +1,5 @@
 <?php
 
-/**
- * A base model with a series of CI Generator
- * @link http://phpcodemania.blogspot.com
- * @copyright Copyright (c) 2018, SONGCHAI SAETERN
- */
 class MY_Model extends CI_Model
 {
 	private $_table_name;
@@ -445,54 +440,5 @@ class MY_Model extends CI_Model
 	public function convertID($id)
 	{
 		return strlen($id) > 11 ? (int)urldecode(decrypt($id)) : urlencode(encrypt($id));
-	}
-
-	protected function set_log_create($post) // tbname,
-	{
-		$post = (object)array(
-			'tbname' => $post['tbname']
-		);
-		$data = array(
-			'l_tb_name' => $post->tbname,
-			'l_pk_id' 	=> $this->db->insert_id(),
-			'str_query'	=> $this->db->last_query(),
-			'user_id'	=> $this->session->userdata('admin')['user_admin_id']
-
-		);
-		$this->db->insert('geerang_gts.admin_log_create', $data);
-	}
-	protected function set_log_update($post) // tbname, id 
-	{
-		$post = (object)array(
-			'tbname' => $post['tbname'],
-			'pk_id'	 => $post['id'],
-		);
-		$data = array(
-			'l_tb_name' => $post->tbname,
-			'l_pk_id' 	=> $post->pk_id,
-			'str_query'	=> $this->db->last_query(),
-			'user_id'	=> $this->session->userdata('admin')['user_admin_id']
-		);
-		$this->db->insert('geerang_gts.admin_log_update', $data);
-	}
-
-	protected function set_log_delete($post, $str_query)
-	{
-		$post = (object)array(
-			'tbname' => $post['tbname'],
-			'pk_id'	 => $post['id'],
-			'log_record_data' => $this->db->get_where($post['tbname'], $str_query['where'])->row(),
-		);
-
-		$log_record_data = json_encode($post->log_record_data);
-		$this->db->delete($str_query['tb'], $str_query['where']);
-		$data = array(
-			'l_tb_name' 	=> $post->tbname,
-			'l_pk_id' 		=> $post->pk_id,
-			'str_query'		=> $this->db->last_query(),
-			'user_id'		=> $this->session->userdata('admin')['user_admin_id'],
-			'record_data'	=> $log_record_data,
-		);
-		return $this->db->insert('geerang_gts.admin_log_delete', $data);
 	}
 }

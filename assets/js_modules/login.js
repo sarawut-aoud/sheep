@@ -41,7 +41,7 @@ const login = {
 								showConfirmButton: false,
 								timer: 1500,
 							}).then(() => {
-								window.location.href = base_url("home/preview");
+								window.location.href = base_url("Dashboard");
 							});
 						} else {
 							Swal.fire({
