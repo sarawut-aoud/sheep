@@ -53,7 +53,7 @@
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="d-flex flex-column gap-1 justify-content-end align-items-end">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?= $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name') ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?php echo $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name') ?></span>
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?= $this->session->userdata('position_name') ?></span>
             </div>
 

@@ -75,6 +75,10 @@ body {
 	animation: page_rlt;
 	animation-duration: 450ms;
 }
+.btn {
+	padding: 0.5rem 1rem;
+	border-radius: 1em !important;
+}
 .btngoback {
 	display: flex;
 	gap: 0.5rem;
@@ -380,4 +384,15 @@ a:hover {
 	gap: 1rem;
 	justify-content: end;
 	border-top: 1px solid #c9c9c9;
+}
+.btn-upload {
+	position: relative;
+}
+.btn-upload > input[type="file"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
 }

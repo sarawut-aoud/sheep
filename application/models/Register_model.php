@@ -46,6 +46,15 @@ class Register_model extends CI_Model
 			'phone' 			=> NULL,
 		);
 		$this->db->insert('db_sheep.personaldocument', $data);
-		return $this->db->insert_id();
+		$last_id = $this->db->insert_id();
+		self::secretInsert($last_id);
+		return $last_id;
+	}
+	private function secretInsert($last_id)
+	{
+		$data = array(
+			'pd_id' => $last_id,
+		);
+		$this->db->insert('db_sheep.personalsecret', $data);
 	}
 }

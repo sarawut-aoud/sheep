@@ -109,7 +109,7 @@ class Users_login_model extends CI_Model
 			$status = true;
 			self::create_session($query_users);
 		}
-		
+
 		// create seesion
 		return 	$status;
 	}
@@ -122,8 +122,6 @@ class Users_login_model extends CI_Model
 				$title = $val['label'];
 			}
 		};
-		
-
 
 		$date_set = [
 			'pd_id'	 			=> $data->pd_id,
@@ -131,6 +129,8 @@ class Users_login_model extends CI_Model
 			'last_name'			=> $data->lastname,
 			'email'				=> $data->email,
 			'title'				=> $title,
+			'picture'			=> $data->picture,
+			'secret'			=> $this->db->get_where('db_sheep.personalsecret', ['pd_id' => $data->pd_id])->row()
 		];
 		$this->session->set_userdata($date_set);
 	}

@@ -23,7 +23,7 @@
                 </div>
                 <span class="font-weight-bold mt-3"><?= $result[0]['firstname'] ?> <?= $result[0]['lastname'] ?></span>
                 <span class="text-black-50"><?= $result[0]['email'] ?></span>
-                <span class="text-black-50">Private Profile <i class="fas fa-check-square text-success"></i></span>
+                <span class="text-black-50">Private Profile <?= $result[0]['private_profile'] == 1 ? '<i class="fas fa-check-square text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>' ?></span>
             </div>
         </div>
         <div class="col-md-8 ">
@@ -70,7 +70,7 @@
                         </div>
                         <div class="contents">
                             <div class="label">เบอร์โทร</div>
-                            <div class="text-value"></div>
+                            <div class="text-value"><?= $result[0]['phone'] ?></div>
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
                         </div>
                         <div class="contents">
                             <div class="label">LineID</div>
-                            <div class="text-value"></div>
+                            <div class="text-value"><?= $result[0]['line'] ?></div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="contents">
                             <div class="label">Website</div>
-                            <div class="text-value"></div>
+                            <div class="text-value"><?= $result[0]['website'] ?></div>
                         </div>
                     </div>
 
