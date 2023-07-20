@@ -140,7 +140,7 @@
         var csrf_cookie_name = '{csrf_cookie_name}';
         localStorage.setItem('lang_js', '<?= $this->session->userdata('language'); ?>')
         $.widget.bridge('uibutton', $.ui.button)
-
+        var mobile = false
 
         OverlayScrollbars($('#menu-sidebar')[0], {
             overflow: {
@@ -153,6 +153,7 @@
         })
 
         $('.loading-page').fadeOut(1000)
+        
     </script>
 
     {another_js}

@@ -28,6 +28,7 @@
 
     <link rel="stylesheet" href="{base_url}assets/css/_var_main.css">
     <link rel="stylesheet" href="{base_url}assets/dist/master.min.css">
+    <link rel="stylesheet" href="{base_url}assets/css/style_custom.css">
     <link rel="stylesheet" href="{base_url}assets/css/style_m_custom.css">
     <link rel="stylesheet" href="{base_url}assets/css/loading.css">
 
@@ -39,7 +40,7 @@
 
 
 <body style="height: auto;">
-
+    <input type="hidden" id="is_mobile" value="<?= true ?>">
     <div class="header">
         {top_navbar}
     </div>
@@ -88,6 +89,7 @@
         var csrf_cookie_name = '{csrf_cookie_name}';
         localStorage.setItem('lang_js', '<?= $this->session->userdata('language'); ?>')
         $.widget.bridge('uibutton', $.ui.button)
+        var mobile = true;
     </script>
 
     {another_js}

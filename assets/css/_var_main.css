@@ -4,7 +4,8 @@
 	--primary-3-color: #47b5ff;
 	--text-color: #dff6ff;
 	--text-black: #252525;
-	
+	--text-small-color: #666666;
+
 	--success-color: #20d119;
 	--warning-color: #ffd712;
 	--danger-color: #eb2323;
@@ -14,7 +15,7 @@
 
 	--font-color: #252525;
 	--box-shadow: 0 1px 4px 0 #939393;
-
+	--bg-box-color: #cbcbcb;
 	--blue: #4e73df;
 	--indigo: #6610f2;
 	--purple: #6f42c1;

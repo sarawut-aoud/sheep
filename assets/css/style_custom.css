@@ -63,6 +63,14 @@ body {
 		opacity: 1;
 	}
 }
+.img-circle {
+	border-radius: 50%;
+}
+.v-card-box {
+	box-shadow: var(--box-shadow);
+	border-radius: 1em;
+}
+
 .page-rlt {
 	animation: page_rlt;
 	animation-duration: 450ms;
@@ -121,6 +129,9 @@ input[type="checkbox"] {
 	border-color: var(--success-color);
 }
 .text-color * {
+	color: var(--text-color);
+}
+.text-small-color * {
 	color: var(--text-color);
 }
 .card-show-content {
@@ -317,4 +328,56 @@ a:hover {
 	cursor: pointer;
 	bottom: -5px;
 	right: 15px;
+}
+.v-label {
+	border-radius: 1em;
+	padding: 0.5rem 1rem;
+	display: flex;
+	width: 100%;
+	background-color: var(--bg-box-color);
+	min-height: 65px;
+}
+.v-label.w-icon {
+	gap: 1.5rem;
+}
+.v-label.w-icon .icon {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	font-size: 22px;
+}
+.v-label.w-icon i {
+	color: var(--text-black);
+}
+.v-label .contents {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.v-label .contents .label {
+	color: var(--text-black);
+}
+.v-label .contents .text-value {
+	color: var(--text-small-color);
+}
+.v-modal .modal-content {
+	border-radius: 12px;
+}
+.v-modal .modal-header {
+	border-radius: 12px 12px 0 0;
+	background-color: var(--primary-color);
+}
+.v-modal .modal-header .modal-title {
+	color: var(--text-black);
+}
+.offcanvas-header {
+	background-color: var(--primary-color);
+	color: var(--text-black);
+}
+.offcanvas-footer {
+	padding: 1rem;
+	display: flex;
+	gap: 1rem;
+	justify-content: end;
+	border-top: 1px solid #c9c9c9;
 }

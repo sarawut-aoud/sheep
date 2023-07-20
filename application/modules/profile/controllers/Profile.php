@@ -10,6 +10,9 @@ class Profile extends CRUD_Controller
 
         $this->load->model('Profile/Profile_model', 'profile');
 
+        // javascript
+        $this->setJs('/assets/js/croppie.js');
+        $this->setJs('/assets/js_modules/profile.js?ft=' . time());
 
         if (!$this->session->userdata('pd_id')) {
             redirect('/home', 'refresh');
@@ -20,7 +23,15 @@ class Profile extends CRUD_Controller
         $this->setBread(['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'], ['class' => 'active', 'ref' => '#', 'name' => 'ข้อมูลส่วนตัว']);
 
         $this->data['result'] = $this->profile->get_userdata();
-       
+
         $this->renderview('profile/view');
+    }
+    public function edit()
+    {
+        $this->setBread(['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'], ['class' => '', 'ref' => '#', 'name' => 'ข้อมูลส่วนตัว'], ['class' => 'active', 'ref' => '#', 'name' => 'แก้ไขข้อมูลส่วนตัว']);
+
+        $this->data['result'] = $this->profile->get_userdata();
+
+        $this->renderview('profile/edit');
     }
 }

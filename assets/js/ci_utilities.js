@@ -1054,8 +1054,8 @@ $(document).on("click", ".btngoback", async (e) => {
 	window.history.back();
 });
 
-async function Getnoti() {
-	await $.ajax({
+function Getnoti() {
+	$.ajax({
 		type: "GET",
 		dataType: "json",
 		url: site_url(),
@@ -1073,4 +1073,18 @@ async function Getnoti() {
 					</a>`;
 		},
 	});
+}
+function activemenu() {
+	let link = window.location.href;
+	let url = location.pathname.split("/")[2].toLowerCase();
+	let tag = "";
+	if ($("#is_mobile").val()) {
+		switch (true) {
+			case "profile": {
+				tag = ".navi-profile";
+				break;
+			}
+		}
+		$(tag).addClass("nav-active");
+	}
 }
