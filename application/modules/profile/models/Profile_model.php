@@ -8,6 +8,7 @@ class Profile_model extends MY_Model
         parent::__construct();
         $this->pd_id = $this->session->userdata('pd_id');
         $this->status = false;
+        $this->load->model('Users_login_model', 'login');
     }
     public function get_userdata()
     {
@@ -57,7 +58,34 @@ class Profile_model extends MY_Model
         $this->db->set($data_secret);
         $this->db->where('pd_id', decrypt($post->pd_id));
         $this->db->update('db_sheep.personalsecret');
-        
+
         return true;
+    }
+    public function checkpassword($post)
+    {
+        if ($post->old_password != '') {
+            $username = $this->db->get_where('db_sheep.personaldocument', ['pd_id' => $this->pd_id])->row('username');
+            $old_password = $this->security->xss_clean($post->old_password);
+            $query_users = $this->login->db_changepass_validate($username, $old_password, 'db_sheep.personaldocument');
+            $this->status =  $query_users;
+        }
+
+
+        return  $this->status;
+    }
+    public function updatepassword($post)
+    {
+        if ($post->password != '') {
+            $username = $this->db->get_where('db_sheep.personaldocument', ['pd_id' => $this->pd_id])->row('username');
+
+            $data = array(
+                'password' => $this->login->secure_pass($post->password)
+            );
+
+            $this->db->where('username', $username);
+            $rs = $this->db->update('db_sheep.personaldocument', $data);
+            $this->status =  $rs ? true : false;
+        }
+        return $this->status;
     }
 }

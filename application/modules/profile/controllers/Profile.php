@@ -98,4 +98,26 @@ class Profile extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function checkpassword()
+    {
+        $post = (object) $this->input->post(NULL, FALSE);
+        try {
+            $result = $this->profile->checkpassword($post);
+
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function updatepassword()
+    {
+        $post = (object) $this->input->post(NULL, FALSE);
+        try {
+            $result = $this->profile->updatepassword($post);
+
+            $this->setRes($result, ['msg' => ''], 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
 }

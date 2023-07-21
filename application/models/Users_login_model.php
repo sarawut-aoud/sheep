@@ -56,8 +56,9 @@ class Users_login_model extends CI_Model
 	{
 		$key_encrypt = $this->encrypt_md5_salt($password);
 		$query = $this->db->query(
-			"SELECT * FROM $table WHERE username = `$username` OR email = `$username` LIMIT 1"
+			"SELECT * FROM $table WHERE username = '$username' OR email = '$username' LIMIT 1"
 		);
+
 		if ($query->num_rows() == 1) {
 			if ($row = $query->row()) {
 				//echo $this->secure_pass($password);
@@ -68,7 +69,7 @@ class Users_login_model extends CI_Model
 				}
 			}
 		}
-		return array();
+		return  false;;
 	}
 
 
@@ -80,7 +81,7 @@ class Users_login_model extends CI_Model
 		$new_password = $this->security->xss_clean($this->input->post('new_password'));
 
 
-		$query_users = $this->db_changepass_validate($username, $old_password, 'geerang_gts.personaldocument');
+		$query_users = $this->db_changepass_validate($username, $old_password, 'db_sheep.personaldocument');
 		if ($query_users) {
 
 			$data = array(
@@ -88,7 +89,7 @@ class Users_login_model extends CI_Model
 			);
 
 			$this->db->where('username', $username);
-			$this->db->update('geerang_gts.personaldocument', $data);
+			$this->db->update('db_sheep.personaldocument', $data);
 
 			if ($this->db->affected_rows() > 0) {
 				return true;

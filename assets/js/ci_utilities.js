@@ -1078,13 +1078,19 @@ function activemenu() {
 	let link = window.location.href;
 	let url = location.pathname.split("/")[2].toLowerCase();
 	let tag = "";
+	console.log(url);
 	if ($("#is_mobile").val()) {
 		switch (true) {
-			case "profile": {
+			case url == "profile": {
 				tag = ".navi-profile";
+				break;
+			}
+			case url == "dashboard": {
+				tag = ".navi-home ";
 				break;
 			}
 		}
 		$(tag).addClass("nav-active");
 	}
 }
+activemenu()

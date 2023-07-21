@@ -12,7 +12,10 @@
 	box-shadow: var(--box-shadow);
 }
 .mb-container {
-	margin: 90px 0;
+	margin: 90px 15px 0 15px;
+}
+.homepage {
+	padding-bottom: 100px;
 }
 .footer ul {
 	z-index: 1000 !important;
@@ -24,8 +27,6 @@
 	width: 100%;
 	height: 80px;
 	color: #86858b;
-	border-top-left-radius: 25px;
-	border-top-right-radius: 25px;
 	background-color: var(--primary-color);
 }
 .promote p {

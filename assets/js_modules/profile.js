@@ -3,6 +3,7 @@ const profile = {
 		pd_id: "",
 		croppie: null,
 		rawdata: [],
+		newpassword: true,
 	},
 	components: {},
 	methods: {
@@ -22,10 +23,44 @@ const profile = {
 			$("#phone").val(data.phone);
 			$("#LineID").val(data.line);
 			$("#Website").val(data.website);
-			$("#PrivateProfile").prop("checked", data.private_profile==1?true:false);
-			$("#Notifications").prop("checked",  data.notify==1?true:false);
+			$("#PrivateProfile").prop(
+				"checked",
+				data.private_profile == 1 ? true : false
+			);
+			$("#Notifications").prop("checked", data.notify == 1 ? true : false);
 			$("#tokenNotifications").val(data.token_line);
-			$("#Receivemessages").prop("checked",  data.receive==1?true:false);
+			$("#Receivemessages").prop("checked", data.receive == 1 ? true : false);
+		},
+		checkpassword: () => {
+			let pass = $("#new_password").val();
+			let chkpass = $("#new_password_check");
+			chkpass.removeClass("request active");
+
+			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
+			if (pass) {
+				if (!$("#new_password").val().match(passw)) {
+					profile.data.newpassword = true;
+					$("#new_password").addClass("request");
+				} else {
+					$("#new_password").removeClass("request").addClass("active");
+					profile.data.newpassword = false;
+				}
+			} else {
+				profile.data.newpassword = true;
+				$("#new_password").removeClass("active").addClass("request");
+			}
+			if (chkpass.val()) {
+				if (pass == chkpass.val() && chkpass.val() != "") {
+					chkpass.removeClass("request").addClass("active");
+					profile.data.newpassword = false;
+				} else {
+					chkpass.addClass("request");
+					profile.data.newpassword = true;
+				}
+			} else {
+				profile.data.newpassword = true;
+				chkpass.addClass("request");
+			}
 		},
 	},
 	ajax: {
@@ -118,6 +153,59 @@ const profile = {
 				},
 			});
 		},
+		passwordcheck: async () => {
+			await $.ajax({
+				type: "post",
+				dataType: "json",
+				url: site_url("profile/checkpassword"),
+				data: {
+					old_password: $("#old_password").val(),
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (results.data) {
+						profile.data.newpassword = false;
+						$("#alertpassword").text("");
+
+						$("#old_password").removeClass("request").addClass("active");
+					} else {
+						$("#old_password").removeClass("active").addClass("request");
+						$("#alertpassword").text("รหัสผ่านไม่ตรงกัน");
+					}
+				},
+			});
+		},
+		updatepassword: async () => {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("profile/updatepassword"),
+				data: {
+					password: $("#new_password").val(),
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (results.status) {
+						Swal.fire({
+							icon: "success",
+							title: results.data,
+							showConfirmButton: false,
+							timer: 1500,
+						}).then(() => {
+							$("#updatepassword").modal("hide");
+							$("#updatepassword input").val("");
+						});
+					} else {
+						Swal.fire({
+							icon: "Error",
+							title: results.data,
+							showConfirmButton: false,
+							timer: 1500,
+						});
+					}
+				},
+			});
+		},
 	},
 	async init() {
 		await this.ajax.get_data();
@@ -160,6 +248,36 @@ const profile = {
 		});
 		$(document).on("click", "#saveprofile", async (e) => {
 			this.ajax.saveprofile();
+		});
+
+		$(document).on("blur ", "#password", async (e) => {
+			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
+			if (!e.target.value.match(passw)) {
+				$("#password").addClass("request");
+			} else {
+				$("#password").removeClass("request").addClass("active");
+			}
+			if (e.target.value == "") {
+				$("#password").removeClass(" active");
+			}
+		});
+		$(document).on("keyup ", "#new_password,#new_password_check", async (e) => {
+			this.methods.checkpassword();
+		});
+		$(document).on("blur", "#old_password", async (e) => {
+			this.ajax.passwordcheck();
+		});
+		setInterval(() => {
+			if (
+				$("#old_password").val() != "" &&
+				$("#new_password_check").val() != ""
+			) {
+				$("#savepassword").prop("disabled", this.data.newpassword);
+			}
+		}, 200);
+
+		$(document).on("click", "#savepassword", async (e) => {
+			this.ajax.updatepassword();
 		});
 	},
 };
