@@ -102,7 +102,7 @@ const profile = {
 								});
 							} else {
 								Swal.fire({
-									icon: "Error",
+									icon: "error",
 									title: results.data,
 									showConfirmButton: false,
 									timer: 1500,

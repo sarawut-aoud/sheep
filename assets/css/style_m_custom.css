@@ -28,6 +28,7 @@
 	height: 80px;
 	color: #86858b;
 	background-color: var(--primary-color);
+	gap: 0.5rem;
 }
 .promote p {
 	z-index: 1001 !important;

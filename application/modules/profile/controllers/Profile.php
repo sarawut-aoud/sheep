@@ -47,7 +47,7 @@ class Profile extends CRUD_Controller
     {
         $post = (object) $this->input->post(NULL, FALSE);
         try {
-            $data = $post->pictrue;
+            $data = urldecode($post->pictrue);
 
             $img_arr_a = explode(";", $data);
             $img_arr_b = explode(",", $img_arr_a[1]);

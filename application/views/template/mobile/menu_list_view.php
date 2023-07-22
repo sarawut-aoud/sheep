@@ -39,7 +39,14 @@
         <h5 id="offcanvasRightLabel">Setting</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-       
+    <div class="offcanvas-body p-4">
+        <div class="contents-setting">
+            <a href="{base_url}Process/logout">
+                <div class="contents">
+                    <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
+                    <div class="text">ออกจากระบบ</div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>

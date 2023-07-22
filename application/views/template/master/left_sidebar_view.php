@@ -16,7 +16,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{base_url}home/preview">
+        <a class="nav-link" href="{base_url}dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>HOME</span></a>
     </li>

@@ -14,7 +14,7 @@
         <div class="header-user">
             <div class="d-flex justify-content-end gap-3 align-items-center">
                 <div class="info">
-                    <span><?= $this->session->userdata('first_name').' '. $this->session->userdata('last_name')?></span>
+                    <span style="font-size: 14px;"><?= $this->session->userdata('first_name').' '. $this->session->userdata('last_name')?></span>
                     <div></div>
                 </div>
                 <div class="image">

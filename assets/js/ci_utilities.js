@@ -1085,7 +1085,7 @@ function activemenu() {
 				tag = ".navi-profile";
 				break;
 			}
-			case url == "dashboard": {
+			case url == "dashboard" || url == "reports": {
 				tag = ".navi-home ";
 				break;
 			}
@@ -1093,4 +1093,4 @@ function activemenu() {
 		$(tag).addClass("nav-active");
 	}
 }
-activemenu()
+activemenu();

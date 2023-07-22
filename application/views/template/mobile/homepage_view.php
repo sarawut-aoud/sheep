@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{base_url}assets/css/style_custom.css">
     <link rel="stylesheet" href="{base_url}assets/css/style_m_custom.css">
     <link rel="stylesheet" href="{base_url}assets/css/loading.css">
+    <link rel="stylesheet" href="{base_url}assets/icomoon/style.css">
 
 
     {another_css}
