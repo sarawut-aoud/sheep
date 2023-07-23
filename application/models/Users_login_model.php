@@ -131,8 +131,17 @@ class Users_login_model extends CI_Model
 			'email'				=> $data->email,
 			'title'				=> $title,
 			'picture'			=> $data->picture,
-			'secret'			=> $this->db->get_where('db_sheep.personalsecret', ['pd_id' => $data->pd_id])->row()
+			'secret'			=> $this->db->get_where('db_sheep.personalsecret', ['pd_id' => $data->pd_id])->row(),
+			'loginby'			=> self::get_loginby($data->pd_id),
 		];
 		$this->session->set_userdata($date_set);
+	}
+	private function get_loginby($pd_id)
+	{
+		$result = $this->db->query(
+			"SELECT status_name FROM db_sheep.user_status t1 LEFT JOIN db_sheep.personalsecret t2 ON t2.status_level = t1.id WHERE t2.pd_id = ?",
+			[$pd_id]
+		)->row('status_name');
+		return $result;
 	}
 }

@@ -54,7 +54,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="d-flex flex-column gap-1 justify-content-end align-items-end">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?php echo $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name') ?></span>
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?= $this->session->userdata('position_name') ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style=" text-transform: uppercase;"> <?= $this->session->userdata('loginby') ?></span>
             </div>
 
             <img class="img-profile rounded-circle" src="<?= $this->session->userdata('picture') ? base_url($this->session->userdata('picture')) : base_url('/assets/images/blank_person.jpg') ?>">

@@ -142,7 +142,8 @@
         localStorage.setItem('lang_js', '<?= $this->session->userdata('language'); ?>')
         $.widget.bridge('uibutton', $.ui.button)
         var mobile = false
-
+       
+       
         OverlayScrollbars($('#menu-sidebar')[0], {
             overflow: {
                 x: 'hidden',

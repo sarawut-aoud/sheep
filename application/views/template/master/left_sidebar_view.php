@@ -1,7 +1,12 @@
+<?php
+$menu = $this->data['menu_list'];
+$setting = $menu['menu_admin'];
+$progamelist = $menu['progamelist'];
+?>
 <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion position-relative" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <div class="sidebar-brand d-flex align-items-center justify-content-center" >
+    <div class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
             <img src="{base_url}/assets/images/application/s-icon.png" alt="" style="width: 50px;filter: invert(1);">
         </div>
@@ -18,77 +23,61 @@
     <li class="nav-item active">
         <a class="nav-link" href="{base_url}dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>HOME</span></a>
+            <span>หน้าแรก</span></a>
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <?php if (!empty($setting)) : ?>
+        <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Menu
-    </div>
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-sliders-h"></i>
-            <span>ตั้งค่า</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-bs-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Setting : </h6>
-                <a class="collapse-item" href="{base_url}">รายการแก้ไข-อัพเดต</a>
-                <a class="collapse-item" href="">Register</a>
-                <a class="collapse-item" href="">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="">404 Page</a>
-                <a class="collapse-item" href="">Blank Page</a>
-            </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Menu
         </div>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        progame list
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-toolbox"></i>
-            <span>ระบบแจ้งซ่อม</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="">Buttons</a>
-                <a class="collapse-item" href="">Cards</a>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item v-collapse">
+            <a class="nav-link collapsed " href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-sliders-h"></i>
+                <span>ตั้งค่า</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-bs-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <?php foreach ($setting as $key => $val) : ?>
+                        <a class="collapse-item" href="<?= base_url($val->href_module) ?>">
+                            <div class="icon"><i class="<?= $val->menu_icon ?>"></i></div>
+                            <div class="text"> <?= $val->application_name ?></div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
             </div>
+        </li>
+    <?php endif; ?>
+    <?php if (!empty($progamelist)) : ?>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            progame list
         </div>
-    </li>
 
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-store-alt"></i>
-            <span>ระบบร้านขายสินค้า</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-bs-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="">Colors</a>
-                <a class="collapse-item" href="">Borders</a>
-                <a class="collapse-item" href="">Animations</a>
-                <a class="collapse-item" href="">Other</a>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item v-collapse">
+            <a class="nav-link collapsed " href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-sliders-h"></i>
+                <span>Menu</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <?php foreach ($progamelist as $key => $val) : ?>
+                        <a class="collapse-item" href="<?= base_url($val->href_module) ?>">
+                            <div class="icon"><i class="<?= $val->menu_icon ?>"></i></div>
+                            <div class="text"> <?= $val->application_name ?></div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    <?php endif; ?>
 
 
     <!-- Divider -->

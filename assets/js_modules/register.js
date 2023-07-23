@@ -1,5 +1,7 @@
 const regis = {
-	data: {},
+	data: {
+		password: true,
+	},
 	methods: {
 		addrequest: (tag) => {
 			$(tag).addClass("request");
@@ -35,20 +37,26 @@ const regis = {
 			if (pass) {
 				if (!$("#password").val().match(passw)) {
 					$("#password").addClass("request");
+					regis.data.password = true;
 				} else {
 					$("#password").removeClass("request").addClass("active");
+					regis.data.password = false;
 				}
 			} else {
 				$("#password").removeClass("active").addClass("request");
+				regis.data.password = true;
 			}
 			if (chkpass.val()) {
 				if (pass == chkpass.val() && chkpass.val() != "") {
 					chkpass.removeClass("request").addClass("active");
+					regis.data.password = false;
 				} else {
 					chkpass.addClass("request");
+					regis.data.password = true;
 				}
 			} else {
 				chkpass.addClass("request");
+				regis.data.password = true;
 			}
 		},
 		checkforminput: () => {
@@ -138,12 +146,12 @@ const regis = {
 		},
 	},
 	async init() {
+		$("#btnregister").prop("disabled", true);
 		$(document).on("click", "#btnregister", async (e) => {
 			await this.ajax.register();
 		});
 		$(document).on("keyup focus", ".input-form input", async (e) => {
 			this.methods.removeRequest($(e.target));
-		
 		});
 		$(document).on("blur", "#username", async (e) => {
 			this.ajax.usernamecheck();
@@ -155,16 +163,24 @@ const regis = {
 			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
 			if (!e.target.value.match(passw)) {
 				$("#password").addClass("request");
+				this.data.password = true;
 			} else {
 				$("#password").removeClass("request").addClass("active");
+				this.data.password = false;
 			}
 			if (e.target.value == "") {
 				$("#password").removeClass(" active");
+				this.data.password = false;
 			}
 		});
 		$(document).on("keyup ", "#password,#checkpassword", async (e) => {
 			this.methods.checkpassword();
 		});
+		setInterval(() => {
+			if ($("#password").val() != "" && $("#checkpassword").val() != "") {
+				$("#btnregister").prop("disabled", this.data.password);
+			}
+		}, 200);
 	},
 };
 regis.init();

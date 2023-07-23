@@ -14,11 +14,11 @@
         <div class="header-user">
             <div class="d-flex justify-content-end gap-3 align-items-center">
                 <div class="info">
-                    <span style="font-size: 14px;"><?= $this->session->userdata('first_name').' '. $this->session->userdata('last_name')?></span>
-                    <div></div>
+                    <span style="font-size: 14px;"><?= $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name') ?></span>
+                    <div style=" text-transform: uppercase;"><?= $this->session->userdata('loginby') ?></div>
                 </div>
                 <div class="image">
-                    <img class="img-circle" src="<?= $this->session->userdata('picture') ? base_url($this->session->userdata('picture') ) : base_url('/assets/images/blank_person.jpg') ?>" style="width: 3rem;" alt="User Image">
+                    <img class="img-circle" src="<?= $this->session->userdata('picture') ? base_url($this->session->userdata('picture')) : base_url('/assets/images/blank_person.jpg') ?>" style="width: 3rem;" alt="User Image">
                 </div>
             </div>
         </div>

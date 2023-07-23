@@ -29,9 +29,10 @@ class Process extends MY_Controller
     {
         $post = $this->input->post();
         $id = $this->regis->register($post);
-        if ($id) {
-            self::SetEmailSend($id);
-        }
+        // if ($id) {
+        //     self::SetEmailSend($id);
+        // }
+        echo json_encode(['status' => true, 'ลงทะเบียนสำเร็จ']);
     }
 
 
@@ -74,11 +75,11 @@ class Process extends MY_Controller
         $status = false;
         $msg = 'ไม่สามารถใช้ชื่อเข้าใช้งานนี้ได้';
         $result = $this->db->query("SELECT username FROM db_sheep.personaldocument WHERE username = '$post->username'");
-        if ($result->num_rows() == 0 ) {
+        if ($result->num_rows() == 0) {
             $status = true;
             $msg = '';
         }
-        if($post->username == ''){
+        if ($post->username == '') {
             $status = false;
             $msg = '';
         }
@@ -93,11 +94,11 @@ class Process extends MY_Controller
         $status = false;
         $msg = 'ไม่สามารถใช้อีเมลล์นี้ได้';
         $result = $this->db->query("SELECT email FROM db_sheep.personaldocument WHERE email = '$post->email'");
-        if ($result->num_rows() == 0 ) {
+        if ($result->num_rows() == 0) {
             $status = true;
             $msg = '';
         }
-        if($post->email == ''){
+        if ($post->email == '') {
             $status = false;
             $msg = '';
         }

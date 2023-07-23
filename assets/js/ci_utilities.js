@@ -1055,10 +1055,12 @@ $(document).on("click", ".btngoback", async (e) => {
 });
 
 function Getnoti() {
+	let url = location.pathname.split("/")[2].toLowerCase();
+	if (url == "home") return;
 	$.ajax({
 		type: "GET",
 		dataType: "json",
-		url: site_url(),
+		url: "api/getnoti",
 		success: (results) => {
 			let item = `<a class="dropdown-item d-flex align-items-center" href="#">
 						<div class="mr-3">
@@ -1093,4 +1095,44 @@ function activemenu() {
 		$(tag).addClass("nav-active");
 	}
 }
+
+function get_location(
+	option = {
+		province: false,
+		amphoe: false,
+		district: false,
+		all: false,
+	}
+) {
+	let data = null;
+	let url = location.pathname.split("/")[2].toLowerCase();
+	if (url == "home") return;
+	$.ajax({
+		type: "GET",
+		dataType: "json",
+		url: "api/getlocation",
+		success: (results) => {
+			console.log(results);
+			switch (true) {
+				case option.all == true:
+					data = results.all;
+					break;
+				case option.province == true:
+					data = results.province;
+					break;
+				case option.amphoe == true:
+					data = results.amphoe;
+					break;
+				case option.district == true:
+					data = results.district;
+					break;
+			}
+		},
+	});
+	return data;
+}
+
+// get funtion
 activemenu();
+get_location();
+Getnoti();

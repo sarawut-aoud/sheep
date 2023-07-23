@@ -109,8 +109,10 @@ class CRUD_Controller extends CI_Controller
 
 	protected function renderview($path)
 	{
+		$this->data['menu_list'] = $this->get_menu();
 		$this->data['another_css'] = $this->another_css;
 		$this->data['another_js'] = $this->another_js;
+		
 		if ($this->agent->is_mobile()) {
 			$this->data['top_navbar'] = $this->parser->parse('template/mobile/top_navbar_view', $this->top_navbar_data, TRUE);
 			$this->data['menu'] = $this->parser->parse('template/mobile/menu_list_view', $this->top_navbar_data, TRUE);
@@ -123,10 +125,36 @@ class CRUD_Controller extends CI_Controller
 			$this->data['page_content'] = $this->parser->parse_repeat($path, $this->data, TRUE);
 			$this->parser->parse('template/master/homepage_view', $this->data);
 		}
+	}
+	public function get_menu()
+	{
+		$login = $this->session->userdata('loginby');
+		$where = [];
+		$menuadmin = [];
+		$menumember = [];
+		if ($login == 'admin') {
+			$menuadmin = $this->db->get_where('db_sheep.application', ['menu_show' => 1, 'menu_level' => 5])->result();
+			$menumember = $this->db->get_where('db_sheep.application',  ['menu_show' => 1, 'menu_level' => 1])->result();
+		} else {
+			$where = [
+				'menu_show' => 1,
+				'menu_level' => self::get_loginby($this->session->userdata('pd_id'))
+			];
+			$menumember = $this->db->get_where('db_sheep.application', $where)->result();
+		}
+		return  (array)[
+			'menu_admin' 	=> $menuadmin ?  $menuadmin : NULL,
+			'progamelist'	=> $menumember ?  $menumember : NULL,
+		];
+	}
+	private function get_loginby($pd_id)
+	{
+		$result = $this->db->query(
+			"SELECT user_rate FROM db_sheep.user_status t1 LEFT JOIN db_sheep.personalsecret t2 ON t2.status_level = t1.id WHERE t2.pd_id = ?",
+			[$pd_id]
+		)->row('user_rate');
 
-		
-
-		
+		return $result;
 	}
 	protected function render_main($path)
 	{

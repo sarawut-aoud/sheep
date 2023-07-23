@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use Mpdf\Tag\Tr;
+
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
 class Register_model extends CI_Model
@@ -9,6 +13,7 @@ class Register_model extends CI_Model
 	{
 		parent::__construct();
 		$this->tb_users_login = 'users';
+		$this->load->model('Linenoti_model', 'line');
 	}
 
 	public function encrypt_md5_salt($pass)
@@ -48,13 +53,43 @@ class Register_model extends CI_Model
 		$this->db->insert('db_sheep.personaldocument', $data);
 		$last_id = $this->db->insert_id();
 		self::secretInsert($last_id);
+		self::lineresponse($last_id);
 		return $last_id;
 	}
 	private function secretInsert($last_id)
 	{
 		$data = array(
-			'pd_id' => $last_id,
+			'pd_id' 		=> $last_id,
+			'status_level'	=> 2
 		);
 		$this->db->insert('db_sheep.personalsecret', $data);
+	}
+
+
+	private function lineresponse($last_id)
+	{
+		$result = $this->db->get_where('db_sheep.personaldocument', ['pd_id' => $last_id])->row();
+		$row = $this->db->query(
+			"SELECT 
+				t2.token_line,
+				t2.notify
+			 FROM db_sheep.personaldocument t1 
+			 LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
+			 LEFT JOIN db_sheep.user_status t3 ON t3.id = t2.status_level
+			 WHERE t3.user_rate = 5  "
+		)->result(); // หา admin สำหรับส่งแจ้งเตือน เม่ื่อมีการรับแจ้งเตือน ผ่าน ไลน์
+		
+		foreach ($row as $key => $val) {
+			if ($val->notify == 1) { // เมื่อมีการเปิดแจ้งเตือน
+				$token = $val->token_line;
+				$str =
+					'สมาชิกได้ทำการลงทะเบียนแล้ว' .
+					"\n" . 'ชื่อ : ' . $result->firstname . ' ' . $result->lastname .
+					"\n" . 'username : ' . $result->username  .
+					"\n" . 'Email : ' . $result->email .
+					"\n" . 'วันที่/เวลา : ' . setDateToThai(date('Y-m-d H:i'), true, 'full_month');
+				$this->line->notify_message($str, $token);
+			}
+		}
 	}
 }

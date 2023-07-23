@@ -553,3 +553,35 @@ function RGBToHSL($RGB)
 
 	return (object) array('hue' => $h, 'saturation' => $s, 'lightness' => $l);
 }
+function DateThai($strDate, $type = null)
+{
+	$strYear = date("Y", strtotime($strDate)) + 543;
+	$strMonth = date("n", strtotime($strDate));
+	$strDay = date("j", strtotime($strDate));
+	$strMonthCut = array(
+		"",
+		"มกราคม",
+		"กุมภาพันธ์",
+		"มีนาคม",
+		"เมษายน",
+		"พฤษภาคม",
+		"มิถุนายน",
+		"กรกฎาคม",
+		"สิงหาคม",
+		"กันยายน",
+		"ตุลาคม",
+		"พฤศจิกายน",
+		"ธันวาคม",
+	);
+	$strMonthThai = $strMonthCut[$strMonth];
+
+	if ($type == NULL) {
+		return "$strDay $strMonthThai $strYear";
+	} else if ($type == 'Y' || $type == 'y') {
+		return "$strYear";
+	} else if ($type == 'M' || $type == 'm') {
+		return "$strMonthThai";
+	} else if ($type == 'D' || $type == 'd') {
+		return "$strDay";
+	}
+}

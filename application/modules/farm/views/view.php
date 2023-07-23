@@ -13,7 +13,7 @@
             <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mt-2 mb-3">
                 <h4 class="text-start">ข้อมูลฟาร์ม</h4>
                 <div class="d-flex gap-2  justify-content-end">
-                    <button type="button" class="btn btn-warning font-m">แก้ไขข้อมูลฟาร์ม</button>
+                    <button type="button" class="btn btn-warning font-m" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
                 </div>
             </div>
             <div class="col-md-8 ">
@@ -49,7 +49,7 @@
                             </div>
                             <div class="contents">
                                 <div class="label">ที่ตั้งฟาร์ม</div>
-                                <div class="text-value">17/6 ตำบลบางแสน อำเภอเมืองชลบุรี จังหวัดชลบุรี  <i class="fas fa-map-marker text-danger"></i></div>
+                                <div class="text-value">17/6 ตำบลบางแสน อำเภอเมืองชลบุรี จังหวัดชลบุรี <i class="fas fa-map-marker text-danger"></i></div>
                             </div>
                         </div>
 
@@ -101,5 +101,14 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="offcanvas offcanvas-end v-offcanvas" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="updatefarm" aria-labelledby="updatefarm">
+    <div class="offcanvas-header">
+        <h5 id="updatefarm">แก้ไขข้อมูลฟาร์ม</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
     </div>
 </div>

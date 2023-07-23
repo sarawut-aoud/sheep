@@ -18,7 +18,7 @@ class Dashboard extends CRUD_Controller
     {
 
         $this->setBread(['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'], ['class' => 'active', 'ref' => '#', 'name' => 'Dashboard']);
-
+        
         $this->renderview('dashboard/view');
     }
 }
