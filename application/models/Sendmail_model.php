@@ -54,11 +54,6 @@ class Sendmail_model extends CI_Model
 			$mail->Username = "noreply@secret-serv.com"; // account SMTP
 			$mail->Password = "P@ssw0rd0979284920"; // รหัสผ่าน SMTP 
 			$mail->Host = 'mail.secret-serv.com';
-			// $mail->Username = "noreply@geerang.com"; // account SMTP
-			// $mail->Password = "P@ssw0rd2017"; // รหัสผ่าน SMTP 
-			// $mail->Username = "support@geerang.com"; // account SMTP
-			// $mail->Password = "Xw02S9fDW"; // รหัสผ่าน SMTP 
-
 			$mail->Port = 25;
 			$mail->SMTPOptions = array(
 				'ssl' => array(
@@ -79,7 +74,6 @@ class Sendmail_model extends CI_Model
 			$mail->MsgHTML($data['message']);
 
 			$mail->AddAddress($data['email'], $data['email']); // ผู้รับคนที่หนึ่ง
-			//$mail->AddAddress("admin@ramacme.local", "recipient2"); // ผู้รับคนที่สอง
 
 			//Attach the uploaded file
 			if (isset($data['uploadfile']['tmp_name'])) {

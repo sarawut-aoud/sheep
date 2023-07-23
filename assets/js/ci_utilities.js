@@ -1062,17 +1062,43 @@ function Getnoti() {
 		dataType: "json",
 		url: "api/getnoti",
 		success: (results) => {
-			let item = `<a class="dropdown-item d-flex align-items-center" href="#">
-						<div class="mr-3">
-							<div class="icon-circle bg-primary">
-								<i class="fas fa-user-plus text-white"></i>
+			let data = results.result;
+			let mobile = data.mobile;
+			let item = "";
+			let sum = 0;
+			
+			if (data.register.detail.length>0) {
+				let reg = data.register.detail;
+				reg.forEach((ev, i) => {
+					item += `<a class="dropdown-item d-flex align-items-center" href="#">
+							<div class="mr-3">
+								<div class="icon-circle bg-success">
+									<i class="fas fa-user-plus text-white"></i>
+								</div>
 							</div>
-						</div>
-						<div>
-							<div class="small text-gray-500">date</div>
-							<span class="font-weight-bold">fullname ได้สมัครเข้าใช้งาน</span>
-						</div>
-					</a>`;
+							<div>
+								<div class="small text-gray-500">${ev.create_at}</div>
+								<span class="font-weight-bold">${ev.fullname} ได้สมัครเข้าใช้งาน</span>
+							</div>
+						</a>`;
+				});
+				$("#first-noti").hide();
+				$("#topnoti-content").html(item);
+				OverlayScrollbars($("#topnoti-content")[0], {
+					overflow: {
+						x: "hidden",
+					},
+				});
+			}else{
+				$("#first-noti").show();
+			}
+
+			sum = data.register.detail.length;
+			if (sum > 0) {
+				$("#topnoti").text(sum);
+			} else {
+				$("#topnoti").text("");
+			}
 		},
 	});
 }
@@ -1135,4 +1161,9 @@ function get_location(
 // get funtion
 activemenu();
 get_location();
-Getnoti();
+Getnoti()
+const intervalMinutes = 1;
+const intervalMilliseconds = intervalMinutes * 60 * 1000;
+setInterval(() => {
+	Getnoti();
+}, intervalMilliseconds);

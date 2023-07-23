@@ -55,6 +55,8 @@ const login = {
 				});
 				loading_on_remove($("#btnlogin"));
 			}
+			loading_on_remove($("#btnlogin"));
+
 		},
 	},
 	async init() {

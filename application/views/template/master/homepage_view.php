@@ -149,6 +149,7 @@
                 x: 'hidden',
             },
         });
+       
 
         $('#sidebarToggle').click(() => {
             $('#accordionSidebar').hasClass('toggled') ? $('#sidebarToggle i').addClass('active') : $('#sidebarToggle i').removeClass('active')

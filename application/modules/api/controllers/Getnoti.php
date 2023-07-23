@@ -31,11 +31,9 @@ class Getnoti extends REST_Controller
         if ($this->pd_id) {
             $data_result = array(
                 'mobile' =>  $this->agent->is_mobile() ? true : false,
-                // 'approve_locationSwitch' => array(
-                // 	'id' => '0',
-                // 'num' => $this->Attendance->count_locationSwitch(), 
-                // 'detail' => lang('nav_approveLocationSwitch')
-                // ),
+                'register' => array(
+                    'detail' => self::get_userregister(),
+                ),
 
 
             );
@@ -45,5 +43,27 @@ class Getnoti extends REST_Controller
 
             $this->response(['status' => $status, 'result' => array()]);
         }
+    }
+    private function get_userregister()
+    {
+        $result = $this->db->query(
+            "SELECT
+                create_at,
+                CONCAT( firstname, ' ', lastname ) AS fullname 
+            FROM
+                db_sheep.personaldocument 
+            WHERE
+                TIMESTAMPDIFF(
+                    MINUTE,
+                create_at,
+                NOW()) < 1
+            "
+        )->result();
+        $data = [];
+        foreach ($result as $key => $val) {
+            $data[$key] = $val;
+            $data[$key]->create_at = setDateToThai($val->create_at, true, 'full_month');
+        }
+        return $data;
     }
 }

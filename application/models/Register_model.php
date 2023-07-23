@@ -78,9 +78,9 @@ class Register_model extends CI_Model
 			 LEFT JOIN db_sheep.user_status t3 ON t3.id = t2.status_level
 			 WHERE t3.user_rate = 5  "
 		)->result(); // หา admin สำหรับส่งแจ้งเตือน เม่ื่อมีการรับแจ้งเตือน ผ่าน ไลน์
-		
+
 		foreach ($row as $key => $val) {
-			if ($val->notify == 1) { // เมื่อมีการเปิดแจ้งเตือน
+			if ($val->notify == 1 && isset($val->token_line)) { // เมื่อมีการเปิดแจ้งเตือน
 				$token = $val->token_line;
 				$str =
 					'สมาชิกได้ทำการลงทะเบียนแล้ว' .
