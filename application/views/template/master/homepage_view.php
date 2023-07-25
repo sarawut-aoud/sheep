@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{base_url}assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Sweetalert2 -->
     <link rel="stylesheet" href="{base_url}assets/css/sweetalert2.min.css">
+    <!-- select2 -->
+    <link rel="stylesheet" href="{base_url}assets/g_template/vendor/bs-select/bs-select.css" />
+
 
     <link rel="stylesheet" href="{base_url}assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
@@ -35,7 +38,11 @@
 
     {another_css}
 
-
+    <style>
+        span.select2 {
+            width: 100% !important;
+        }
+    </style>
 </head>
 
 
@@ -116,6 +123,8 @@
     <script src="{base_url}assets/js/bootstrap.bundle.min.js"></script>
     <!-- Sweetalert2 -->
     <script src="{base_url}assets/js/sweetalert2.all.min.js"></script>
+    <!-- select2 -->
+    <script src="{base_url}assets/bootstrap_extras/select2/select2.full.min.js"></script>
 
     <script src="{base_url}assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
@@ -142,21 +151,20 @@
         localStorage.setItem('lang_js', '<?= $this->session->userdata('language'); ?>')
         $.widget.bridge('uibutton', $.ui.button)
         var mobile = false
-       
-       
+
+
         OverlayScrollbars($('#menu-sidebar')[0], {
             overflow: {
                 x: 'hidden',
             },
         });
-       
+
 
         $('#sidebarToggle').click(() => {
             $('#accordionSidebar').hasClass('toggled') ? $('#sidebarToggle i').addClass('active') : $('#sidebarToggle i').removeClass('active')
         })
 
         $('.loading-page').fadeOut(1000)
-        
     </script>
 
     {another_js}

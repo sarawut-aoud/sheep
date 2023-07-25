@@ -1066,8 +1066,8 @@ function Getnoti() {
 			let mobile = data.mobile;
 			let item = "";
 			let sum = 0;
-			
-			if (data.register.detail.length>0) {
+
+			if (data.register.detail.length > 0) {
 				let reg = data.register.detail;
 				reg.forEach((ev, i) => {
 					item += `<a class="dropdown-item d-flex align-items-center" href="#">
@@ -1089,7 +1089,7 @@ function Getnoti() {
 						x: "hidden",
 					},
 				});
-			}else{
+			} else {
 				$("#first-noti").show();
 			}
 
@@ -1122,46 +1122,21 @@ function activemenu() {
 	}
 }
 
-function get_location(
-	option = {
-		province: false,
-		amphoe: false,
-		district: false,
-		all: false,
-	}
-) {
-	let data = null;
+async function get_location() {
+	let data = [];
 	let url = location.pathname.split("/")[2].toLowerCase();
-	if (url == "home") return;
-	$.ajax({
+
+	return $.ajax({
 		type: "GET",
 		dataType: "json",
 		url: "api/getlocation",
-		success: (results) => {
-			console.log(results);
-			switch (true) {
-				case option.all == true:
-					data = results.all;
-					break;
-				case option.province == true:
-					data = results.province;
-					break;
-				case option.amphoe == true:
-					data = results.amphoe;
-					break;
-				case option.district == true:
-					data = results.district;
-					break;
-			}
-		},
+		success: (results) => {},
 	});
-	return data;
 }
 
 // get funtion
 activemenu();
-get_location();
-Getnoti()
+Getnoti();
 const intervalMinutes = 1;
 const intervalMilliseconds = intervalMinutes * 60 * 1000;
 setInterval(() => {

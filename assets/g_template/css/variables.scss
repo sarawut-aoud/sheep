@@ -1,0 +1,154 @@
+$white: #ffffff;
+$black: #111111;
+$grey: #666666;
+
+$body-bg: #0F0E0F;
+
+
+// Font Colors
+$font-color: #8a8a8a;
+$font-color-light: #dcdbdc;
+$font-color-dark: #1d1c1d;
+
+
+// Shades
+$bg-shade1: #292729;
+$bg-shade2: #353335;
+$bg-shade3: #4E4C4E;
+$bg-shade4: #767376;
+
+
+
+// Dark and Light Bg
+$dark-bg:  #292729;
+$card-dark: #2d2c2d;
+
+
+// Border Colors
+$border-bg: #565556;
+$border-bg-light: #3b3a3b;
+$border-bg-lighter: #d1d0d1;
+
+
+// Sidebar Color
+$sidebar-bg: #1b1a1b;
+$sidebar-hover-bg: #2c2a2c;
+$sidebar-active-bg: #2b2a2b;
+$sidebar-text-color: #979697;
+
+
+// Forms
+$form-bg: #ffffff;
+$form-border: #c3cbd6;
+$form-hover-border: #9ba5b3;
+$input-color: #232629;
+$input-color-light: #989da1; 
+
+$form-bg-dark: #282a2b;
+$form-border-dark: #515252;
+$form-hover-border-dark: #8c8d8d;
+
+$valid-color: #85b724;
+$invalid-color: #de3e3e;
+$label-color: #8d9092;
+$label-color-light: #989da1;
+
+
+// Table
+$table-dark-bg: #1e2122;
+$table-dark-bg-header: #121617;
+$table-dark-color: #8a8c90;
+$table-border: #373a3c;
+
+
+// Modal
+$modal-border: #ced9e6;
+$modal-border-dark: #505050;
+
+
+// Colors
+$red: #ff6a59;
+$dark-red: #de3e3e;
+$green: #b2ce84;
+$green2: #70A755;
+$dark-green: #85b724;
+$thick-green: #168e3b;
+$yellow: #fec02b;
+$dark-yellow: #e7a100;
+$blue: #4ba7e8;
+$dark-blue: #1676b9;
+$pink: #f3517b;
+$light-pink: #f98faa;
+$dark-pink: #e73d67;
+$orange: #ff8e67;
+$orange2: #FF713C;
+$dark-orange: #d4552d;
+$brick: #CA8F8C;
+$peach: #FD716E;
+$teal: #5fb2c3;
+$dark-teal: #1e8ba2;
+$violet: #5f6ec3;
+$violet2: #DFD9EA;
+$violet3: #201F8E;
+$dark-violet: #2b3da5;
+
+
+// Login
+$login-bg: #DEE0EB;
+$login-label-bg: #E2EFF7;
+
+
+// Transition
+@mixin transition($transition-property, $transition-time, $method) {
+	-webkit-transition: $transition-property $transition-time $method;
+	-moz-transition: $transition-property $transition-time $method;
+	-ms-transition: $transition-property $transition-time $method;
+	-o-transition: $transition-property $transition-time $method;
+	transition: $transition-property $transition-time $method;
+}
+
+// Box Sizing
+@mixin box-sizing($string){
+	-webkit-box-sizing: $string;
+	-moz-box-sizing: $string;
+	box-sizing: $string;
+}
+
+// Box Shadow
+@mixin box-shadow($off-y, $off-x, $blur, $color){
+	-moz-box-shadow: $off-y $off-x $blur $color; /* FF3.5+ */
+	-webkit-box-shadow: $off-y $off-x $blur $color; /* Saf3.0+, Chrome */
+	box-shadow: $off-y $off-x $blur $color; /* Opera 10.5, IE9 */
+}
+@mixin box-shadow-inset($top, $left, $blur, $color, $inset:"") {
+	-webkit-box-shadow: $top $left $blur $color $inset;
+	-moz-box-shadow: $top $left $blur $color $inset;
+	box-shadow: $top $left $blur $color $inset;
+}
+
+// Border Radius
+@mixin roundedCorners($size) {
+	-webkit-border-radius: $size + px;
+	-moz-border-radius: $size + px;
+	border-radius: $size + px;
+}
+@mixin roundedCornersAll($size1, $size2, $size3, $size4) {
+	-webkit-border-radius: $size1 $size2 $size3 $size4;
+	-moz-border-radius: $size1 $size2 $size3 $size4;
+	border-radius: $size1 $size2 $size3 $size4;
+}
+
+// Transform
+@mixin transform($args){
+	-webkit-transform: $args;
+	-moz-transform: $args;
+	-o-transform: $args;
+	-ms-transform: $args;
+	transform: $args;
+}
+
+// Opacity
+@mixin opacity($opacity) {
+	opacity: $opacity / 100;
+	filter: alpha(opacity=$opacity);
+}

@@ -1,5 +1,7 @@
 const farm = {
-	data: {},
+	data: {
+		rawsheeptype: null,
+	},
 	components: {
 		content: () => {
 			return `
@@ -94,7 +96,7 @@ const farm = {
 			$(document).on("show.bs.offcanvas", "#updatefarm", async (e) => {
 				let btn = $(e.relatedTarget);
 				let action = btn.data("action");
-				console.log(action);
+
 				let text = action == "create" ? "เพิ่มข้อมูลฟาร์ม" : "แก้ไขข้อมูลฟาร์ม";
 				$("#offcanvas-headerupdatefarm").text(text);
 
@@ -103,6 +105,7 @@ const farm = {
 					.fadeIn(300, () => {
 						$(".offcanvas-backdrop").addClass("show");
 					});
+				await farm.Jquery.get_location();
 			});
 			$(document).on("hide.bs.offcanvas", "#updatefarm", async (e) => {
 				$(`.offcanvas-backdrop`).fadeOut(10, () => {
@@ -110,10 +113,53 @@ const farm = {
 				});
 			});
 		},
+		get_location: async () => {
+			let amphoe = await get_location();
+			let district = await get_location();
+			let province = await get_location();
+
+			let data_province = "";
+			let data_district = "";
+			let data_amphoe = "";
+			province.result.province.forEach((ev, i) => {
+				data_province += `<option value="${ev.province_id}">${ev.nameTh}</option>`;
+			});
+			$("#province").html(data_province);
+		},
 	},
-	methods: {},
-	ajax: {},
+	methods: {
+		renderinputsheeptype: async (data) => {
+			if (!data) return;
+			let item = "";
+			data.forEach((ev, i) => {
+				item += `
+				<div class="mb-3 ">
+					<label for="sheep_type${ev.id}" class="form-label">จำนวน${ev.typename} <small>(ตัว)</small></label>
+					<input type="number" class="form-control" name="" id="sheep_type${ev.id}" min="0" max="100" data-type-id="${ev.id}"  placeholder="0">
+				</div>
+				`;
+			});
+			$("#show-sheeptype").html(item);
+		},
+	},
+	ajax: {
+		getsheeptype: async () => {
+			await $.ajax({
+				type: "get",
+				dataType: "json",
+				url: site_url("farm/get_typesheep"),
+				success: (results) => {
+					if (results.data) {
+						farm.data.rawsheeptype = results.data;
+					}
+				},
+			});
+		},
+	},
 	async inti() {
+		$(".select2").select2();
+		await this.ajax.getsheeptype();
+		await this.methods.renderinputsheeptype(this.data.rawsheeptype);
 		this.Jquery.main();
 		$("#show-content-detail-farm").html(this.components.content());
 	},

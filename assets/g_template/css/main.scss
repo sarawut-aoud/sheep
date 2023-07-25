@@ -1,0 +1,5057 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:		CLIQ Admin Dashboard
+Version:		1.0
+Last change: 	25/11/2021
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Table of Contents]
+
+1. Importing Sass Variables
+2. Importing Web Fonts
+	2.1 Lato Font
+	2.2 Merriweather Font
+	2.3 Rubik Mono One Font
+3. Body CSS
+4. Loading CSS
+5. Re Usable Styles
+	5.1 Anchor Reset
+	5.2 HR
+	5.3 Unorder List
+	5.4 Headings
+	5.5 Images
+	5.6 Background Images
+	5.7 Background Colors
+	5.8 Background Gradient Colors
+	5.9 Text Colors
+6. Layout CSS
+	6.1 Page Wrapper
+	6.2 Sidebar Wrapper
+	6.3 Main Container
+	6.4 Page Header
+	6.5 Search Container
+	6.6 Header Ations
+	6.7 Header Notifications
+	6.8 Header Profile Actions
+	6.9 Breadcrumb Container
+	6.10 Content Wrapper
+	6.11 App Footer
+	6.12 Country Dropdown
+7. Animations
+8. Components/Widgets
+	8.1 Button Icon
+	8.2 Custom Button Group
+	8.3 Custom Icon Group
+	8.4 Custom Badge Group
+	8.5 Chart Heights
+	8.6 Card Heights
+	8.7 Ratings
+	8.8 Product Cards
+		8.8.1 Product Cards
+		8.8.2 Product Checkout List
+	8.9 Download Icon
+	8.10 Download Button
+	8.11 More Button
+	8.12 Google Drive
+	8.13 Subscribers
+	8.14 Earnings
+	8.15 Earnings Container
+	8.16 Admins
+	8.17 Orders Badge
+	8.18 Car Loan
+	8.19 Latest Updates
+	8.20 Uploading
+	8.21 Notifications Container
+	8.22 Signups
+	8.23 Upgrade Plan
+	8.24 Sales Tile
+	8.25 Activity Container
+	8.26 Statistics
+	8.27 Bookmarks
+	8.28 Spinner Group
+9. Plugins
+	9.1 Overlay Scroll
+	9.2 DropZone
+	9.3 Credit Card
+	9.4 jVector Maps
+	9.5 Apex Graphs
+10. Pages
+	10.1 Login
+	10.2 Stars Blink Animation
+	10.3 Earth Rotate Animation
+	10.4 Rocket Launch Animation
+	10.5 Astronaut Animation
+	10.6 Error Screen
+	10.7 Maintenance Screen
+	10.8 Contacts
+	10.9 Pricing Plan
+	10.10 Account Settings
+	10.11 User Profile
+	10.12 Stats Tile
+	10.13 Create Offer
+	10.14 Top Rated Items
+	10.15 Chat Widget
+	10.16 Recent Orders
+	10.17 Invoice List
+	10.18 Create Invoice
+	10.19 Add Product
+	10.20 Edit Customer Status
+11. Bootstrap Overwrite CSS
+	11.1 Badge
+	11.2 Placeholder
+	11.3 Accordion
+	11.4 Alerts
+	11.5 Tabs
+	11.6 Cards
+	11.7 Buttons
+	11.8 Button Info
+	11.9 Button Danger
+	11.10 Button Warning
+	11.11 Button Success
+	11.12 Button Light
+	11.13 Button Dark
+	11.14 Button White
+	11.15 Dropdown Menu
+	11.16 List Group
+	11.17 Carousel
+	11.18 Form Controls
+	11.19 File Upload
+	11.20 Checkbox and Radio
+	11.21 Input Color Shades
+	11.22 Modal
+	11.23 Tables
+	11.24 Pagination
+	11.25 Progress
+	11.26 Spinners
+	11.27 Off Canvas
+	11.28 Row Gutters
+
+
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Typography]
+
+# Lato - Main Font
+# Merriweather Font - Additional Font
+-------------------------------------------------------------------*/
+
+/************************************************
+	************************************************
+				1. Importing Sass Variables
+	************************************************
+************************************************/
+@import 'variables.scss';
+
+
+
+/************************************************
+	************************************************
+				2. Importing Web Fonts
+	************************************************
+************************************************/
+// 2.1 Lato Font
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/lato/Lato-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/lato/Lato-Bold.ttf') format('truetype');
+    font-weight: bold;
+	font-style: normal;
+    font-display: swap;
+}
+
+
+// 2.2 Merriweather Font
+@font-face {
+    font-family: 'Merriweather';
+    src: url('../fonts/merriweather/Merriweather-Bold.ttf') format('truetype');
+    font-weight: bold;
+	font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Merriweather';
+    src: url('../fonts/merriweather/Merriweather-Regular.ttf') format('truetype');
+    font-weight: normal;
+	font-style: normal;
+    font-display: swap;
+}
+
+
+// 2.3 Rubik Mono One Font
+@font-face {
+    font-family: 'Rubik Mono One';
+    src: url('../fonts/rubik-mono/RubikMonoOne-Regular.ttf') format('truetype');
+    font-style: normal;
+	font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+/************************************************
+	************************************************
+					3. Body CSS
+	************************************************
+************************************************/
+html, body {
+	height: 100%;
+	font-size: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font: 400 .9rem 'Lato', sans-serif;
+	color: $font-color;
+	min-height: 100%;
+	position: relative;
+	&.login-container {
+		background: $login-bg;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&.maintenance-page {
+		background: $body-bg;
+		display: flex;
+		align-items: center;
+		color: $white;
+	}
+}
+
+
+
+/************************************************
+	************************************************
+					4. Loading CSS
+	************************************************
+************************************************/
+#loading-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5000;
+	background: rgba(0, 0, 0, 0.9);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	.spinner-border {
+		width: 10rem;
+		height: 10rem;
+		color: $green;
+		border-width: .25rem;
+	}
+	.loading-messsage {
+		font-size: 1.2rem;
+		margin: 15px auto;
+		color: $white;
+		text-transform: uppercase;
+		span {
+			-webkit-animation: loading 1.4s infinite alternate;
+			animation: loading 1.4s infinite alternate;
+			&:nth-child(1) {
+				-webkit-animation-delay: 0s;
+				animation-delay: 0s;
+			}
+			&:nth-child(2) {
+				-webkit-animation-delay: 0.1s;
+				animation-delay: 0.1s;
+			}
+			&:nth-child(3) {
+				-webkit-animation-delay: 0.2s;
+				animation-delay: 0.2s;
+			}
+			&:nth-child(4) {
+				-webkit-animation-delay: 0.3s;
+				animation-delay: 0.3s;
+			}
+			&:nth-child(5) {
+				-webkit-animation-delay: 0.4s;
+				animation-delay: 0.4s;
+			}
+			&:nth-child(6) {
+				-webkit-animation-delay: 0.5s;
+				animation-delay: 0.5s;
+			}
+			&:nth-child(7) {
+				-webkit-animation-delay: 0.6s;
+				animation-delay: 0.6s;
+			}
+		}
+	}
+	@-webkit-keyframes loading {
+		0% {
+		  	opacity: 1;
+		}
+		100% {
+		  	opacity: 0;
+		}
+	}
+	@keyframes loading {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+}
+
+
+/************************************************
+	************************************************
+				5. Re Usable Styles
+	************************************************
+************************************************/
+
+/************* 5.1 Anchor Reset *************/
+a {
+	color: $font-color;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+		color: inherit;
+	}
+}
+
+
+/************* 5.2 HR *************/
+hr {
+	background: $white;
+    opacity: .3;
+	&.dark {
+		background: $black;
+	}
+	&.light {
+		background: $bg-shade4;
+	}
+}
+
+
+/************* 5.3 Unorder List *************/
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	&.custom {
+		margin: 20px 0 0 20px;
+		li {
+			line-height: 180%;
+		}
+	}
+}
+
+
+/************* 5.4 Headings *************/
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 600;
+}
+h1 {
+	font-size: 3rem;
+	margin-bottom: .8rem;
+}
+h2 {
+	font-size: 2.5rem;
+	margin-bottom: .5rem;
+}
+h3 {
+	font-size: 2rem;
+	margin-bottom: .5rem;
+}
+h4 {
+	font-size: 1.5rem;
+	margin-bottom: .4rem;
+}
+h5 {
+	font-size: 1rem;
+	margin-bottom: .3rem;
+}
+h6 {
+	font-size: .925rem;
+	margin-bottom: .2rem;
+}
+p {
+	margin-bottom: .2rem;
+	font-size: .875rem;
+	line-height: 180%;
+}
+
+
+
+/************* 5.5 Images *************/
+img {
+	@include roundedCorners(3);
+}
+
+
+/************* 5.6 Background Images *************/
+.bg1 {
+	background: url(../img/card-bg-1.svg) no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+
+/************* 5.7 Background Colors *************/
+.shade-white {
+	background: $white;
+}
+.shade-yellow {
+	background: $yellow;
+}
+.shade-yellow2 {
+	background: $dark-yellow;
+}
+.shade-light-grey {
+	background: #D7DEDD
+}
+.shade-pink {
+	background: $pink;
+}
+.shade-pink2 {
+	background: $dark-pink;
+}
+.shade-red {
+	background: $red;
+}
+.shade-peach {
+	background: $peach;
+}
+.shade-orange {
+	background: $orange;
+}
+.shade-orange2 {
+	background: $orange2;
+}
+.shade-orange-dark {
+	background: $dark-orange;
+}
+.shade-green {
+	background: $green;
+}
+.shade-green2 {
+	background: $dark-green;
+}
+.shade-blue {
+	background: $blue;
+}
+.shade-violet {
+	background: $violet;
+}
+.shade-violet2 {
+	background: $violet2;
+}
+.shade-violet3 {
+	background: $violet3;
+}
+.shade-teal {
+	background: $teal;
+}
+
+
+
+/************* 5.8 Background Gradient Colors *************/
+.gradient-teal {
+	background: #36929b;
+	background: linear-gradient(45deg, #36929b 0%, #34c2d0 100%);
+}
+.gradient-blue {
+	background: #0066e0;
+	background: linear-gradient(45deg, #0066e0 0%, #00d0ff 100%);
+}
+.gradient-blue2 {
+	background: #0874af;
+	background: linear-gradient(45deg, #0874af 0%, #6cbce8 100%);
+}
+.gradient-blue-cream {
+	background: #2d71ab;
+	background: linear-gradient(45deg, #2d71ab 0%, #FAE6E3 100%);
+}
+.gradient-mist {
+	background: #b0d0c9;
+	background: linear-gradient(45deg, #b0d0c9 0%, #d6e1e7 100%);
+}
+.gradient-mist2 {
+	background: #85B2BA;
+	background: linear-gradient(45deg, #85B2BA 0%, #D0DFE2 100%);
+}
+.gradient-red {
+	background: #d63939;
+	background: linear-gradient(45deg, #d63939 0%, #FF857B 100%);
+}
+.gradient-orange {
+	background: #d4552d;
+	background: linear-gradient(45deg, #d4552d 0%, #ff8e67 100%)
+}
+.gradient-orange2 {
+	background: #FF504B;
+	background: linear-gradient(45deg, #FF504B 0%, #FEA061 100%)
+}
+.gradient-pink {
+	background: #e73d67;
+	background: linear-gradient(45deg, #e73d67 0%, #f98faa 100%)
+}
+.gradient-pink-teal {
+	background: #f56d92;
+	background: linear-gradient(45deg, #f56d92 0%, #29afaf 100%);
+}
+.gradient-brick {
+	background: #CA8F8C;
+	background: linear-gradient(45deg, #CA8F8C 0%, #eec5d4 100%);
+}
+.gradient-green {
+	background: #49914E;
+	background: linear-gradient(45deg, #49914E 0%, #B2D553 100%);
+}
+.gradient-green2 {
+	background: #75A855;
+	background: linear-gradient(45deg, #75A855 0%, #2EA557 100%);
+}
+.gradient-green-orange {
+	background: #48934B;
+	background: linear-gradient(45deg, #48934B 0%, #FE9E60 100%);
+}
+.gradient-peach {
+	background: #ff7778;
+	background: linear-gradient(45deg, #ff7778 0%, #ffa267 100%);
+}
+.gradient-peach2 {
+	background: linear-gradient(to right, #ef473a, #cb2d3e);
+}
+.gradient-peach3 {
+	background: rgb(254,121,116);
+	background: linear-gradient(90deg, #fe7974 0%, #fe8c68 25%, #ff9968 50%, #ff9e67 100%);
+}
+.gradient-peach4 {
+	background: #F5CEC6;
+	background: linear-gradient(45deg, #F5CEC6 0%, #FAE6E3 100%);
+}
+.gradient-yellow {
+	background: #e78000;
+	background: linear-gradient(45deg, #e78000 0%, #ffd26a 100%);
+}
+.gradient-violet {
+	background: #374bc3;
+	background: linear-gradient(45deg, #374bc3 0%, #8695e8 100%);
+}
+.gradient-violet2 {
+	background: #201F8E;
+	background: linear-gradient(45deg, #201F8E 0%, #31BFCE 100%);
+}
+.gradient-violet3 {
+	background: #201F8E;
+	background: linear-gradient(45deg, #201F8E 0%, #7170e8 100%);
+}
+.gradient-violet-light {
+	background: #4847CE;
+	background: linear-gradient(45deg, #4847CE 0%, #FFFFFF 100%);
+}
+.gradient-violet-pink {
+	background: #216ED8;
+	background: linear-gradient(45deg, #216ED8 0%, #FA7799 100%);
+}
+.gradient-dark-grey {
+	background: #464646;
+	background: linear-gradient(45deg, #464646 0%, #141819 100%)
+}
+.gradient-dark-grey2 {
+	background: #292929;
+	background: linear-gradient(45deg, #292929 0%, #676767 100%)
+}
+.gradient-grey {
+	background: #565656;
+	background: linear-gradient(45deg, #565656 0%, #393d3e 100%)
+}
+.gradient-grey2 {
+	background: #B1ABA6;
+	background: linear-gradient(45deg, #B1ABA6 0%, #E0E2E0 100%);
+}
+.gradient-grey3 {
+	background: #bfbfbf;
+	background: linear-gradient(45deg, #bfbfbf 0%, #ffffff 100%);
+}
+.gradient-white {
+	background: #e9f0f9;
+	background: linear-gradient(45deg, #e9f0f9 0%, #d7e1ec 100%);
+}
+.gradient-pearl {
+	background: #ffffff;
+	background: linear-gradient(45deg, #ffffff 0%, #f1f8ff 100%);
+}
+.gradient-pearl2 {
+	background: #ffffff;
+	background: linear-gradient(45deg, #ffffff 0%, #e8e8e8 100%);
+}
+.gradient-silver-light {
+	background: #a3b8d2;
+	background: linear-gradient(45deg, #a3b8d2 0%, #c6d5e3 100%);
+}
+.gradient-silver-dark {
+	background: #849ab8;
+	background: linear-gradient(45deg, #849ab8 0%, #364961 100%);
+}
+.gradient-teal-brown {
+	background: #3797A1;
+	background: linear-gradient(45deg, #3797A1 0%, #BC805A 100%);
+}
+.gradient-teal-cream {
+	background: #0D95AD;
+	background: linear-gradient(45deg, #0D95AD 0%, #FFD2C1 100%);
+}
+.gradient-vertical-strip {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 70px;
+	@include roundedCornersAll(0, 10px, 10px, 0);
+	background: $white;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%,  rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0) 70%);
+}
+.gradient-vertical-strip-grey {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 70px;
+	@include roundedCornersAll(0, 10px, 10px, 0);
+	background: $white;
+	background: linear-gradient(180deg, rgba(167, 167, 167, 0.3) 0%,  rgba(181, 181, 181, 0.2) 30%, rgba(255, 255, 255, 0) 70%);
+}
+.globe-bg {
+	overflow: hidden;
+	&:before {
+		content: '';
+		background: url(../img/globe.png) no-repeat;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		background-position: center right;
+		background-size: 50%;
+		opacity: 0.3;
+		z-index: 0;
+	}
+}
+
+
+
+/************* 5.9 Text Colors *************/
+.text-red {
+	color: $red;
+}
+.text-green {
+	color: $green;
+}
+.text-yellow {
+	color: $yellow;
+}
+.text-blue {
+	color: $blue;
+}
+.text-white {
+	color: $white;
+}
+.text-black {
+	color: $black;
+}
+.text-grey {
+	color: $grey;
+}
+.text-muted {
+	color: rgba(255, 255, 255, 0.5) !important;
+}
+
+
+
+/************************************************
+	************************************************
+					6. Layout CSS
+	************************************************
+************************************************/
+
+/************* 6.1 Page Wrapper *************/
+.page-wrapper {
+	padding: 10px;
+	background: $body-bg;
+}
+@media (max-width: 576px) {
+	.page-wrapper {
+		padding: 0;
+	}
+}
+
+
+/************* 6.2 Sidebar Wrapper *************/
+.sidebar-wrapper {
+	width: 160px;
+	padding: 0;
+	background: $sidebar-bg;
+	height: calc(100vh - 20px);
+	@include roundedCorners(10);
+	position: fixed;	
+	top: 10px;
+	left: 10px;
+	z-index: 999;
+	-webkit-transition: left .3s ease, width .3s ease;
+	transition: left .3s ease, width .3s ease;
+
+	/************* Sidebar Brand *************/
+	.sidebar-brand {
+		margin: 0;
+		.logo {
+			padding: 2.2rem 1rem 2.5rem 1rem;
+			min-height: 80px;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			img {
+				max-width: 90px;
+				max-height: 30px;
+			}
+		}
+	}
+
+	/************* Sidebar Icon Animation *************/
+	@keyframes iconUpDown {
+		0%, 100% {
+			  transform: translateY(3px);
+		}
+		50% {
+			  transform: translateY(-3px);
+		}
+	}
+
+	/************* Sidebar Menu *************/	
+	.sidebar-menu {
+		padding: 0;
+		ul {
+			li {
+				a {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-direction: column;
+					position: relative;
+					padding: 12px 15px 12px 15px;
+					color: $sidebar-text-color;
+					font-size: .925rem;
+					-webkit-transition: all 0.5s ease-in-out;
+					-moz-transition: all 0.5s ease-in-out;
+					-ms-transition: all 0.5s ease-in-out;
+					-o-transition: all 0.5s ease-in-out;
+					transition: all 0.5s ease-in-out;
+					position: relative;
+					i {
+						margin-bottom: 7px;
+						font-size: 1.4rem;
+						background-color: $white;
+						text-shadow: none;
+						color: $white;
+						width: 48px;
+						height: 48px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						-ms-flex-negative: 0;
+						flex-shrink: 0;
+						@include roundedCorners(50);
+					}
+					.menu-text {
+						-webkit-box-flex: 1;
+						-ms-flex-positive: 1;
+						flex-grow: 1;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						-ms-flex-negative: 1;
+						flex-shrink: 1;
+						overflow: hidden;
+					}
+					&:hover {
+						background-color: $sidebar-hover-bg;
+						color: $sidebar-text-color;
+						i {
+							animation: iconUpDown 1s linear infinite;
+						}
+					}
+				}
+				&.active-page-link {
+					background: $sidebar-active-bg;
+					position: relative;
+					pointer-events: none;
+					a {
+						color: $white;
+						i {
+							color: $white;
+							@include roundedCorners(50);
+						}
+					}
+				}
+				&.active {
+					a {
+						i {
+							color: $white;
+							@include roundedCorners(50);
+						}
+						&.current-page {
+							background: $sidebar-active-bg;
+							pointer-events: none;
+							position: relative;
+							color: $white;
+						}
+					}
+					.sidebar-submenu {
+						display: block;
+					}
+				}
+			}
+		}
+		.sidebar-dropdown {
+			> a:after {
+				font-family: "icomoon";
+				font-weight: bold;
+				font-size: 1rem;
+				content: "\eb67";
+				display: inline-block;
+				position: absolute;
+				right: 30px;
+				top: 28px;
+				-webkit-transition: -webkit-transform .3s ease;
+				transition: -webkit-transform .3s ease;
+				transition: transform .3s ease;
+				transition: transform .3s ease, -webkit-transform .3s ease;
+			}
+			.sidebar-submenu {
+				display: none;
+				ul {
+					padding: 0;
+					li {
+						a {
+							overflow: hidden;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+							padding: 10px 7px 10px 7px;
+							margin: 2px 8px;
+							@include roundedCorners(5);
+							&:hover {
+								background: $sidebar-hover-bg;
+								color: $font-color;
+							}
+						}
+					}
+				}
+			}
+			&.active > a:after {
+				-webkit-transform: rotate(-180deg);
+				transform: rotate(-180deg);
+				right: 30px;
+			}
+		}
+	}
+}
+
+
+/************* 6.3 Main Container *************/
+.main-container {	
+	@include roundedCorners(10);
+	-webkit-transition: padding-left .3s ease;
+	transition: padding-left .3s ease;
+	padding: 0 0 0 160px;
+	height: calc(100vh - 20px);
+}
+
+@media screen and (max-width: 1024px) {
+
+	/************* Page Wrapper *************/
+	.page-wrapper {
+		.sidebar-wrapper {
+			left: -180px;
+		}
+		&.toggled {
+			.sidebar-wrapper {
+				left: 10px;
+			}
+		}
+		/************* Main Container *************/
+		.main-container {
+			padding-left: 0px;
+		}
+	}
+	
+}
+@media (max-width: 576px) {
+	.main-container {
+		height: calc(100vh);
+	}
+}
+
+
+/************* 6.4 Page Header *************/
+.page-header {
+	padding: 10px 14px 20px 24px;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	.toggle-sidebar {
+		@extend .gradient-red;
+		@include roundedCorners(30);
+		cursor: pointer;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+    	min-width: 40px;
+    	height: 40px;
+		margin: 0 15px 0 0;
+		z-index: 1000;
+		i {
+			color: $white;
+			font-size: 1.1rem;
+		}
+		&:hover {
+			@extend .gradient-orange;
+		}
+	}
+}
+@media screen and (max-width: 1024px) {
+	.page-header {
+		.toggle-sidebar {
+			display: flex;
+			margin: 0 15px 0 0;
+		}
+	}
+}
+@media (max-width: 576px) {
+	.page-header {
+		padding: 20px 1rem;
+	}
+}
+
+
+/************* 6.5 Search Container *************/
+.search-container {
+	margin: 0;
+	padding: 0;
+	.input-group {
+		position: relative;
+		.form-control {
+			background: transparent;
+			border: 1px solid $border-bg;
+			border-radius: 4px !important;
+			min-width: 230px;
+			color: $white;
+			&:focus {
+				outline: none !important;
+				border: 1px solid $orange;
+				box-shadow: none;
+				.btn {
+					i {
+						color: $orange;
+					}
+				}
+			}
+		}
+		.btn {
+			position: absolute;
+			right: 5px;
+			top: 7px;
+			background: transparent;
+			border: 0;
+			padding: 4px 6px;
+			z-index: 10;
+			i {
+				color: $font-color;
+				font-size: 1.3rem;
+			}
+			&:hover {
+				i {
+					color: $orange;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 576px) {
+	.search-container {
+		.input-group {
+			.form-control {
+				min-width: 170px;
+			}
+		}
+	}
+}
+
+
+/************* 6.6 Header Ations *************/
+.header-actions-container {
+	display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+	margin-left: auto;
+}
+@media (max-width: 576px) {
+	.header-actions-container {
+		margin: 10px 0 0 auto;
+	}
+}
+.header-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-left: 1px solid $border-bg;
+    margin-left: 25px;
+    padding-left: 5px;
+	> li {
+		> a {
+			padding: 1rem 1rem;
+			display: flex;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			> i {
+				font-size: 1.5rem;
+				color: $font-color;
+			}
+			.count-label {
+				position: absolute;
+				top: 7px;
+				right: 5px;
+				width: 21px;
+				height: 21px;
+				font-size: 9px;
+				font-weight: 600;
+				@include roundedCorners(50);
+				border: 2px solid $body-bg;
+				color: $white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			img.flag-img {
+				width: 21px;
+				height: 21px;
+				@include roundedCorners(50);
+			}
+		}
+		.user-settings {
+			padding: 0 0 0 1rem;
+			color: $font-color;
+			.avatar {
+				position: relative;
+				margin: 0;
+				width: 48px;
+				height: 48px;
+				> img {
+					width: 48px;
+					height: 48px;
+					@include roundedCorners(50);
+				}
+				.status {
+					position: absolute;
+					top: -3px;
+					right: -4px;
+					width: 15px;
+					height: 15px;
+					@include roundedCorners(10);
+					border: 2px solid $body-bg;
+					&.busy {
+						@extend .gradient-red;
+					}
+					&.online {
+						@extend .gradient-green;
+					}
+					&.away {
+						@extend .gradient-yellow;
+					}
+				}
+			}
+			span.user-name {
+				margin-right: 8px;
+				vertical-align: middle;
+				display: inline-block;
+				max-width: 100px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
+		&:hover, &:focus {
+			> a {
+				i {
+					color: $font-color-light;
+				}
+			}
+			.dropdown-menu {
+				margin-top: 0;
+				display: block;
+			}
+		}
+	}
+}
+@media (max-width: 576px) {
+	.header-actions {
+		> li {
+			> a {
+				&.user-settings {
+					span.user-name {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/************* 6.7 Header Notifications *************/
+ul.header-notifications {
+	margin: 20px;
+	li {
+		margin: 5px 10px;
+		@include roundedCorners(3);
+		transition: all 0.5s ease;
+		a {
+			padding: .9rem 1rem;
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			color: $white;	
+			cursor: text;		
+			> .user-img {
+				position: relative;
+				margin: 0 15px 0 0;
+				img {
+					width: 60px;
+					height: 60px;
+					@include roundedCorners(50);
+				}
+			}
+			.details {
+				display: flex;
+				flex-direction: column;
+				> .user-title {
+					font-size: 1rem;
+					margin: 0 0 7px 0;
+					font-weight: bold;
+				}
+				.noti-details {
+					font-size: .925rem;
+					margin: 0 0 7px 0;
+					line-height: 150%;
+				}
+				.noti-date {
+					line-height: 150%;
+					font-size: .875rem;
+					opacity: .7;
+				}
+			}
+		}
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+
+/************* 6.8 Header Profile Actions *************/
+.header-profile-actions {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	a {
+		padding: 12px 10px;
+		transition: all 0.5s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		color: $white;
+		font-size: .925rem;
+		@include roundedCorners(15);
+		margin: 0 3px;
+		min-width: 96px;
+		&:hover {
+			color: $white;
+		}
+		i {
+			margin-bottom: .4rem;
+			font-size: 1.6rem;
+			vertical-align: text-top;
+		}
+	}
+}
+.header-profile-avatar {
+	margin: 0 0 20px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 10px;
+	img {
+		width: 80px;
+		height: 80px;		
+		@include roundedCorners(100);
+	}
+}
+.header-profile-block {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 45px 15px 15px 15px;
+	background: url(../img/header-profile-bg.svg) no-repeat;
+	background-size: 100%;
+    margin: -40px 10px 10px 10px;
+    flex-direction: column;
+	color: $font-color-light;
+	@include roundedCornersAll(10px, 10px, 20px, 20px);
+	h5 {
+		margin: 0 0 8px 0;
+	}
+	p {
+		line-height: 150%;
+	}
+}
+
+
+/************* 6.9 Breadcrumb Container *************/
+.breadcrumb-container {
+	display: flex;
+    align-items: center;
+}
+.breadcrumb {
+	background: transparent;
+	padding: 0;
+	margin: 0;;
+	font-size: .9rem;
+	.breadcrumb-item {		
+		color: $font-color;
+		font-weight: 400;
+		display: flex;
+    	align-items: center;
+		i {
+			font-size: 1.8rem;
+    		margin-right: 7px;
+		}
+		& + .breadcrumb-item::before {
+			color: $font-color;
+			font-family: 'icomoon' !important;
+			content: '\eb67';
+			font-size: 1.3rem;
+			line-height: 1;
+			vertical-align: middle;
+		}
+		a {
+			color: $font-color;
+		}
+	}
+	.breadcrumb-active {
+		color: $font-color-light;
+	}
+}
+@media (max-width: 576px) {
+	.breadcrumb {
+		font-size: .825rem;
+		.breadcrumb-item {
+			i {
+				font-size: 1.4rem;
+				margin-right: 5px;
+			}
+			& + .breadcrumb-item::before {
+				font-size: 1.5rem;
+			}
+		}
+	}
+}
+
+
+/************* 6.10 Content Wrapper *************/
+.content-wrapper-scroll {
+	padding: 0;
+}
+.content-wrapper {
+	padding: 0 14px 0 24px;
+	height: calc(100vh - 148px);
+	overflow: auto;
+}
+@media (max-width: 576px) {
+	.content-wrapper {
+		height: calc(100vh - 188px);
+		padding: 0 15px 0 15px;
+	}
+}
+
+
+/************* 6.11 App Footer *************/
+.app-footer {
+	font-size: .7rem;
+	color: rgba(255, 255, 255, 0.6);
+	margin: 0;
+	padding: 15px 14px 0 24px;
+	display: flex;
+	justify-content: flex-end;
+	span {
+		background-color: $bg-shade1;
+		padding: 8px 30px;
+		@include roundedCornersAll(100px, 100px, 30px, 30px);
+	}
+}
+@media (max-width: 576px) {
+	.app-footer {
+		padding: 15px 15px 0 15px;
+	}
+}
+
+
+/************* 6.12 Country Dropdown *************/
+.country-container {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+	a {
+		margin: 10px 0 10px 0;
+		img {
+			width: 20px;
+			height: 20px;
+			@include roundedCorners(100);
+			transition: all 1s ease-out;
+		}
+		&:hover {
+			img {
+				opacity: 0.6;
+			}
+		}
+	}
+}
+
+
+
+/************************************************
+	************************************************
+					7. Animations
+	************************************************
+************************************************/
+@keyframes MoveUpDown {
+	0%, 100% {
+	  	transform: translateY(5px);
+	}
+	50% {
+	  	transform: translateY(-5px);
+	}
+}
+
+
+@keyframes MoveLeftRight {
+	0%, 100% {
+	  	transform: translateX(5px);
+	}
+	50% {
+	  	transform: translateX(-5px);
+	}
+}
+
+
+/************************************************
+	************************************************
+				8. Components/Widgets
+	************************************************
+************************************************/
+
+/************* 8.1 Button Icon *************/
+.btn-icon {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	i {
+		font-size: 1.2rem;
+	}
+}
+
+
+/************* 8.2 Custom Button Group *************/
+.custom-btn-group {
+	display: flex;
+	flex-wrap: wrap;
+	&.flex-end {
+		justify-content: flex-end;
+	}
+	.btn {
+		margin: .25rem;
+	}
+}
+
+
+/************* 8.3 Custom Icon Group *************/
+.custom-icon-group {
+	display: flex;
+	flex-wrap: wrap;
+	&.flex-end {
+		justify-content: flex-end;
+	}
+	.btn {
+		margin: .2rem;
+		i {
+			margin: 0;
+		}
+	}
+}
+
+
+/************* 8.4 Custom Badge Group *************/
+.custom-badge-group {
+	display: flex;
+	flex-wrap: wrap;
+	&.flex-end {
+		justify-content: flex-end;
+	}
+	.badge {
+		margin: .25rem;		
+	}
+}
+
+
+/************* 8.5 Chart Heights *************/
+.chart-height {
+	position: relative;
+	height: 250px;
+}
+.chart-height-md {
+	position: relative;
+	height: 220px;
+}
+.chart-height-sm {
+	position: relative;
+	height: 180px;
+}
+.chart-height-xl {
+	position: relative;
+	height: 300px;
+}
+.chart-height-xxl {
+	position: relative;
+	height: 420px;
+}
+
+
+/************* 8.6 Card Heights *************/
+.card-150 {
+	min-height: 150px;
+}
+.card-170 {
+	min-height: 170px;
+}
+.card-186 {
+	min-height: 186px;
+}
+.card-210 {
+	min-height: 210px;
+}
+.card-230 {
+	min-height: 230px;
+}
+.card-270 {
+	min-height: 270px;
+}
+.card-330 {
+	min-height: 330px;
+}
+.card-370 {
+	min-height: 370px;
+}
+.card-390 {
+	min-height: 390px;
+}
+.card-450 {
+	min-height: 450px;
+}
+.card-800 {
+	min-height: 800px;
+}
+
+
+/******** 8.7 Ratings ********/
+.rating-block {
+	width: 70px !important;
+	line-height: 100%;
+	img {
+		width: 17px;
+		height: 17px;
+	}
+}
+
+
+/******** 8.8 Product Cards ********/
+.product-card {
+	@extend .gradient-dark-grey;
+	border: 0;
+	box-shadow: none;
+	@include roundedCorners(4);
+	margin-bottom: 20px;
+	.product-card-body {
+		padding: 1rem 1rem;
+		position: relative;
+		.product-title {
+			margin-bottom: .7rem;
+			font-size: 1rem;
+			font-weight: bold;
+			line-height: 100%;
+		}
+		.product-price {
+			display: flex;
+			flex-direction: row;
+			font-size: .9rem;
+			.disount-price {
+				color: $font-color;
+				margin-right: 7px;
+			}
+			.actucal-price {
+				color: $font-color-light;
+				margin-right: 7px;
+				text-decoration: line-through;
+			}
+			.off-price {
+				color: $green;
+			}
+		}
+		.product-rating {
+			margin: 8px 0;
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			.rating-stars {
+				width: 120px !important;
+				line-height: 100%;
+				img {
+					width: 18px;
+					height: 18px;
+				}
+			}
+			.total-ratings {
+				font-size: .9rem;
+				color: $font-color-light;
+			}
+		}
+		.product-description {
+			min-height: 50px;
+			font-size: .9rem;
+			margin: 0 0 10px 0;
+			color: $font-color-light;
+			line-height: 150%;
+		}
+		.product-actions {
+			display: flex;
+			flex-direction: row;
+			.btn {
+				margin-right: 5px;
+			}
+		}
+	}
+	.product-card-img-top {
+		border-top-right-radius: 4px;
+		border-top-left-radius: 4px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+		flex-shrink: 0;
+    	width: 100%;
+	}
+}
+
+
+/******** 8.8.1 Product Cards ********/
+.product-added-card {
+	@extend .gradient-dark-grey;
+	@include roundedCorners(4);
+	margin-bottom: 20px;
+	padding: 1rem;
+	display: flex;
+	flex-direction: row;
+	.product-added-card-body {
+		padding: 1rem;
+		position: relative;
+		.product-added-title {
+			margin-bottom: 15px;
+			font-size: 1rem;
+			font-weight: normal;
+			line-height: 100%;
+			color: $white;
+		}
+		.product-added-price {
+			display: flex;
+			flex-direction: row;
+			font-size: 1.5rem;
+			margin: 0 0 10px 0;
+			font-weight: bold;
+			color: $green;
+		}
+		.product-added-description {
+			font-size: .9rem;
+			margin: 0 0 20px 0;
+			color: $font-color-light;
+			line-height: 150%;
+		}
+		.product-added-actions {
+			display: flex;
+			flex-direction: row;
+			.btn {
+				margin-right: 5px;
+			}
+		}
+	}
+	.product-added-img {
+		@include roundedCorners(5);
+    	max-height: 200px;
+		margin: 0 10px 0 0;
+	}
+}
+.sub-total-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	flex-direction: column;
+	.total {
+		margin: 0 0 20px 0;
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: $white;
+	}
+}
+
+
+/******** 8.8.2 Product Checkout List ********/
+.product-list-card {
+	@extend .gradient-dark-grey;
+	@include roundedCorners(8);
+	margin-bottom: 20px;
+	padding: 1rem;	
+	h5 {
+		margin: 0 0 10px 0;
+	}
+	.product-list-block {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-bottom: 20px;
+		.product-list-img {
+			@include roundedCorners(5);
+			max-height: 70px;
+			margin: 0 10px 0 0;
+		}
+		.product-list-details {
+			.product-list-title {
+				margin-bottom: 10px;
+				font-size: .9rem;
+				font-weight: normal;
+				line-height: 100%;
+				color: $white;
+			}
+			.product-list-price {
+				display: flex;
+				flex-direction: row;
+				font-size: 1.2rem;
+				line-height: 100%;
+				margin: 0;
+				font-weight: bold;
+				color: $green;
+			}
+		}
+	}
+}
+
+
+
+/************* 8.9 Download Icon *************/
+.download-icon {
+	background: #fafcff;
+	background: linear-gradient(45deg, #fafcff 0%, #e1e8f1 100%);
+	border: 0;
+	width: 50px;
+	height: 50px;
+	@include roundedCorners(50);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 30px;
+	right: 45px;
+	z-index: 10;
+	img {
+		width: 21px;
+		height: 21px;
+	}
+	&:hover {
+		border: 0;
+		img {
+			animation: MoveUpDown 1s linear infinite;
+		}
+	}
+}
+
+
+/************* 8.10 Download Button *************/
+.download-btn {
+	background: #fafcff;
+	background: linear-gradient(45deg, #fafcff 0%, #e1e8f1 100%);
+	border: 0;
+	@include roundedCorners(50);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: .85rem;
+	padding: 3px 15px 3px 3px;
+	text-transform: uppercase;
+	color: $pink;
+	.icon {
+		padding: 10px;
+		background: $pink;
+		margin-right: 10px;
+		@include roundedCorners(50);
+		img {
+			width: 16px;
+			height: 16px;
+		}
+	}
+	&:hover {
+		border: 0;
+		img {
+			animation: MoveUpDown 1s linear infinite;
+		}
+	}
+	&.lg {
+		font-size: 1rem;
+		padding: 6px 20px 6px 6px;
+		.icon {
+			padding: 13px;
+			img {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+}
+
+
+/************* 8.11 More Button *************/
+.more-btn {
+	background: #fafcff;
+	background: linear-gradient(45deg, #fafcff 0%, #e1e8f1 100%);
+	border: 0;
+	width: 50px;
+	height: 50px;
+	@include roundedCorners(50);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 30px;
+	right: 45px;
+	z-index: 10;
+	img {
+		width: 21px;
+		height: 21px;
+	}
+	&:hover {
+		border: 0;
+		img {
+			animation: MoveLeftRight 1s linear infinite;
+		}
+	}
+}
+
+
+/************* 8.12 Google Drive *************/
+.google-drive-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin: 40px 0 0 0;
+	color: $font-color-dark;
+	img {
+		max-width: 120px;
+	}
+	h4 {
+		margin: 10px 0 10px 0;		
+	}
+	.drive-progress {
+		display: flex;
+		flex-direction: column;
+		width: 70%;
+		margin: 40px 0 30px 0;
+		.progress {
+			width: 100%;
+			background-color: rgba(0, 0, 0, 0.1);
+			height: 12px;
+			@include roundedCorners(50);
+			.progress-bar {
+				background-color: #4caf50;
+			}
+		}
+		.drive-space-container {
+			margin: 7px 0 0 0;
+			display: flex;
+			justify-content: space-between;
+			font-size: 1.1rem;
+			font-weight: bold;
+		}
+	}
+}
+
+
+/************* 8.13 Subscribers *************/
+.subscribers {
+	position: relative;
+	margin: 10px 0 20px 0;
+	.total-subscribers {
+		font-size: 6rem;
+		color: $white;
+		margin: 0 0 20px 0;
+	}
+	.subscribers-status {
+		color: $white;
+		padding: 7px 15px;
+		border: 1px solid $white;
+		font-size: .8rem;
+		@include roundedCorners(3);
+		&:hover {
+			background: rgba(0, 0, 0, 0.1);
+		}
+	}
+}
+
+
+/************* 8.14 Earnings *************/
+.earnings {
+	text-align: center;
+	color: $white;
+	margin: 0;
+	.svg-container {
+		width: 110px;
+		margin: -10px auto 0 auto;
+	}
+	p {
+		font-size: .9rem;		
+	}
+	h3 {
+		margin: 0;
+	}
+}
+
+
+/************* 8.15 Earnings Container *************/
+.earnings-container {
+	color: $white;
+	padding: 1rem .5rem;
+	.earnings-icon {
+		height: 70px;
+		width: 70px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		background: $white;
+		@include roundedCorners(20);
+		i {
+			color: $light-pink;
+			font-size: 2.1rem;
+		}
+	}
+	.earnings-block {
+		display: flex;
+    	align-items: center;
+		.earning-details {
+			margin-right: 30px;
+    		border-right: 1px solid rgba(255, 255, 255, 0.2);
+    		padding-right: 30px;
+			h2 {
+				margin: 0 0 10px 0;
+			}
+			h5 {
+				margin: 0;
+				font-weight: normal;
+			}
+		}
+	}	
+	.earnings-high-low {
+		font-size: .95rem;
+		background: $white;
+		color: $pink;
+		padding: 12px 15px;
+		@include roundedCorners(4);
+		display: inline-flex;
+	}
+}
+
+
+/************* 8.16 Admins *************/
+.admins-container {
+	margin: 30px 0 0 0;
+	li {
+		margin: 0 60px 0 0;	
+		a {
+			display: flex;
+			align-items: center;
+			color: $white;
+			padding: 10px 15px;
+			@include roundedCorners(6);
+			img.avatar {
+				@include roundedCorners(30);
+				width: 60px;
+				height: 60px;
+				margin: 0 15px 0 0;
+			}
+			.admin-details {
+				flex-direction: column;
+				flex: 1;			
+				h6 {
+					margin: 0 0 .3rem 0;
+					font-size: 1rem;
+				}
+				.admin-type {
+					font-size: .85rem;
+					color: rgba(255, 255, 255, .5%)
+				}
+			}
+			.admin-more {
+				margin-left: auto;
+				i {
+					font-size: 1.5rem;
+				}
+			}
+			&:hover {
+				background: rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+}
+
+
+/************* 8.17 Orders Badge *************/
+.orders-badge {
+	background: rgba(255, 255, 255, .1);
+	@include roundedCorners(50);
+	width: 70%;
+	padding: 5px 20px;
+	text-align: center;
+	margin: -70px 0 0 auto;
+	color: $white;
+	font-size: 3rem;
+	z-index: 100;;
+}
+
+
+/************* 8.18 Car Loan *************/
+.car-locan-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: $white;
+	.loan-amount {
+		display: flex;
+		flex-direction: column;
+		p {
+			font-size: 1rem;
+		}
+		h3 {
+			margin: 0;
+		}
+	}
+	.svg-container {
+		width: 150px;
+		margin: -25px 0 -15px auto;
+	}
+}
+
+
+/************* 8.19 Latest Updates *************/
+.get-latest-updates {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.update-details {
+		h5 {
+			font-family: 'Merriweather';
+			margin: 0 0 25px 0;
+			line-height: 150%;
+			color: $white;
+			font-size: 1.2rem;
+			font-weight: normal;
+		}
+	}
+	img.blocks-img {
+		max-height: 180px;
+	}
+}
+.get-latest-updates-lg {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.update-details {
+		width: 70%;
+		margin: 40px 0 0 40px;
+		h5 {
+			font-family: 'Merriweather';
+			margin: 0 0 40px 0;
+			line-height: 150%;
+			color: $white;
+			font-size: 1.5rem;
+			font-weight: normal;
+		}
+	}
+	img.blocks-img {
+		margin: 30px 50px 0 0;
+		width: 30%;
+		max-height: 300px;
+	}
+}
+
+
+/************* 8.20 Uploading *************/
+.uploading-container {
+	.pause {
+		display: flex;
+		justify-content: flex-end;
+		margin: 0 0 30px 0;
+		i {
+			font-size: 2.4rem;
+			color: $white;
+		}
+	}
+	.upload-progress-container {
+		display: flex;
+		flex-direction: row;
+		margin: 20px 0 0 0;
+		color: $white;
+		.upload-icon {
+			@include roundedCorners(50);
+			background: $white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 80px;
+			height: 50px;
+			margin: 0 15px 0 0;
+			img {				
+				width: 21px;
+				height: 21px;
+			}
+		}
+		.upload-progress {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			.upload-space-container {
+				margin: 0 0 10px 0;
+				display: flex;
+				justify-content: space-between;
+				font-size: 1.1rem;
+				font-weight: bold;
+				span {
+					font-weight: normal;
+					font-size: .85rem;
+					font-style: italic;
+				}
+			}
+			.progress {
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.1);
+				height: 12px;
+				margin: 0 0 15px 0;
+				@include roundedCorners(50);
+				.progress-bar {
+					background-color: $white;
+				}
+			}
+		}
+	}
+}
+
+
+/************* 8.21 Notifications Container *************/
+.notifications-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: $white;
+	.notify-details-block {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		.notify-icon {
+			height: 100px;
+			width: 60px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 15px 0 0;
+			background: $white;
+			@include roundedCorners(50);
+			i {
+				color: $pink;
+				font-size: 2rem;
+			}
+		}
+		.notify-details {
+			h5 {
+				margin: 0 0 7px 0;
+				font-weight: normal;
+			}
+			h3 {
+				margin: 0 0 7px 0;
+			}
+			.notify-high-low {
+				font-size: .8rem;
+			}
+		}
+	}
+}
+
+
+/************* 8.22 Signups *************/
+.active-users-container {
+	color: $white;
+	.active-users-details {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.details {
+			h6 {
+				margin: 0 0 7px 0;
+				font-weight: normal;
+			}
+			h3 {
+				margin: 0 0 7px 0;
+			}
+			.active-users-high-low {
+				font-size: .725rem;
+				background: rgba(255, 255, 255, .2%);
+				color: $white;
+				padding: 4px 12px;
+				@include roundedCorners(50);
+			}
+		}
+	}
+	.active-users-icon {
+		height: 60px;
+		width: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		background: $white;
+		@include roundedCorners(50);
+		i {
+			color: $dark-yellow;
+			font-size: 2rem;
+		}
+	}
+}
+
+
+/************* 8.23 Upgrade Plan *************/
+.upgrade-plan {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: $white;
+	margin-top: 10px;
+	img {
+		width: 100px;
+		height: 100px;		
+	}
+	.plan-details {
+		margin: 0;
+		text-align: right;
+		h5 {
+			font-weight: normal;
+			line-height: 140%;
+			font-size: 1.1rem;
+		}
+		.btn {
+			margin: 12px 0 0 0;
+			background: $white;
+			color: $peach;
+		}
+	}
+}
+
+
+/************* 8.24 Sales Tile *************/
+.sales-tile {
+	color: $white;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 18px 0;
+	.sales-tile-icon {
+		height: 90px;
+		width: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 20px 0 0;
+		background: $white;
+		@include roundedCorners(100);
+		box-shadow: -10px -10px 0 rgba(0, 0, 0, 0.1);
+		i {
+			font-size: 2.2rem;
+			color: $white;
+		}
+		&.violet {
+			i {
+				color: #8672bc;
+			}
+		}
+		&.peach {
+			i {
+				color: #fe7974;
+			}
+		}
+		&.green {
+			i {
+				color: #a0c952;
+			}
+		}
+		&.teal {
+			i {
+				color: #66aab4;
+			}
+		}
+	}
+	.sales-tile-block {
+		display: flex;
+    	flex-direction: row;
+		align-items: center;
+		margin: 0;
+		.sales-tile-details {
+			h5 {
+				margin: 0 0 5px 0;
+				font-weight: normal;
+			}
+			h2 {
+				margin: 0 0 12px 0;
+			}
+			span {
+				background: rgba(255, 255 ,255 , .1);
+				padding: 5px 10px;
+				@include roundedCorners(3);
+			}
+		}
+	}
+}
+.sales-tile2 {
+	color: $white;
+	margin: 15px 0 0 0;
+	.sales-tile2-block {
+		display: flex;
+    	flex-direction: row;
+		align-items: center;
+		.sales-tile2-icon {
+			height: 60px;
+			width: 60px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 20px 0 0;
+			background: $white;
+			@include roundedCorners(100);
+			box-shadow: -10px -10px 0 rgba(0, 0, 0, 0.1);
+			img {
+				width: 21px;
+				height: 21px;
+			}
+		}
+		.sales-tile2-details {
+			h5 {
+				margin: 0 0 5px 0;
+				font-weight: normal;
+			}
+			h2 {
+				margin: 0;
+			}
+		}
+	}
+	.sales-tile2-progress {
+		.progress {
+			width: 100%;
+			background-color: rgba(0, 0, 0, 0.1);
+			height: 8px;
+			margin: 10px 0 0 0;
+			@include roundedCorners(50);
+			.progress-bar {
+				background-color: $white;
+			}
+		}	
+	}
+	&.lg {
+		margin: 25px 0 0 0;
+		.sales-tile2-block {
+			.sales-tile2-icon {
+				width: 50px;
+				height: 70px;
+				margin: 0 10px 0 0;
+			}
+			.sales-tile2-details {
+				h2 {
+					font-size: 2rem;
+				}
+			}
+		}
+		.sales-tile2-progress {
+			.progress {
+				margin: 12px 0 0 0;
+			}
+		}
+	}
+}
+.sales-tile3 {
+	color: $white;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 8px 0;
+	.sales-tile3-icon {
+		height: 90px;
+		width: 90px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 20px 0 0;
+		background: $white;
+		@include roundedCorners(100);
+		box-shadow: -10px -10px 0 rgba(0, 0, 0, 0.1);
+		i {
+			font-size: 2.2rem;
+			color: $white;
+		}
+		&.violet {
+			i {
+				color: #8672bc;
+			}
+		}
+		&.peach {
+			i {
+				color: #fe7974;
+			}
+		}
+		&.green {
+			i {
+				color: #a0c952;
+			}
+		}
+		&.teal {
+			i {
+				color: #66aab4;
+			}
+		}
+	}
+	.sales-tile3-block {
+		display: flex;
+    	flex-direction: row;
+		align-items: center;
+		margin: 0;
+		.sales-tile3-details {
+			h5 {
+				margin: 0 0 7px 0;
+				font-weight: normal;
+			}
+			h2 {
+				margin: 0 0 5px 0;
+			}
+			span {
+				font-size: .875rem;
+				opacity: 0.7;
+			}
+		}
+	}
+}
+.sales-tile4 {
+	color: $white;
+	display: flex;
+	flex-direction: column;
+	margin: 25px 0 0 0;
+	h2 {
+		margin: 0 0 5px 0;
+	}
+	span {
+		font-size: .875rem;
+		opacity: 0.7;
+	}
+}
+
+
+/************* 8.25 Activity Container *************/
+.activity-container {
+	margin: 30px 0 0 0;
+	.activity-block {
+		margin: 0 0 30px 0;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		position: relative;
+		&:before {
+			content: '';
+			border-left: 1px solid rgba(0, 0, 0, 0.1);
+			position: absolute;
+			left: 29px;
+			top: 0;
+			bottom: 0;
+			z-index: 0;
+		}
+		.activity-user {
+			margin: 0 30px 0 0;
+			z-index: 1;
+			img {
+				@include roundedCorners(100);
+				width: 60px;
+				height: 60px;
+			}			
+		}
+		.activity-details {
+			h4 {
+				margin: 0 0 5px 0;
+				font-weight: bold;
+				color: $black;
+				font-size: 1.1rem;
+			}
+			h5 {
+				margin: 0 0 3px 0;
+				font-weight: normal;
+			}
+			p {
+				margin: 0 0 5px 0;
+			}
+			span.badge {
+				margin: 0;
+				padding: 10px 10px;
+				min-width: 80px;
+			}
+		}
+		&:last-child {
+			margin: 0;
+		}
+	}
+}
+
+
+/************* 8.26 Statistics *************/
+ul.statistics {
+	margin: 40px 20px 0 20px;
+	z-index: 10;
+	position: relative;
+	li {
+		display: flex;
+		align-items: center;
+		margin: 0 0 20px 0;
+		color: $white;
+		font-size: 1rem;
+		.stat-icon {
+			background: $white;
+			box-shadow: -7px -7px 0 rgba(0, 0, 0, .1);
+			width: 48px;
+			height: 48px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			@include roundedCorners(50);
+			margin: 0 15px 0 0;
+			i {
+				font-size: 1.5rem;
+				color: $dark-pink;
+			}
+		}
+		&:last-child {
+			margin: 0;
+		}
+	}
+}
+
+
+/************* 8.27 Bookmarks *************/
+.bookmarks-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 20px;
+	a.bookmark-block {
+		border: 1px solid $border-bg-light;
+		padding: 10px;
+		margin: 5px;
+		width: 30%;
+		@include roundedCorners(4);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		img {
+			width: 36px;
+			height: 36px;
+			margin: 0 0 7px 0;
+		}
+		h5 {
+			margin: 0;
+			line-height: 100%;
+			color: $font-color-light;
+			font-weight: normal;
+		}
+		&:hover {
+			background: rgba(0, 0, 0, .1);
+			h5 {
+				color: $font-color-light;
+			}
+		}
+	}
+}
+
+
+/************* 8.28 Spinner Group *************/
+.spinners-container {
+	.spinner-border {
+		margin: 5px;
+	}
+	.spinner-grow {
+		margin: 5px;
+	}
+	.btn {
+		margin: 5px;
+		.spinner-border {
+			margin: 0 5px 0 0;
+		}
+		.spinner-grow {
+			margin: 0 5px 0 0;
+		}
+	}
+}
+
+
+/************* 8.29 Thank You Container *************/
+.thank-you-container {
+	padding: 5rem;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	h2 {
+		color: $green;
+		line-height: 180%;
+		margin: 0 0 30px 0;
+	}
+	p {
+		color: $font-color-light;
+		max-width: 300px;
+		margin: 0 0 50px 0;
+		font-size: 1rem;
+		span {
+			text-transform: uppercase;
+			color: $green;
+		}
+	}
+}
+
+
+
+/************************************************
+	************************************************
+					9. Plugins
+	************************************************
+************************************************/
+
+/******** 9.1 Overlay Scroll ********/
+.sidebarMenuScroll {
+	height: calc(100vh - 150px);
+}
+.scroll300 {
+	height: 300px;
+}
+.scroll285 {
+	height: 285px;
+}
+.scroll240 {
+	height: 240px;
+}
+
+
+/******** 9.2 DropZone ********/
+#dropzone {
+	margin: 0;	
+	min-width: 240px;
+}
+.dropzone {
+	border: 2px dashed $form-border !important;
+	@include roundedCorners(6);
+	background: $white !important;
+	min-height: 250px !important;
+	display: flex;
+	align-items: center;
+	.dz-message {
+		font-weight: 400;
+		text-align: center;
+		margin: 0 auto !important;
+		.note {
+			font-size: .9rem;
+			display: block;
+			margin-top: 1rem;
+			color: $font-color !important;
+		}
+		.dz-button {
+			background: transparent;
+			color: $font-color !important;
+			font-size: 1.5rem !important;
+		}
+	}
+}
+.dropzone-dark {
+	.dropzone {
+		border: 2px dashed $form-border-dark !important;	
+		background: $form-bg-dark !important;
+	}
+}
+#dropzone-sm {
+	.dropzone {
+		min-height: 120px !important;
+		.dz-button {
+			font-size: 1rem !important;
+		}
+	}
+}
+
+
+/******** 9.3 Credit Card ********/
+#creditCardType {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	.credit-card {
+		margin: 5px 5px 0 0;
+		display: inline-block;
+		img {
+			max-width: 36px;
+			filter: grayscale(100%);
+		}
+		&.highlight {
+			img {
+				filter: grayscale(10%);
+			}
+		}
+	}
+}
+
+
+/******** 9.4 jVector Maps ********/
+.jvectormap-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	-ms-touch-action: none;
+		touch-action: none;
+}
+.jvectormap-tip {
+	position: absolute;
+	display: none;
+	border-radius: 0px;
+	background: #000000;
+	color: #ffffff;
+	font-size: .75rem;
+	padding: 6px 12px;
+}
+@-webkit-keyframes showHideDot {
+	0% {
+	  	opacity: 0;
+	}
+	50% {
+	  	opacity: 1;
+	}
+	60% {
+	  	opacity: 1;
+	}
+	100% {
+	  	opacity: 0;
+	}
+}
+@keyframes showHideDot {
+	0% {
+	  	opacity: 0;
+	}
+	50% {
+	  	opacity: 1;
+	}
+	60% {
+	  	opacity: 1;
+	}
+	100% {
+	  	opacity: 0;
+	}
+}
+.jvectormap-marker {
+	opacity: 0;
+	-webkit-animation: showHideDot 1.5s ease-in-out infinite;
+			animation: showHideDot 1.5s ease-in-out infinite;
+}
+
+
+/******** 9.5 Apex Graphs ********/
+.apex-hide-lines {
+	.apexcharts-xaxis {
+		display: none;
+	}
+	.apexcharts-grid {
+		display: none;
+	}
+}
+.apex-dark-legend {
+	.apexcharts-legend-text {
+		color: $font-color-dark !important;
+	}
+}
+
+
+
+/************************************************
+	************************************************
+						10. Pages
+	************************************************
+************************************************/
+
+/************* 10.1 Login *************/
+.login-box {
+	@extend .gradient-violet2;
+	padding: 40px 20px 40px 170px;
+	margin: auto;
+	width: 450px;
+	min-height: 320px;
+	@include roundedCorners(6);
+	position: relative;
+	&:before {
+		background: $white;
+		@include roundedCorners(500);
+		width: 420px;
+		height: 120%;
+		position: absolute;
+		left: 15px;
+		content: '';
+		top: -10%;
+		z-index: -1;
+	}
+	.login-blocks-img {
+		position: absolute;
+		left: 30px;
+		bottom: 30px;
+		background: url('../img/blocks.svg') no-repeat;
+		background-size: contain;
+		width: 170px;
+		height: 170px;
+	}
+	.login-form {
+		.login-logo {
+			margin: 0 0 20px 0;
+			display: inline-flex;
+			img {
+				width: 100px;
+				height: 40px;
+			}	
+		}
+		.login-welcome {
+			font-size: .925rem;
+			color: $white;
+			line-height: 24px;
+			font-weight: normal;
+			margin: 0 0 30px 0;
+			font-family: Merriweather;
+		}
+		.login-form-block {
+			margin: 0 0 20px 0;
+			position: relative;
+			.login-form-control {
+				padding: 8px 10px;
+				width: 100%;
+				@include roundedCorners(2);
+				background: rgba(255, 255, 255, 0.3);
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				color: $white;
+				&:focus {
+					outline: none;
+					border: 1px solid $white;
+				}
+			}
+			.login-form-label {
+				background: $login-label-bg;
+				@include roundedCorners(50);
+				font-size: .625rem;
+				padding: 5px 12px;
+				line-height: 100%;
+				text-transform: uppercase;
+				color: $black;
+				position: absolute;
+				top: -12px;
+				left: 15px;
+			}
+		}
+		.login-form-actions {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			flex-wrap: wrap;
+			.btn {
+				@include roundedCorners(50);
+				background: $white;
+				padding: 3px 15px 3px 3px;
+				line-height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: .75rem;
+				text-transform: uppercase;
+				margin-left: 15px;
+				.icon {
+					@include roundedCorners(50);
+					width: 30px;
+					height: 30px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					@extend .gradient-pink;
+					margin: 0 7px 0 0;				
+					i {
+						margin: 0;
+						font-size: 1rem;
+						color: $white;
+					}
+				}
+				img.login-icon {
+					width: 30px;
+					height: 30px;
+					margin: 0 5px 0 0;
+				}
+			}
+			a.btn-link {
+				font-size: .7rem;
+				color: $white;
+				text-decoration: none;
+				border: 0;
+				background: transparent;
+				padding: 4px 3px 4px 3px;
+				text-transform: uppercase;
+				border-bottom: 1px dashed;
+			}
+		}
+		.login-form-actions2 {
+			margin-top: 20px;
+			padding: 20px 0 0 0;
+			border-top: 1px solid rgba(255, 255, 255, 0.2);
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			flex-wrap: wrap;
+			.btn {
+				@include roundedCorners(50);
+				background: $white;
+				padding: 3px 15px 3px 3px;
+				line-height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: .75rem;
+				text-transform: uppercase;
+				margin-left: 15px;
+				img.login-icon {
+					@include roundedCorners(50);
+					width: 30px;
+					height: 30px;
+					margin: 0 5px 0 0;
+				}
+			}
+		}
+		.login-form-footer {
+			border-top: 1px solid rgba(255, 255, 255, 0.2);
+			margin: 20px 0 0 0;
+			padding: 20px 0 0 0;
+			.additional-link {
+				font-size: .8rem;
+				display: flex;
+				align-items: center;
+				color: $white;
+				.btn {
+					@include roundedCorners(50);
+					background: rgba(255, 255, 255, 0.7);
+					padding: 10px 15px 10px 15px;
+					line-height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: .75rem;
+					text-transform: uppercase;
+					margin-left: 10px;
+					&:hover {
+						background: $white;
+					}
+				}
+			}
+		}
+	}	
+}
+@media (max-width: 576px) {
+	.login-box {
+		padding: 30px 20px 30px 20px;
+		width: auto;
+		&:before {
+			display: none;
+		}
+		.login-blocks-img {
+			display: none;
+		}
+	}
+}
+
+
+/******** 10.2 Stars Blink Animation ********/
+@-webkit-keyframes stars-blink {
+	10% {
+		opacity: 0.3;
+	}
+	30% {
+		opacity: 0.7;
+	}
+	70% {
+		opacity: 0.5;
+	}
+	90% {
+		opacity: 0.8;
+	}
+}
+@keyframes stars-blink {
+	10% {
+		opacity: 0.3;
+	}
+	30% {
+		opacity: 0.7;
+	}
+	70% {
+		opacity: 0.5;
+	}
+	90% {
+		opacity: 0.8;
+	}
+}
+
+/******** 10.3 Earth Rotate Animation ********/
+@-webkit-keyframes earth-spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@keyframes earth-spin {
+	100% {
+		-webkit-transform: rotate(360deg); transform:rotate(360deg);
+	}
+}
+
+/******** 10.4 Rocket Launch Animation ********/
+@-webkit-keyframes rocket-launch {
+	100% {
+		-webkit-transform: translate(1250px, -1900px);
+	}
+}
+@keyframes rocket-launch {
+	100% {
+		transform: translate(1250px, -1900px);
+	}
+}
+
+/******** 10.5 Astronaut Animation ********/
+@-webkit-keyframes astronaut-movement {
+	100% {
+		-moz-transform: translate(-120px, -120px);
+	}
+}
+@keyframes astronaut-movement {
+	100% {
+		-webkit-transform: translate(-120px, -120px);
+	}
+}
+@-webkit-keyframes astronaut-rotate {
+	100% {
+		-moz-transform: rotate(-900deg);
+	}
+}
+@keyframes astronaut-rotate {
+	100% {
+		-webkit-transform: rotate(-900deg);
+	}
+}
+
+
+/******** 10.6 Error Screen ********/
+.error-screen {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: radial-gradient(at 70% 100%, #2a2b2d, #000306);
+	color: $white;
+	height: 100vh;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: url(../img/error-screen/stars.svg) repeat;
+		animation: stars-blink 3s linear infinite;
+		background-size: 55%;
+	}
+	.earth {
+		position: absolute;
+		top: 25%;
+		left: 10%;
+		-webkit-animation: earth-spin 150s linear infinite;
+		-moz-animation: earth-spin 150s linear infinite;
+		animation: earth-spin 150s linear infinite;
+		@include roundedCorners(100);
+		width: 110px;
+		height: 110px;
+	}
+	.moon {
+		position: absolute;
+		top: 10%;
+		left: 29%;
+		box-shadow: 0 0 80px $white;
+		@include roundedCorners(100);
+		width: 60px;
+		height: 60px;
+	}
+	.rocket {
+		position: absolute;
+		top: 80%;
+		left: 5%;
+		animation: rocket-launch 200s linear infinite;
+		width: 40px;
+		height: 40px;
+	}
+	.astronaut-container {
+		position: absolute;
+		top: 50%;
+		right: 20%;
+		will-change: transform;
+		animation: astronaut-movement 75s infinite linear both alternate;
+		.astronaut {
+			animation: astronaut-rotate 240s infinite linear both alternate;
+			width: 120px;
+		}
+	}
+	.contents {
+		text-align: center;
+		z-index: 1000;
+		h1 {
+			font-size: 12rem;
+			margin: 0;
+			font-family: "Rubik Mono One";
+			font-weight: bold;
+			line-height: 100%;
+		}
+		h5 {
+			margin-bottom: 2rem;
+			line-height: 180%;
+			font-family: 'Lato';
+			font-weight: 300;
+		}
+		.btn {
+			padding: .7rem 1.8rem;
+			@include roundedCorners(50);
+			color: $white;
+			border: 1px solid $white;
+			&:hover {
+				color: $black;
+				background: $white;
+			}
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	.error-screen {
+		.earth {
+			top: 15%;
+			width: 70px;
+    		height: 70px;
+		}
+		.moon {
+			position: absolute;
+			top: 5%;
+			left: 35%;
+			width: 40px;
+    		height: 40px;
+		}
+		.astronaut-container {
+			top: 80%;
+    		right: 15%;
+		}
+		.contents {
+			h1 {
+				font-size: 5rem;
+			}
+		}
+	}
+}
+
+
+/******** 10.7 Maintenance Screen ********/
+.maintenance-message {
+	display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 100%;
+	text-align: center;
+	color: $font-color-light;
+	position: relative;
+	z-index: 100;
+	.message-title-block {
+		padding: 20px;
+		border: 3px solid $green;
+		margin-bottom: 20px;
+		@include roundedCorners(10);
+	}
+	h1 {
+		font-size: 3rem;
+		margin: 0 0 1rem 0;
+		line-height: 100%;
+		font-weight: bold;
+	}
+	h4 {
+		font-size: 1.8rem;
+		margin: 0;
+		font-weight: normal;
+	}
+	p {
+		font-size: .85rem;
+		margin: 0;
+		line-height: 160%;
+	}
+	.btn {
+		padding: .7rem 1.8rem;
+	}
+}
+@media screen and (max-width: 768px) {
+	.maintenance-message {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		p {
+			text-align: center;
+		}
+	}
+}
+
+
+/************* 10.8 Contacts *************/
+.contact-card {
+	padding: 2rem 1rem;
+	position: relative;
+	text-align: center;
+	a.edit-contact-card {
+		position: absolute;
+		right: 25px;
+		top: 25px;
+		width: 40px;
+		height: 40px;
+		background: rgba(255, 255, 255, 0.2);
+		@include roundedCorners(50);
+		transition: all 1s ease-out;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		i {
+			font-size: 1.4rem;
+			color: $white;
+		}
+		&:hover {
+			width: 50px;
+			height: 50px;
+			transition: all .5s ease-out;
+		}
+	}
+	.contact-avatar {
+		@include roundedCorners(50);
+		max-width: 90px;
+		margin-bottom: 10px;
+	}
+	h5 {
+		color: $white;
+		margin-bottom: 10px;
+	}
+}
+
+
+/******** 10.9 Pricing Plan ********/
+.pricing-plan-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+.pricing-plan {
+	margin: 0 0 1.5rem 0;
+	width: 100%;
+	position: relative;
+	@include roundedCorners(10);
+	color: $white;
+	text-align: center;
+	.pricing-header {		
+		padding: 20px 0 0 0;		
+		.pricing-title {
+			font-size: 1.2rem;			
+			padding: 1rem 0 0 0;
+			text-transform: uppercase;
+			font-weight: 100;
+			margin: 0;
+			text-shadow: 0 30px 10px rgba(0, 0, 0, 0.15);
+		}
+		.pricing-cost {
+			padding: 1rem 0 0 0;
+			font-size: 3rem;
+			font-weight: bold;
+			text-shadow: 0 30px 10px rgba(0, 0, 0, 0.15);
+		}
+		.pricing-save {
+			padding: .8rem 0;
+			font-size: 1rem;
+			font-weight: 400;
+		}
+	}
+	.pricing-features {
+		padding: 20px 0;
+		margin: 0;
+		li {
+			padding: 12px 15px 12px 15px;
+			font-size: .9rem;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			position: relative;
+			line-height: 100%;
+		}
+	}
+	.pricing-footer {
+		@include roundedCornersAll(0, 0, 3px, 3px);
+		text-align: center;
+		padding: 1rem 0 2rem 0;
+	}
+}
+@media (max-width: 767px) {
+	.pricing-plan-container {
+		height: auto;
+	}
+	.pricing-plan {
+		.pricing-header {
+			text-align: center;
+			i {
+				display: block;
+				float: none;
+				margin-bottom: 1.5rem;
+			}
+		}
+	}
+}
+
+
+/******** 10.10 Account Settings ********/
+.change-img-avatar {
+	display: flex;
+	margin: 0 20px 15px 0;
+	@include roundedCorners(6);
+	max-height: 120px;
+}
+.account-settings-block {
+	border-left: 1px solid $border-bg;
+	margin-bottom: 20px;
+	height: 100%;
+	padding: 0 0 0 1rem;
+	.settings-block {
+		margin-bottom: 1rem;
+		.settings-block-title {
+			margin: 0 0 .7rem 0;
+    		font-size: 1rem;
+    		font-weight: 400;
+		}
+		.settings-block-body {
+			padding: 0;
+			.form-check {
+				margin: 0;
+				min-height: 1.1rem;
+			}
+		}
+	}
+}
+@media (max-width: 992px) {
+	.account-settings-block {
+		border-left: 0;
+		padding: 0;
+	}
+}
+.pricing-change-plan {
+	margin: 0 0 1rem 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	a {
+		padding: 3rem 1rem 1rem 1rem;
+		@include roundedCorners(6);
+		min-width: 90px;
+		max-width: 90px;
+		min-height: 90px;
+		margin: 0 10px 10px 0;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		color: $white;
+		> h5 {
+			font-size: 1.4rem;
+			margin: 0 0 5px 0;
+			font-weight: 600;
+		}
+		> h6 {
+			font-size: .9rem;
+			margin: 0;
+			font-weight: 400;
+		}
+		&.active-plan {
+			&:after {
+				font-family: "icomoon";
+				font-weight: bold;
+				content: '\ebdc';
+				background: url();
+				position: absolute;
+				top: 10px;
+				left: 50%;
+				margin-left: -15px;
+				font-size: 2rem;
+			}
+		}
+	}
+}
+
+
+/******** 10.11 User Profile ********/
+.profile-header {
+	position: relative;
+	padding: 0;
+	margin-bottom: 20px;
+	// Welcome Title
+	h1 {
+		font-weight: 300;
+		color: $orange;
+		font-size: 1.8rem;
+		margin: 0 auto 1rem auto;	
+	}
+	.profile-header-content {
+		@include roundedCorners(8);
+		background: $card-dark;
+		padding: 1rem 1.5rem 1rem 1.5rem;
+		display: flex;
+		align-items: center;
+		position: relative;
+		.profile-header-tiles {
+			width: 100%;
+			margin-right: 1.5rem;
+			z-index: 100;
+			// Profile Tiles
+			.profile-tile {
+				background: rgba(255, 255, 255, 0.1);
+				@include roundedCorners(8);
+				padding: 1rem 1rem;
+				margin: .3rem 0;
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				color: $white;
+				> .icon {
+					width: 60px;
+					height: 60px;
+					@include roundedCorners(50);					
+					margin: 0 .6rem 0 0;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					@extend .gradient-peach;
+					i {
+						font-size: 2rem;
+					}
+				}
+				h6 {
+					margin: 0;
+					line-height: 150%;
+					font-weight: 400;
+					font-size: .925rem;
+					span {
+						font-weight: 600;
+					}
+				}
+			}
+		}
+		.profile-avatar-tile {
+			background-color: $white;
+			@include roundedCorners(8);
+			padding: .7rem;
+			margin: -60px 0 0 auto;
+			z-index: 100;
+			img {
+				@include roundedCorners(8);
+				width: 180px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	.profile-header {
+		.profile-header-content {
+			flex-direction: column-reverse;
+			.profile-header-tiles {
+				margin-right: 0;
+			}
+			.profile-avatar-tile {
+				margin: 20px 0;
+			}
+		}
+	}
+}
+
+
+/******** 10.12 Stats Tile ********/
+.stats-tile1 {
+	padding: 25px 20px;
+	margin: 0 0 20px 0;
+	@include roundedCorners(8);
+	color: $white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	.stats-icon1 {
+		margin: 0 0 1rem 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 90px;
+		height: 90px;
+		@include roundedCorners(50);
+		i {
+			font-size: 2rem;
+			color: $orange;
+		}
+	}
+	h3 {
+		margin: 0 0 .5rem 0;
+		font-size: 2rem;
+	}
+	h4 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 300;
+	}
+}
+
+
+/******** 10.13 Create Offer ********/
+.create-offer-container {
+	background: $card-dark;
+	padding: 1rem 1.5rem 1rem 1.5rem;
+	@include roundedCorners(8);
+	h4 {
+		font-size: 1.2rem;
+		color: $white;
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+	}
+	.form-control {
+		margin: 0 0 .5rem 0;
+		max-height: 100px;
+		min-height: 100px;
+	}
+	.share-thoughts-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.share-icons {
+			display: flex;
+			a {
+				width: 40px;
+				height: 40px;
+				margin: 0 .3rem 0 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: rgba(255, 255, 255, 0.1);
+				@include roundedCorners(3);
+				i {
+					font-size: 1.2rem;
+					color: $white;
+				}
+			}
+		}
+	}
+}
+
+
+/******** 10.14 Top Rated Items ********/
+.top-items-container {
+	.top-item-img {
+		max-height: 200px;
+		margin: auto;
+		display: flex;
+		@include roundedCorners(8);
+	}
+	.top-item-details {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		color: $white;
+		h4 {
+			margin: 15px 0 10px 0;			
+		}
+		.rating-block {
+			margin: 0 auto 10px auto;
+			width: 150px !important;
+			display: flex;
+    		align-items: center;
+			img {
+				width: 21px;
+				height: 21px;
+			}
+			.rating-count {
+				font-size: 1rem;
+				margin: 0 0 0 5px;
+				font-weight: 300;
+			}
+		}
+	}
+}
+
+
+/******** 10.15 Chat Widget ********/
+.chats {
+	position: relative;
+	padding: 0;
+	li {
+		margin-bottom: 25px;
+		&.chats-left, &.chats-right {
+			position: relative;
+		}
+		img {
+			width: 50px;
+			height: 50px;
+			@include roundedCorners(50);
+		}  
+		.chats-avatar {
+			float: left;
+		}
+		&.chats-right {
+			> .chats-avatar {
+				float: right;
+			}
+		}
+		.chats-name {
+			font-size: .9rem;
+			text-align: center;
+			margin-top: 5px;
+			color: $white;
+		}
+		.chats-hour {
+			margin: 5px 0 0 70px;
+			padding: 2px;
+			margin-bottom: 20px;
+			font-size: .9rem;
+			color: $white;
+			> span {
+				font-size: .9rem;
+				color: $green;
+			}
+		}
+		.chats-text {
+			margin: 0 0 0 70px;
+			padding: 15px;
+			@include roundedCorners(20);
+			background-color: $white;
+			left: 15px;
+			line-height: 170%;
+			font-size: .9rem;
+			&:before {
+				content: '';
+				position: absolute;
+				width: 0;
+				height: 0;
+				top: 28px;
+				left: 52px;
+				border: 10px solid;
+				border-color: transparent $white transparent transparent;
+			}
+		}
+		&.chats-right {
+			> .chats-text {
+				text-align: right;
+				right: 16px;
+				margin: 0 70px 0 0;
+				background-color: $white;
+				&:before {
+					left: auto;
+					right: 52px;
+					border-color: transparent transparent transparent $white;
+				}
+			}
+			> .chats-hour {
+				text-align: right;
+				margin: 0 70px 0 0;
+			}
+		}
+	}
+}
+
+
+/******** 10.16 Recent Orders ********/
+ul.recent-orders {
+	li {
+		margin-bottom: 20px;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		.order-img {
+			position: relative;
+			img {
+				height: 70px;
+				@include roundedCorners(8);
+			}
+			.badge {
+				position: absolute;
+				top: 15px;
+				left: 0px;
+				font-weight: 400;
+				@include roundedCornersAll(0, 3px, 3px, 0);
+				font-size: .8rem;
+				padding: 4px 10px 4px 10px;
+			}
+		}
+		.order-details {
+			margin-left: 15px;
+			color: $white;
+			h5.order-title {
+				margin: 0 0 8px 0;
+				font-size: 1rem;
+			}
+			p.order-desc {
+				line-height: 150%;
+				font-size: .85rem;				
+			}
+			span.order-date {
+				font-size: .75rem;
+				color: rgba(255, 255, 255, 0.5);
+			}
+		}
+	}
+}
+
+
+/******** 10.17 Invoice List ********/
+.invoice-table {
+	td {
+		vertical-align: middle;
+	}
+	.customer {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		img.user-avatar {
+			width: 60px;
+			height: 60px;
+			margin-right: 15px;
+			@include roundedCorners(100);
+		}
+		.name {
+			font-size: .9rem;
+			margin: 0 0 5px 0;
+		}
+	}
+	.details {
+		display: flex;
+		flex-direction: column;
+		h5 {
+			margin: 0 0 5px 0;
+			font-weight: 300;
+		}
+		h6 {
+			font-weight: 300;
+		}
+	}
+	.badge {
+		padding: 10px 10px;
+		@include roundedCorners(20);
+		min-width: 80px;
+	}
+}
+
+
+/******** 10.18 Create Invoice ********/
+.invoice-container {
+	padding: 0;
+	.invoice-header {
+		.invoice-logo {
+			margin: .8rem 0 1rem 0;
+			display: inline-block;
+			img {
+				width: 50px;
+				height: 50px;
+			}
+		}
+		address {
+			font-size: .9rem;
+			color: $font-color;
+			margin: 0;
+			text-align: right;
+			line-height: 180%;
+		}
+	}
+	.invoice-details {
+		display: flex;
+		margin: 1rem 0 .5rem 0;
+		padding: 1rem;
+		line-height: 180%;
+		background: rgba(0, 0, 0, 0.15);
+		.invoice-num {
+			text-align: right;
+			margin-left: auto;
+			font-size: .8rem;
+		}
+	}
+	.invoice-body {
+		padding: 3rem 0;
+	}
+	.invoice-footer {
+		text-align: center;
+		font-size: .7rem;
+		span {
+			display: inline-block;
+			background: $card-dark;
+			padding: 3px 10px;
+			@include roundedCorners(30);
+		}
+	}
+}
+
+
+/******** 10.19 Add Product ********/
+.product-block {
+	border: 1px solid rgba(255,255,255,.125);
+	@include roundedCorners(8);
+	padding: 1rem;
+	margin: 0 0 24px 0;
+	.product-title {
+		font-size: 1.1rem;
+		margin: 0 0 30px 0;
+		font-weight: bold;
+		color: $font-color-light;
+	}
+	.product-body {
+		padding: 0;
+	}
+}
+
+
+/******** 10.20 Edit Customer Status ********/
+.customer-card {
+	padding: 15px;
+	border: 1px solid $border-bg;
+	@include roundedCorners(5);
+	margin: 0 0 20px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	h6 {
+		font-size: .875rem;
+		margin: 0 0 5px 0;
+		font-weight: normal;
+	}
+	h5 {
+		font-size: 1rem;
+		margin: 0;
+		color: $font-color-light;
+	}
+}
+
+
+
+/************************************************
+	************************************************
+				11. Bootstrap Overwrite CSS
+	************************************************
+************************************************/
+
+/************* 11.1 Badge *************/
+.badge {
+	font-weight: 400;
+	font-size: .825rem;
+	@include roundedCorners(2);
+}
+
+
+/************* 11.2 Placeholder *************/
+.placeholder {
+	background-color: rgba(0, 0, 0, 0.3);
+	&.light {
+		background-color: rgba(255, 255, 255, 0.4);
+	}
+}
+
+
+/************* 11.3 Accordion *************/
+.accordion {
+	background: transparent;
+	.accordion-item {
+		background-color: transparent;
+	}
+	.accordion-button {
+		background-color: transparent;
+		&::after {
+			background-image: none;
+			font-family: "icomoon";
+			font-weight: bold;
+			font-size: 1rem;
+			content: "\ea59";
+		}
+		&:not(.collapsed)::after {
+			background-image: none;
+			font-family: "icomoon";
+			font-weight: bold;
+			font-size: 1rem;
+			content: "\ea57";
+		}
+		&:not(.collapsed) {
+			background-color: rgba(0, 0, 0, 0.05);
+			color: $black;
+		}
+	}
+	.accordion-body {
+		color: $black;
+		line-height: 150%;
+	}
+	&.light {
+		.accordion-item {
+			border: 1px solid rgba(255,255,255,.125);
+			&:not(:first-of-type) {
+				border-top: 0;
+			}
+		}
+		.accordion-button {
+			border: 0;
+			color: rgba(255, 255, 255, 0.5);
+			&::after {
+				color: $font-color;
+			}
+			&:not(.collapsed)::after {
+				color: $font-color;
+			}
+			&:not(.collapsed) {
+				background-color: rgba(255, 255, 255, 0.05);
+				color: $white;
+			}
+		}
+		.accordion-body {
+			color: $white;
+		}
+	}
+}
+
+
+/************* 11.4 Alerts *************/
+.alert {
+	&.alert-dismissible {
+		.btn-close {
+			padding: 1.1rem 1rem;
+		}
+	}
+	&.alert-success {
+		color: $white;
+		@extend .gradient-green;
+		border-color: $green;
+	}
+	&.alert-warning {
+		color: $white;
+		@extend .gradient-yellow;
+		border-color: $yellow;
+	}
+	&.alert-danger {
+		color: $white;
+		@extend .gradient-red;
+		border-color: $red;
+	}
+	&.alert-info {
+		color: $white;
+		@extend .gradient-blue;
+		border-color: $blue;
+	}
+	&.alert-light {
+		color: $black;
+		@extend .gradient-white;
+		border-color: $white;
+	}
+	&.alert-dark {
+		color: $font-color-light;
+		@extend .gradient-grey;
+		border-color: $dark-bg;
+	}
+}
+.alert-fixed {
+	position: fixed;
+	right: 45px;
+	top: 80px;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	i {
+		font-size: 3rem;
+		margin: 0 10px 0 0;
+	}
+}
+
+
+/************* 11.5 Tabs *************/
+.nav-tabs {
+	.nav-item.show {
+		.nav-link {
+			background-color: transparent;
+		}
+	}
+}
+.nav-tabs {
+	border: 0;
+	.nav-link {
+		padding: 0.65rem 1.2rem;
+		margin-bottom: -1px;
+		border: 0;
+		font-size: 1rem;
+		background: transparent;
+		color: rgba(255,255,255,.5);
+		&:hover {
+			background-color: rgba(255,255,255,.15);
+			border: 0;
+			color: $white;
+		}
+		&.active {
+			@extend .gradient-green;
+			border: 0;
+			color: $white;
+		}
+	}
+}
+.tab-content {
+	border: 1px solid rgba(255,255,255,.125);
+	padding: 15px;
+}
+
+
+/************* 11.6 Cards *************/
+.card {
+	border: 0;
+	box-shadow: none;
+	@include roundedCorners(8);
+	position: relative;
+	margin-bottom: 20px;
+	.card-header {
+		padding: 1.25rem 1.25rem 0 1.25rem;
+		background: transparent;
+		border: 0;
+		display: flex;
+    	align-items: center;
+    	justify-content: space-between;
+		.card-title {
+			font-size: 1.2rem;
+    		margin: 0;
+			color: $white;
+			font-weight: 400;
+			font-family: 'Merriweather';
+			line-height: 150%;
+			&.dark {
+				color: $black;
+			}
+		}
+	}
+	.card-body {
+		padding: 1.25rem 1.25rem;
+		.card-title {
+			margin: 10px 0 0 0;
+			font-size: 1.2rem;
+			font-weight: 400;
+			font-family: 'Merriweather';
+			line-height: 150%;
+			color: $white;
+			&.dark {
+				color: $black;
+			}
+		}
+		&.h-170 {
+			min-height: 170px;
+		}
+		&.h-250 {
+			min-height: 250px;
+		}
+		&.h-300 {
+			min-height: 300px;
+		}
+	}
+	.card-loading {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		@include roundedCorners(8);
+		cursor: wait;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, .3);
+	}
+}
+
+
+/************* 11.7 Buttons *************/
+button {
+	&:focus {
+		outline: none;
+		box-shadow: none;
+		border: 0;
+	}
+	&:focus:not(:focus-visible) {
+		outline: none;
+		box-shadow: none;
+		border: 0;
+	}
+}
+.btn {
+	@include roundedCorners(50);
+	border: 0;
+	font-size: .9rem;
+	font-weight: 400;
+	padding: .594rem 1.25rem;
+	i {
+		font-size: .9rem;
+		margin: 0 3px 0 0;
+		vertical-align: middle;
+	}
+	.btn-check:focus + &, &:focus {
+		outline: 0;
+		box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, .25%);
+	}
+}
+.btn-lg {
+	padding: .9rem 1.75rem;
+	font-size: 1rem;
+}
+
+/************* 11.8 Button Info *************/
+.btn-info {
+	color: $white;
+	background: #0066e0;
+	background: linear-gradient(45deg, #0066e0 0%, #00d0ff 100%);
+	&:hover {
+		color: $white;
+		background: #006cf0;
+		background: linear-gradient(45deg, #006cf0 0%, #01bde7 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $white;
+		background: #006cf0;
+		background: linear-gradient(45deg, #006cf0 0%, #01bde7 100%);
+		box-shadow: 0 0 0 0.2rem rgba(0, 121, 238, .30%);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $white;
+		background: #006cf0;
+		background: linear-gradient(45deg, #006cf0 0%, #01bde7 100%);
+		box-shadow: 0 0 0 0.2rem rgba(0, 121, 238, .30%);
+		&:focus {
+			color: $white;
+			background: #006cf0;
+			background: linear-gradient(45deg, #006cf0 0%, #01bde7 100%);
+			box-shadow: 0 0 0 0.2rem rgba(0, 121, 238, .30%);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $white;
+		background: #006cf0;
+		background: linear-gradient(45deg, #006cf0 0%, #01bde7 100%);
+	}
+}
+
+/************* 11.9 Button Danger *************/
+.btn-danger {
+	color: $white;
+	background: #bd0000;
+	background: linear-gradient(45deg, #bd0000 0%, #ff6b49 100%);
+	&:hover {
+		color: $white;
+		background: #b50303;
+		background: linear-gradient(45deg, #b50303 0%, #ff4a20 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $white;
+		background: #b50303;
+		background: linear-gradient(45deg, #b50303 0%, #ff4a20 100%);
+		box-shadow: 0 0 0 0.2rem rgba(218, 8, 0, .3);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $white;
+		background: #b50303;
+		background: linear-gradient(45deg, #b50303 0%, #ff4a20 100%);
+		box-shadow: 0 0 0 0.2rem rgba(218, 8, 0, .3);
+		&:focus {
+			color: $white;
+			background: #b50303;
+			background: linear-gradient(45deg, #b50303 0%, #ff4a20 100%);
+			box-shadow: 0 0 0 0.2rem rgba(218, 8, 0, .3);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $white;
+		background: #b50303;
+		background: linear-gradient(45deg, #b50303 0%, #ff4a20 100%);
+	}
+}
+
+/************* 11.10 Button Warning *************/
+.btn-warning {
+	color: $white;
+	background: #ef6300;
+	background: linear-gradient(45deg, #ef6300 0%, #ffba1f 100%);
+	&:hover {
+		color: $white;
+		background: #d25700;
+		background: linear-gradient(45deg, #d25700 0%, #f9ba2d 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $white;
+		background: #d25700;
+		background: linear-gradient(45deg, #d25700 0%, #f9ba2d 100%);
+		box-shadow: 0 0 0 0.2rem rgba(235, 149, 31, .5);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $white;
+		background: #d25700;
+		background: linear-gradient(45deg, #d25700 0%, #f9ba2d 100%);
+		box-shadow: 0 0 0 0.2rem rgba(235, 149, 31, .5);
+		&:focus {
+			color: $white;
+			background: #d25700;
+			background: linear-gradient(45deg, #d25700 0%, #f9ba2d 100%);
+			box-shadow: 0 0 0 0.2rem rgba(235, 149, 31, .5);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $white;
+		background: #d25700;
+		background: linear-gradient(45deg, #d25700 0%, #f9ba2d 100%);
+	}
+}
+
+/************* 11.11 Button Success *************/
+.btn-success {
+	color: $white;
+	background: #028073;
+	background: linear-gradient(45deg, #028073 0%, #98c452 100%);
+	&:hover {
+		color: $white;
+		background: #006b60;
+		background: linear-gradient(45deg, #006b60 0%, #96c252 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $white;
+		background: #006b60;
+		background: linear-gradient(45deg, #006b60 0%, #96c252 100%);
+		box-shadow: 0 0 0 0.2rem rgba(36, 125, 93, .30%);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $white;
+		background: #006b60;
+		background: linear-gradient(45deg, #006b60 0%, #96c252 100%);
+		box-shadow: 0 0 0 0.2rem rgba(36, 125, 93, .30%);
+		&:focus {
+			color: $white;
+			background: #006b60;
+			background: linear-gradient(45deg, #006b60 0%, #96c252 100%);
+			box-shadow: 0 0 0 0.2rem rgba(36, 125, 93, .40%);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $white;
+		background: #006b60;
+		background: linear-gradient(45deg, #006b60 0%, #96c252 100%);
+	}
+}
+
+/************* 11.12 Button Light *************/
+.btn-light {
+	color: $black;
+	background: #b3c4d6;
+	background: linear-gradient(45deg, #b3c4d6 0%, #e1e9f3 100%);
+	&:hover {
+		color: $black;
+		background: linear-gradient(45deg, #9eb1c5 0%, #d3deea 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $black;
+		background: linear-gradient(45deg, #9eb1c5 0%, #d3deea 100%);
+		outline: 0;
+		box-shadow: 0 0 0 0.2rem rgba(138, 157, 177, 0.3);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $black;
+		background: linear-gradient(45deg, #9eb1c5 0%, #d3deea 100%);
+		box-shadow: 0 0 0 0.2rem rgba(138, 157, 177, 0.3);
+		&:focus {
+			color: $black;
+			background: linear-gradient(45deg, #9eb1c5 0%, #d3deea 100%);
+			box-shadow: 0 0 0 0.2rem rgba(138, 157, 177, 0.3);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $black;
+		background: linear-gradient(45deg, #9eb1c5 0%, #d3deea 100%);
+	}
+}
+
+/************* 11.13 Button Dark *************/
+.btn-dark {
+	color: $white;
+	background: #3c3f44;
+	background: linear-gradient(45deg, #3c3f44 0%, #959dab 100%);
+	&:hover {
+		color: $white;
+		background: linear-gradient(45deg, #464a52 0%, #929fb6 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $white;
+		background: linear-gradient(45deg, #464a52 0%, #929fb6 100%);
+		outline: 0;
+		box-shadow: 0 0 0 0.2rem rgba(89, 95, 106, .20%);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $white;
+		background: linear-gradient(45deg, #464a52 0%, #929fb6 100%);
+		box-shadow: 0 0 0 0.2rem rgba(89, 95, 106, .20%);
+		&:focus {
+			color: $white;
+			background: linear-gradient(45deg, #464a52 0%, #929fb6 100%);
+			box-shadow: 0 0 0 0.2rem rgba(89, 95, 106, .20%);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $white;
+		background: linear-gradient(45deg, #464a52 0%, #929fb6 100%);
+	}
+}
+
+/************* 11.14 Button White *************/
+.btn-white {
+	color: $black;
+	background: #b3c4d6;
+	background: linear-gradient(45deg, #ffffff 0%, #ffffff 100%);
+	&:hover {
+		color: $black;
+		background: linear-gradient(45deg, #ffffff 0%, #d3deea 100%);
+	}
+	.btn-check:focus + &,
+	&:focus {
+		color: $black;
+		background: linear-gradient(45deg, #ffffff 0%, #d3deea 100%);
+		outline: 0;
+		box-shadow: 0 0 0 0.2rem rgba(202, 202, 202, 0.3);
+	}
+	&.dropdown-toggle.show,
+	.btn-check:checked + &,
+	.btn-check:active + &,
+	&:active,
+	&.active {
+		color: $black;
+		background: linear-gradient(45deg, #ffffff 0%, #d3deea 100%);
+		box-shadow: 0 0 0 0.2rem rgba(202, 202, 202, 0.3);
+		&:focus {
+			color: $black;
+			background: linear-gradient(45deg, #ffffff 0%, #d3deea 100%);
+			box-shadow: 0 0 0 0.2rem rgba(202, 202, 202, 0.3);
+		}
+	}
+	&:disabled,
+	&.disabled,
+	fieldset:disabled & {
+		pointer-events: none;
+		color: $black;
+		background: linear-gradient(45deg, #ffffff 0%, #d3deea 100%);
+	}
+}
+
+
+/************* 11.15 Dropdown Menu *************/
+.dropdown-menu {
+	background-color: $bg-shade1;
+	border: 0;
+	@include roundedCorners(8);
+	width: 12rem;
+	&:before {
+		position: absolute;
+		top: -9px;
+		left: 12px;
+		content: '';
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-bottom: 9px solid $bg-shade1;
+	}
+	&.dropdown-menu-end {
+		right: 0;
+		&:before {
+			right: 15px;
+			left: auto;
+			top: -9px;
+		}
+	}
+	&.mini {
+		width: 50px;
+		min-width: auto;
+	}
+	&.sm {
+		width: 15rem;
+		min-width: auto;
+	}
+	&.md {
+		width: 20rem;
+	}
+	&.lrg {
+		width: 24rem;
+	}
+	.dropdown-item {
+		padding: .5rem 1rem .5rem 1rem;
+		line-height: 100%;
+		position: relative;
+		color: $font-color;
+		&:hover {
+			background: $bg-shade2;
+		}
+		&:first-child {
+			@include roundedCorners(0);
+		}
+		&:last-child {
+			@include roundedCorners(0);
+		}
+		&.active-page {
+			background: $bg-shade3;
+			pointer-events: none;
+			cursor: not-allowed;
+		}
+	}
+	.dropdown-divider {
+		border-top: 1px solid $bg-shade2;
+	}
+	.dropdown-menu-header {
+		padding: .7rem 1rem;
+		margin-bottom: .5rem;
+		background: $bg-shade2;
+		color: $font-color-light;
+		font-size: .925rem;
+		font-weight: bold;
+	}
+	&.white-dropdown {
+		background-color: $white;
+		&:before {
+			border-bottom: 9px solid $white;
+		}
+	}
+}
+.dropdown-toggle {
+	&::after {
+		vertical-align: middle;
+	}
+	&.sub-nav-link {
+		&::after {
+			float: right;
+			margin: .15rem 0 0 0;
+			border-right: 0;
+			border-left: 5px solid;
+			border-top: 4px solid transparent;
+			border-bottom: 4px solid transparent;	
+		}
+	}
+}
+
+
+/************* 11.16 List Group *************/
+.list-group {
+	.list-group-item {
+		padding: .75rem 1rem;
+		color: $white;
+		background-color: rgba(255, 255, 255, .02);
+    	border: 1px solid rgba(255, 255, 255, .15);
+		+ .list-group-item {
+			border-top-width: 0;
+		}
+	}
+}
+
+
+/************* 11.17 Carousel *************/
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+	width: 4rem;
+    height: 4rem;
+}
+
+
+/******** 11.18 Form Controls ********/
+.form-label {
+	margin-bottom: .5rem;
+	font-size: .9rem;
+	font-weight: 600;
+	color: $label-color;
+}
+.form-control {
+	border: 1px solid $form-border;
+	@include roundedCorners(4);
+	color: $input-color;
+	font-size: .9rem;
+	min-height: 40px;
+	background-color: $form-bg;
+	&:hover {
+		border: 1px solid $form-hover-border;
+	}
+	&:focus {
+		border-color: $form-hover-border;
+		box-shadow: none;
+		@include roundedCorners(2);
+		outline: 0 !important;
+		outline-color: $form-hover-border !important;
+	}
+	&:disabled {
+		opacity: .7;
+	}
+}
+.form-select {
+	border: 1px solid $form-border;
+	@include roundedCorners(4);
+	color: $input-color;
+	font-size: .9rem;
+	min-height: 40px;
+	background-color: $form-bg;
+	&:hover {
+		border: 1px solid $form-hover-border;
+	}
+	&:focus {
+		border-color: $form-hover-border;
+		box-shadow: none;
+		@include roundedCorners(2);
+		outline: auto !important;
+		outline-color: $form-hover-border !important;
+	}
+	&:disabled {
+		opacity: .7;
+	}
+}
+.col-form-label {
+	padding-top: calc(.595rem + 1px);
+	padding-bottom: calc(.595rem + 1px);
+	min-height: 40px;
+}
+.input-group-text {
+	border: 1px solid $form-border;
+	background: $white;
+	@include roundedCorners(4);
+	font-size: 1rem;	
+	min-height: 40px;
+	margin: 0;
+	i {
+		color: $input-color;
+	}
+}
+.input-group {
+	.btn {
+		@include roundedCorners(4);
+	}
+}
+.form-control[type=file]:not(:disabled):not([readonly]) {
+	font-size: 1rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid $green;
+  -webkit-text-fill-color: $input-color;
+  box-shadow: 0 0 0px 100px rgba(0, 0, 0, 0.8) inset;
+}
+
+
+/******** 11.19 File Upload ********/
+.form-control::-webkit-file-upload-button {
+	background: $white;
+	font-size: .75rem;	
+	min-height: 40px;
+	margin: -1rem 1rem -1rem -.75rem;
+	color: $font-color;
+	line-height: 40px;
+}
+
+
+/******** 11.20 Checkbox and Radio ********/
+.form-check {
+	margin: 0 1rem 0 0;
+	min-height: 2rem;
+	.form-check-label {
+		font-weight: 400;
+		font-size: .9rem;
+		margin: 5px 0 0 10px;
+		color: $input-color;
+	}
+	.form-check-input {
+		border-color: $form-border;
+		background-color: $form-bg;
+		&:checked {
+			background-color: $teal;
+			border-color: $teal;
+		}
+		&:disabled~.form-check-label, [disabled]~.form-check-label {
+			opacity: 0.7;
+		}
+	}
+	.form-check-input[type=checkbox] {
+		@include roundedCorners(2);
+		width: 1.5rem !important;
+		height: 1.5rem !important;
+		margin-top: .15em;
+		min-height: auto;
+		padding: 0;
+	}
+	.form-check-input[type=radio] {
+		@include roundedCorners(50);
+		width: 1.5rem !important;
+		height: 1.5rem !important;
+		margin-top: .15em;
+		min-height: auto;
+		padding: 0;
+	}
+	&.form-switch {
+		min-height: 1.5rem;
+		margin: 0 0 10px 0;
+		.form-check-label {
+			margin: 0;
+		}
+		.form-check-input {
+			@include roundedCorners(30);
+			width: 2em !important;
+			height: 1em !important;
+		}
+	}
+}
+
+
+/******** 11.21 Input Color Shades ********/
+.control-light {
+
+	/* Form Control */
+	.form-control {
+		border: 1px solid rgba(255, 255, 255, 0.9);
+		color: $input-color;
+		background-color: rgba(255, 255, 255, 0.6);
+		&:hover {
+			border: 1px solid $white;
+		}
+		&:focus {
+			border: 1px solid  rgba(255, 255, 255, 0.7);
+			color: $input-color;
+			background-color: rgba(255, 255, 255, 0.5);
+			outline-color: $black !important;
+		}
+	}
+
+	/* Form Select */
+	.form-select {
+		border: 1px solid rgba(255, 255, 255, 0.9);
+		color: $input-color;
+		background-color: rgba(255, 255, 255, 0.6);
+		&:hover {
+			border: 1px solid $white;
+		}
+		&:focus {
+			border: 1px solid  rgba(255, 255, 255, 0.7);
+			color: $input-color;
+			background-color: rgba(255, 255, 255, 0.5);
+			outline-color: $black !important;
+		}
+	}
+
+	/* Form Label */
+	.form-label {
+		color: $white;
+	}
+
+	/* Input Group Text */
+	.input-group-text {
+		border: 1px solid rgba(255, 255, 255, 0.9);
+		color: $input-color;
+		background-color: rgba(255, 255, 255, 0.6);
+		&:hover {
+			border: 1px solid $white;
+		}
+		&:focus {
+			border: 1px solid  rgba(255, 255, 255, 0.7);
+			color: $input-color;
+			background-color: rgba(255, 255, 255, 0.5);
+			outline-color: $black !important;
+
+		}
+		i {
+			color: $input-color;
+		}
+	}
+
+	/* Form Check */
+	&.form-check {
+		.form-check-label {
+			color: $white;
+		}
+		.form-check-input {
+			border: 1px solid rgba(255, 255, 255, 0.9);
+			background-color: rgba(255, 255, 255, 0.6);
+		}
+	}
+
+	/* Form Switch */
+	.form-switch {
+		.form-check-label {
+			color: $white;
+		}
+		.form-check-input {
+			border: 1px solid rgba(255, 255, 255, 0.9);
+			background-color: rgba(255, 255, 255, 0.6);
+			&:checked {
+				background-color: $teal;
+				border-color: $teal;
+			}
+		}
+	}
+	
+}
+
+.control-dark {
+
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover, 
+	input:-webkit-autofill:focus,
+	textarea:-webkit-autofill,
+	textarea:-webkit-autofill:hover,
+	textarea:-webkit-autofill:focus,
+	select:-webkit-autofill,
+	select:-webkit-autofill:hover,
+	select:-webkit-autofill:focus {
+		-webkit-text-fill-color: $input-color-light;
+	}
+
+	/* Form Control */
+	.form-control {
+		border: 1px solid $form-border-dark;
+		color: $input-color-light;
+		background-color: $form-bg-dark;
+		&:hover {
+			border: 1px solid $form-hover-border-dark;
+		}
+		&:focus {
+			border-color: $form-hover-border-dark;
+			color: $input-color-light;
+			outline-color: $form-hover-border-dark !important;
+		}
+	}
+
+	/* Form Select */
+	.form-select {
+		border: 1px solid $form-border-dark;
+		color: $input-color-light;
+		background-color: $form-bg-dark;
+		&:hover {
+			border: 1px solid $form-hover-border-dark;
+		}
+		&:focus {
+			border-color: $form-hover-border-dark;
+			color: $input-color-light;
+			outline-color: $form-hover-border-dark !important;
+		}
+	}
+
+	/* Form  Label */
+	.form-label {
+		color: $label-color-light;
+	}
+
+	/* Input Group Text */
+	.input-group-text {
+		border: 1px solid $form-border-dark;
+		color: $input-color-light;
+		background-color: $form-bg-dark;
+		&:hover {
+			border: 1px solid $form-hover-border-dark;
+		}
+		&:focus {
+			border-color: $form-hover-border-dark;
+			color: $input-color-light;
+			outline-color: $form-hover-border-dark !important;
+		}
+		i {
+			color: $input-color-light;
+		}
+	}
+
+	/* Form Check */
+	&.form-check {
+		.form-check-label {
+			color: $input-color-light;
+		}
+		.form-check-input {
+			border: 1px solid $form-border-dark;
+			background-color: $form-bg-dark;
+		}
+	}
+
+	/* Form Switch */
+	.form-switch {
+		.form-check-label {
+			color: $input-color-light;
+		}
+		.form-check-input {
+			border: 1px solid rgba(255, 255, 255, 0.9);
+			background-color: rgba(255, 255, 255, 0.6);
+			&:checked {
+				background-color: $teal;
+				border-color: $teal;
+			}
+		}
+	}
+}
+
+
+/******** 11.22 Modal ********/
+.modal {	
+	.modal-content {
+		@include roundedCorners(10);
+		border: 0;
+		@extend .gradient-pearl;
+	}
+	.modal-header {
+		color: $black;
+		border: 0;
+		padding: 1rem 1.2rem;
+		@include roundedCornersAll(10px, 10px, 0, 0);
+		.btn-close {
+			background: url(../img/cancel.svg) center/1em auto no-repeat;
+		}
+	}
+	.modal-body {
+		padding: 1.2rem;
+	}
+	.modal-footer {
+		border-top: 1px solid $modal-border;
+		padding: .5rem 1.2rem;
+	}
+}
+.modal.modal-dark {	
+	.modal-content {
+		@include roundedCorners(10);
+		border: 0;
+		@extend .gradient-dark-grey;
+	}
+	.modal-header {
+		color: $white;
+		border: 0;
+		padding: 1rem 1.2rem;
+		@include roundedCornersAll(10px, 10px, 0, 0);
+		.btn-close {
+			background: url(../img/cancel-white.svg) center/1em auto no-repeat;
+		}
+	}
+	.modal-body {
+		padding: 1.2rem;
+	}
+	.modal-footer {
+		border-top: 1px solid $modal-border-dark;
+		padding: .5rem 1.2rem;
+	}
+}
+.modal-backdrop {
+	&.show {
+		opacity: 0.7;
+	}
+}
+
+
+/******** 11.23 Tables ********/
+.table {
+	background: $table-dark-bg;
+	color: $table-dark-color;
+	.flag-img {
+		width: 18px;
+		height: 18px;
+		margin: 0 10px 0 0;
+	}
+	.flag-img-lg {
+		width: 24px;
+		height: 24px;
+		margin: 0 7px 0 0;
+	}
+	> thead {
+		td, th {
+			background: $table-dark-bg-header;
+			font-weight: bold;
+			font-size: 1rem;
+			border-color: $table-border;
+		}
+	}
+	> tbody {
+		td {
+			background: $table-dark-bg;
+			border-color: $table-border;
+		}
+	}
+	> :not(caption) > * > * {
+		background: $table-dark-bg;
+		border-color: $table-border;
+	}
+	> :not(:first-child) {
+		border-top: 2px solid $table-dark-bg-header;
+	}	
+	&.v-middle {
+		vertical-align: middle;
+	}
+	.user-details {
+		display: flex;
+		align-items: center;
+		img {
+			width: 60px;
+			height: 60px;
+			margin: 0 10px 0 0;
+			@include roundedCorners(50);
+		}
+	}
+	.badge.min-70 {
+		min-width: 70px;
+	}
+	.badge.min-90 {
+		min-width: 90px;
+	}
+	.actions {
+		display: flex;
+    	align-items: center;
+		a {
+			width: 36px;
+			height: 36px;
+			font-size: 1rem;
+			margin: 3px;
+			border: 1px solid $table-border;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			-webkit-transition: .3s ease;
+			transition: .3s ease;
+		}
+	}
+	.media-box {
+		display: flex;
+		align-items: center;
+		img.media-avatar {
+			height: 60px;
+			margin: 0 15px 0 0;
+		}
+		img.media-avatar-lg {
+			height: 90px;
+			margin: 0 15px 0 0;
+		}
+		.media-box-body {
+			flex: 1;
+			p {
+				color: $font-color-light;
+				padding: 5px 0;
+			}
+		}
+	}
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+	color: $table-dark-color;
+}
+.table-bordered {
+	> :not(caption)>* {
+		border-top: 2px solid $table-border;
+	}
+	> :not(:first-child) {
+		border-bottom: 1px solid $table-border;
+	}
+	> :not(:last-child) > :last-child > * {
+		border-color: $table-border;
+	}
+}
+
+
+/******** 11.24 Pagination ********/
+.page-item {
+	&.disabled .page-link {
+		background-color: rgba(255, 255, 255, .02%);
+		border: 1px solid rgba(255, 255, 255, .1%);
+		color: $font-color;
+	}
+	.page-link {
+		padding: .594rem 1.25rem;
+		font-size: .9rem;
+		&:focus {
+			box-shadow: none;
+		}
+	}
+	&:first-child .page-link {
+		border-top-left-radius: 20px;
+		border-bottom-left-radius: 20px;
+	}
+	&:last-child .page-link {
+		border-top-right-radius: 20px;
+		border-bottom-right-radius: 20px;
+	}
+	&.active .page-link {
+		@extend .gradient-peach;
+		border: 1px solid $orange;
+	}
+}
+.page-link {
+	background-color: rgba(255, 255, 255, .05%);
+	border: 1px solid rgba(255, 255, 255, .1%);
+	color: $font-color-light;
+	&:hover, &:focus {
+		background-color: rgba(255, 255, 255, .1%);
+		border: 1px solid rgba(255, 255, 255, .15%);
+		color: $font-color-light;
+	}
+}
+
+
+/******** 11.25 Progress ********/
+.progress {
+	background-color: rgba(255, 255, 255, 0.05);
+	@include roundedCorners(2);
+}
+.progress-bar {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/******** 11.26 Spinners ********/
+.spinner-w3 {
+	width: 3rem;
+	height: 3rem;
+}
+.spinner-w5 {
+	width: 5rem;
+	height: 5rem;
+}
+
+
+/******** 11.27 Off Canvas ********/
+.offcanvas-start {
+	border-right: 0;
+}
+.offcanvas-end {
+	border-left: 0;
+}
+.offcanvas-bottom {
+	border-top: 0;
+}
+.offcanvas-top {
+	border-bottom: 0;
+}
+
+
+/************* 11.28 Row Gutters *************/
+.gutters {
+	margin-right: -10px;
+	margin-left: -10px;
+}
+.gutters > .col,
+.gutters > [class*="col-"] {
+	padding-right: 10px;
+	padding-left: 10px;
+}
