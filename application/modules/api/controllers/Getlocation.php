@@ -29,7 +29,7 @@ class Getlocation extends REST_Controller
                 'province' => self::get_province(),
                 'amphoe' => self::amphoe(),
                 'district' => self::district(),
-                'all' => self::get_location(),
+                // 'all' => self::get_location(),
             );
 
             $this->response(['status' => $status, 'result' => $data_result]);

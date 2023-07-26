@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{base_url}assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Sweetalert2 -->
     <link rel="stylesheet" href="{base_url}assets/css/sweetalert2.min.css">
-
+    <!-- select2 -->
+    <link rel="stylesheet" href="{base_url}assets/g_template/vendor/bs-select/bs-select.css" />
     <link rel="stylesheet" href="{base_url}assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
     <!-- Main Css -->
@@ -67,6 +68,7 @@
     <script src="{base_url}assets/js/sweetalert2.all.min.js"></script>
 
     <script src="{base_url}assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="{base_url}assets/bootstrap_extras/select2/select2.full.min.js"></script>
 
     <!-- DataTables -->
     <script src="{base_url}assets/plugins/datatables/jquery.dataTables.min.js"></script>

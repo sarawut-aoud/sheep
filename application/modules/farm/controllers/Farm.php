@@ -10,6 +10,7 @@ class Farm extends CRUD_Controller
         $this->pd_id = $this->session->userdata('pd_id');
 
         $this->load->model('farm/Sheep_type_model', 'sheep');
+        $this->load->model('farm/Farm_model', 'farm');
         if (!$this->session->userdata('pd_id')) {
             redirect('/home', 'refresh');
         }
@@ -36,6 +37,25 @@ class Farm extends CRUD_Controller
     {
         try {
             $result = $this->sheep->get_type_sheep();
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_farm()
+    {
+        try {
+            $result = $this->farm->get_farm();
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function savefarm()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->savefarm($post);
             $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);

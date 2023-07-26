@@ -29,7 +29,7 @@
         <h5 id="offcanvas-headerupdatefarm">แก้ไขข้อมูลฟาร์ม</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body overflow-auto" style="height: 1500px;">
+    <div class="offcanvas-body overflow-auto" style="height: 400px;">
         <div class="mb-3">
             <label for="farmname" class="form-label">ชื่อฟาร์ม</label>
             <input type="text" class="form-control" name="" id="farmname" aria-describedby="helpId" placeholder="กรอกชื่อฟาร์ม">
@@ -66,7 +66,7 @@
         </div>
         <div class="offcanvas-footer ">
             <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">ย้อนกลับ</button>
-            <button type="button" class="btn btn-success">บันทึก</button>
+            <button type="button" class="btn btn-success" id="save-farm-data">บันทึก</button>
         </div>
     </div>
 </div>
