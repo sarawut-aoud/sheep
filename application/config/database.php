@@ -145,13 +145,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $active_group = 'default';
 
 $query_builder = TRUE;
-$localhost = ['localhost', '127.0.0.1'];
+$localhost = ['localhost', '127.0.0.1', 'sheep.local'];
 if (!in_array($_SERVER['SERVER_NAME'], $localhost)) {
 
 	// ON Production Server
+	// $hostname = 'localhost';
+	$hostname = 'localhost';
 	$mysql_port = 3306;
-	$DB_USER = 'admin@tar'; //Database Username
-	$DB_PASS = 'P@ssw0rd0979284920';
+	$DB_USER = 'tar'; //Database Username
+	$DB_PASS = 'P@ssw0rd1234';
 	$DB_NAME = 'db_sheep'; // Database Name
 } else {
 
@@ -161,14 +163,14 @@ if (!in_array($_SERVER['SERVER_NAME'], $localhost)) {
 	} else {
 		$mysql_port = 3306;
 	}
+	$hostname = 'localhost';
 	$DB_NAME = 'db_sheep';
 	$DB_USER = 'admin@tar';
 	$DB_PASS = 'P@ssw0rd0979284920';
 }
-
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => $hostname,
 	'port'	   => $mysql_port,
 	'username' => $DB_USER,
 	'password' => $DB_PASS,

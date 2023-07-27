@@ -11,9 +11,9 @@ class Sendmail_model extends CI_Model
 			$mail->IsSMTP();
 			$mail->SMTPDebug = 0;
 			$mail->SMTPAuth = true;
-			$mail->Username = "noreply@noreply.com"; // account SMTP
-			$mail->Password = "P@ssw0rd2017"; // รหัสผ่าน SMTP 
-			$mail->Host = 'mail.geerang.com';
+			$mail->Username = "noreply@secret-serv.com"; // account SMTP
+			$mail->Password = "P@ssw0rd0979284920"; // รหัสผ่าน SMTP 
+			$mail->Host = 'mail.secret-serv.com';
 			// $mail->SMTPSecure = 'tls';
 			$mail->Port = 587;
 			$mail->SMTPOptions = array(
@@ -23,7 +23,7 @@ class Sendmail_model extends CI_Model
 					'allow_self_signed' => true
 				)
 			);
-			$mail->SetFrom('support@geerang.com', 'support@geerang.com');
+			$mail->SetFrom('noreply@secret-serv.com', 'noreply@secret-serv.com');
 			$mail->Subject = $subject;
 
 			$mail->MsgHTML($data['message']);
@@ -66,7 +66,7 @@ class Sendmail_model extends CI_Model
 			if (!empty($data["mailsend"])) {
 				$mail->SetFrom($data["mailsend"], $data["mailsend"]);
 			} else {
-				$mail->SetFrom('support@geerang.com', 'support@geerang.com');
+				$mail->SetFrom('noreply@secret-serv.com', 'noreply@secret-serv.com');
 			}
 
 			$mail->Subject = $subject;
