@@ -1,6 +1,3 @@
-<style>
-
-</style>
 <div class="homepage">
     <div class="container pb-4 page-rlt">
         <div class="row mb-3 v-card-box  p-2">

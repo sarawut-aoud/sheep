@@ -27,6 +27,8 @@ class Farm extends CRUD_Controller
     }
     public function create_sheep()
     {
+        $this->setJs('/assets/js_modules/createsheep.js?ft=' . time());
+
         $this->setBread(
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
             ['class' => 'active', 'ref' => '#', 'name' => 'เพิ่มข้อมูลแพะ']

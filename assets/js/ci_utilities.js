@@ -1060,7 +1060,7 @@ function Getnoti() {
 	$.ajax({
 		type: "GET",
 		dataType: "json",
-		url: "api/getnoti",
+		url: "/api/getnoti",
 		success: (results) => {
 			let data = results.result;
 			let mobile = data.mobile;
@@ -1129,7 +1129,7 @@ async function get_location() {
 	return $.ajax({
 		type: "GET",
 		dataType: "json",
-		url: "api/getlocation",
+		url: "/api/getlocation",
 		success: (results) => {},
 	});
 }
