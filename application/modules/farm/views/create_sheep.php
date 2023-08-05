@@ -17,16 +17,16 @@
 
     .row-sticky {
         position: sticky;
-        top: 80px;
+        top: 0;
         z-index: 100;
         background-color: white;
         margin-top: 1rem;
     }
 </style>
 <div class="homepage">
-    <div class="container pb-4 page-rlt">
+    <div class="container pb-4 page-rlt overflow-auto "style="height:80vh">
 
-        <div class="row">
+        <div class="row " >
             <div class="d-flex justify-content-start mt-3 mb-3 button-goback ">
                 <button type="button" class="btn btn-dark btngoback">
                     <div class="icon"><i class="fas fa-chevron-left"></i></div>
@@ -53,7 +53,7 @@
                         <div class="d-flex flex-column flex-lg-row gap-3 w-100 mb-3">
                             <div class="mb-3">
                                 <label for="" class="form-label">รหัสแพะ</label>
-                                <input type="text" name="" id="sheepcode_0" class="form-control sheepcode" placeholder="A001" aria-describedby="helpId">
+                                <input type="text" name="" id="sheepcode_0" class="form-control sheepcode" maxlength="10" placeholder="A001" aria-describedby="helpId">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">ชื่อแพะ</label>
@@ -86,15 +86,15 @@
                         <div class="d-flex flex-column flex-lg-row gap-3 w-100">
                             <div class="mb-3 w-100">
                                 <label for="" class="form-label">อายุ (เดือน)</label>
-                                <input type="text" name="" id="old_0" class="form-control old" placeholder="10" aria-describedby="helpId">
+                                <input type="text" name="" id="old_0" class="form-control old isNumberOnly" placeholder="10" aria-describedby="helpId">
                             </div>
                             <div class="mb-3 w-100">
                                 <label for="" class="form-label">น้ำหนัก (กก.)</label>
-                                <input type="text" name="" id="weight_0" class="form-control weight" placeholder="00.00" aria-describedby="helpId">
+                                <input type="text" name="" id="weight_0" class="form-control weight isNumberOnly" placeholder="00.00" aria-describedby="helpId">
                             </div>
                             <div class="mb-3 w-100">
                                 <label for="" class="form-label">ส่วนสูง (ซม.)</label>
-                                <input type="text" name="" id="height_0" class="form-control height" placeholder="100" aria-describedby="">
+                                <input type="text" name="" id="height_0" class="form-control height isNumberOnly" placeholder="100" aria-describedby="">
                             </div>
                         </div>
                     </div>

@@ -21,17 +21,6 @@ class Farm_model extends MY_Model
             'province_id '  => $post->province,
         ];
         $this->db->insert('db_sheep.farms', $data);
-        $last_id = $this->db->insert_id();
-
-        foreach ($post->sheep as $key => $val) {
-            $data_sheep = [
-                'sheep_type'    => $val['id'],
-                'sheep_count'   => $val['value'],
-                'pd_id'         => $this->pd_id,
-                'farm_id'       => $last_id,
-            ];
-            $this->db->insert('db_sheep.sheep_keep', $data_sheep);
-        }
     }
     public function get_farm()
     {
@@ -43,6 +32,10 @@ class Farm_model extends MY_Model
             $data[$key]->sheep = $this->db->query("SELECT * FROM db_sheep.sheep_keep t1 LEFT JOIN db_sheep.sheep_type t2 ON t2.id = t1.sheep_type WHERE farm_id = ? AND pd_id = ?", [$val->id, $this->pd_id])->result();
         }
         return $data;
+    }
+    public function get_farmbyid($post)
+    {
+        return $this->db->get_where('db_sheep.farms', ['id' => $post->id])->row();
     }
     public function get_location($province = 0, $district = 0, $subdistrict = 0)
 
@@ -73,5 +66,26 @@ class Farm_model extends MY_Model
             $address[]  = 'จังหวัด ' . $pro->nameTh;
         }
         return (!empty($address) ? implode(' ', $address) : '');
+    }
+    public function savesheep($post)
+    {
+        $post = $post->data;
+        foreach ($post as $key => $val) {
+            $data = [
+                'sheepcode'     => $val['sheepcode'],
+                'sheepname'     => $val['sheepname'],
+                'sheeptype'     => $val['sheeptype'],
+                'farm'          => $val['farm'],
+                'gender'        => $val['gender'],
+                'old'           => $val['old'],
+                'weight'        => $val['weight'],
+                'height'        => $val['height'],
+            ];
+            $this->db->insert('db_sheep.sheppdata', $data);
+        }
+        if ($this->db->affected_rows() > 1) {
+            $this->status = true;
+        }
+        return $this->status;
     }
 }

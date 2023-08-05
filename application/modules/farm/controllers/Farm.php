@@ -44,6 +44,15 @@ class Farm extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function get_farmlist()
+    {
+        try {
+            $result = $this->farm->get_farm();
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
     public function get_farm()
     {
         try {
@@ -58,6 +67,26 @@ class Farm extends CRUD_Controller
         $post = (object)$this->input->post(NULL, false);
         try {
             $result = $this->farm->savefarm($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_farmbyid()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->get_farmbyid($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function savesheep()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->savesheep($post);
             $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);

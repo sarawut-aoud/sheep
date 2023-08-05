@@ -1055,7 +1055,7 @@ $(document).on("click", ".btngoback", async (e) => {
 });
 
 function Getnoti() {
-	let url = location.pathname.split("/")[2].toLowerCase();
+	let url = location.pathname?.split("/")[2]?.toLowerCase();
 	if (url == "home") return;
 	$.ajax({
 		type: "GET",
@@ -1104,7 +1104,7 @@ function Getnoti() {
 }
 function activemenu() {
 	let link = window.location.href;
-	let url = location.pathname.split("/")[2].toLowerCase();
+	let url = location.pathname?.split("/")[2]?.toLowerCase();
 	let tag = "";
 	console.log(url);
 	if ($("#is_mobile").val()) {
@@ -1124,7 +1124,7 @@ function activemenu() {
 
 async function get_location() {
 	let data = [];
-	let url = location.pathname.split("/")[2].toLowerCase();
+	let url = location.pathname?.split("/")[2]?.toLowerCase();
 
 	return $.ajax({
 		type: "GET",

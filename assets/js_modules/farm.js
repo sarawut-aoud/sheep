@@ -8,9 +8,7 @@ const farm = {
 		content: (data) => {
 			return `
 			<div class="d-flex justify-content-end">
-				<button type="button" class="btn btn-warning font-m" data-farm-id="${
-					data.id
-				}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
+				<button type="button" class="btn btn-warning font-m" data-farm-id="${data.id}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
 			</div>
 			<div class="contents-farm-view-item mb-3">
 				<div class="">
@@ -46,7 +44,6 @@ const farm = {
 						</div>
 					</div>
 				</div>
-				${farm.methods.rendersheep(data.sheep)}
 			
 		</div>
 			`;
@@ -74,6 +71,12 @@ const farm = {
 				$(`.offcanvas-backdrop`).fadeOut(10, () => {
 					$(".offcanvas-backdrop").remove();
 				});
+				$("#farmname").val("");
+				$("#farmername").val("");
+				$("#address").val("");
+				$("#province").val("").trigger("change");
+				$("#amphoe").val("").trigger("change");
+				$("#district").val("").trigger("change");
 			});
 			$(document).on("keypress", ".isNumberOnly", async (e) => {
 				let input = $(e.target).val();
@@ -90,7 +93,6 @@ const farm = {
 			await farm.ajax.getsheeptype();
 			await farm.ajax.get_farm();
 			await farm.methods.renderfarm(farm.data.rawdatafarm);
-			await farm.methods.renderinputsheeptype(farm.data.rawsheeptype);
 		},
 		async renderfarm(data) {
 			let item = "";
@@ -370,7 +372,17 @@ const farm = {
 					id: id,
 					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
 				},
-				success: (results) => {},
+				success: (results) => {
+					if (results.data) {
+						let data = results.data;
+						$("#farmname").val(data.farmname);
+						$("#farmername").val(data.farmer);
+						$("#address").val(data.address);
+						$("#province").val(data.province_id).trigger("change");
+						$("#amphoe").val(data.amphoe_id).trigger("change");
+						$("#district").val(data.distirct_id).trigger("change");
+					}
+				},
 			});
 		},
 	},
@@ -381,7 +393,6 @@ const farm = {
 		await this.ajax.get_farm();
 
 		await this.methods.renderfarm(this.data.rawdatafarm);
-		await this.methods.renderinputsheeptype(this.data.rawsheeptype);
 		this.Jquery.main();
 
 		$(document).on("click", "#save-farm-data", async (e) => {
