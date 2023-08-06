@@ -113,6 +113,23 @@ const sheep = {
 		},
 		async save() {
 			let data = [];
+			let chk = true;
+			let msg = "";
+			$(`.sheepcode`).each((i, ev) => {
+				if ($(ev).val() == "") {
+					msg += `<br> -  โปรดกรอกข้อมูลรหัสแพะช่องที่ ${i + 1}`;
+					chk = false;
+					return;
+				}
+			});
+			$(`.sheepname`).each((i, ev) => {
+				if ($(ev).val() == "") {
+					msg += `<br> - โปรดกรอกข้อมูลชื่อแพะช่องที่ ${i + 1}`;
+					chk = false;
+					return;
+				}
+			});
+
 			$(".box-content").each((i, ev) => {
 				data.push({
 					sheepcode: $(`#sheepcode_${i}`).val(),
@@ -125,23 +142,48 @@ const sheep = {
 					height: $(`#height_${i}`).val(),
 				});
 			});
+			loading_on($("#savesheep"));
+			if (chk) {
+				await $.ajax({
+					type: "POST",
+					dataType: "json",
+					url: site_url("farm/savesheep"),
+					data: {
+						data,
+						csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+					},
+					success: (results) => {
+						if (results.status) {
+							Swal.fire({
+								icon: "success",
+								title: "บันทึกสำเร็จ",
+								showConfirmButton: false,
+								timer: 1500,
+							}).then(async () => {
+								location.reload();
+							});
+						} else {
+							Swal.fire({
+								icon: "error",
+								title: "เกิดข้อผิดพลาด",
+								showConfirmButton: false,
+								timer: 1500,
+							});
+							location.reload();
+						}
+						loading_on_remove($("#savesheep"));
+					},
+				});
+			} else {
+				Swal.fire({
+					icon: "error",
+					title: `เกิดข้อผิดพลาดยังกรอกข้อมูลไม่ครบ<br>${msg}`,
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
 
-			await $.ajax({
-				type: "POST",
-				dataType: "json",
-				url: site_url('farm/savesheep'),
-				data: {
-					data,
-					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
-				},
-				success: (results) => {
-					if(results.status){
-
-					}else{
-
-					}
-				},
-			});
+			loading_on_remove($("#savesheep"));
 		},
 	},
 	async init() {

@@ -414,11 +414,18 @@ a:hover {
 
 .contents-farm-view {
 	width: 100%;
-	border-radius: 1em;
-	box-shadow: var(--box-shadow);
 	margin-bottom: 1.5rem;
 	height: 100%;
 	padding: 10px;
+}
+.contents-farm-view-box {
+	box-shadow: var(--box-shadow);
+	border-radius: 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	padding: 1rem;
 }
 .contents-farm-view-item {
 	display: grid;

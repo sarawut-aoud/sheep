@@ -87,7 +87,7 @@ class Farm extends CRUD_Controller
         $post = (object)$this->input->post(NULL, false);
         try {
             $result = $this->farm->savesheep($post);
-            $this->setRes(true, $result, 200);
+            $this->setRes($result,['msg'=>''] , 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
         }

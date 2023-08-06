@@ -89,6 +89,7 @@
 	margin-bottom: 1.5rem;
 	height: 100%;
 }
+
 .contents-farm-view-item {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr) );

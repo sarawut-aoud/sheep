@@ -6,46 +6,48 @@ const farm = {
 	},
 	components: {
 		content: (data) => {
-			return `
-			<div class="d-flex justify-content-end">
-				<button type="button" class="btn btn-warning font-m" data-farm-id="${data.id}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
-			</div>
-			<div class="contents-farm-view-item mb-3">
-				<div class="">
-					<div class="v-label h-100  w-icon">
-						<div class="icon">
-							<i class="fas fa-warehouse"></i>
+			return `<div class="contents-farm-view-box">
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-warning font-m" data-farm-id="${data.id}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
 						</div>
-						<div class="contents">
-							<div class="label">ชื่อฟาร์ม</div>
-							<div class="text-value">${data.farmname}</div>
-						</div>
+						<div class="contents-farm-view-item mb-3">
+							<div class="">
+								<div class="v-label h-100  w-icon">
+									<div class="icon">
+										<i class="fas fa-warehouse"></i>
+									</div>
+									<div class="contents">
+										<div class="label">ชื่อฟาร์ม</div>
+										<div class="text-value">${data.farmname}</div>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="v-label h-100  w-icon">
+									<div class="icon">
+										<i class="fas fa-tag"></i>
+									</div>
+									<div class="contents">
+										<div class="label">เจ้าของฟาร์ม</div>
+										<div class="text-value">${data.farmer}</div>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="v-label h-100  w-icon">
+									<div class="icon">
+										<i class="fas fa-map-marker-alt"></i>
+									</div>
+									<div class="contents">
+										<div class="label">ที่ตั้งฟาร์ม</div>
+										<div class="text-value">${data.address} ${data.location}</div>
+									</div>
+								</div>
+							</div>
+							${farm.methods.rendersheep(data.sheep)}
+						</div>	
 					</div>
-				</div>
-				<div class="">
-					<div class="v-label h-100  w-icon">
-						<div class="icon">
-							<i class="fas fa-tag"></i>
-						</div>
-						<div class="contents">
-							<div class="label">เจ้าของฟาร์ม</div>
-							<div class="text-value">${data.farmer}</div>
-						</div>
-					</div>
-				</div>
-				<div class="">
-					<div class="v-label h-100  w-icon">
-						<div class="icon">
-							<i class="fas fa-map-marker-alt"></i>
-						</div>
-						<div class="contents">
-							<div class="label">ที่ตั้งฟาร์ม</div>
-							<div class="text-value">${data.address} ${data.location}</div>
-						</div>
-					</div>
-				</div>
-			
-		</div>
+				
 			`;
 		},
 	},
