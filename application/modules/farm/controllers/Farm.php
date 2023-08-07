@@ -35,6 +35,16 @@ class Farm extends CRUD_Controller
         );
         $this->renderview('farm/create_sheep');
     }
+    public function sale_purchase()
+    {
+        $this->setJs('/assets/js_modules/sale_purchase.js?ft=' . time());
+
+        $this->setBread(
+            ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
+            ['class' => 'active', 'ref' => '#', 'name' => 'ข้อมูลการซื้อ-ขาย']
+        );
+        $this->renderview('farm/sale_purchase');
+    }
     public function get_typesheep()
     {
         try {
@@ -87,7 +97,7 @@ class Farm extends CRUD_Controller
         $post = (object)$this->input->post(NULL, false);
         try {
             $result = $this->farm->savesheep($post);
-            $this->setRes($result,['msg'=>''] , 200);
+            $this->setRes($result, ['msg' => ''], 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
         }
