@@ -15,25 +15,16 @@ class Setting extends CRUD_Controller
         }
     }
 
-    public function linenoti()
+    public function index()
     {
         $this->setBread(
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'ตั้งค่า'],
-            ['class' => 'active', 'ref' => '#', 'name' => ' ตั้งค่า line Notification']
+            ['class' => 'active', 'ref' => '#', 'name' => ' ตั้งค่า Line Notifications / เพิ่มผู้ใช้งาน']
         );
 
         //Js
 
-        $this->renderview('admin/view');
-    }
-    public function adduser()
-    {
-        $this->setBread(
-            ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
-            ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'ตั้งค่า'],
-            ['class' => 'active', 'ref' => '#', 'name' => 'เพิ่มผู้ใช้งาน']
-        );
         $this->renderview('admin/view');
     }
 }

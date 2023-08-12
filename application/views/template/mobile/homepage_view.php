@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{base_url}assets/css/style_m_custom.css">
     <link rel="stylesheet" href="{base_url}assets/css/loading.css">
     <link rel="stylesheet" href="{base_url}assets/icomoon/style.css">
+    <link rel="stylesheet" href="{base_url}assets/css/dashboard.css">
 
 
     {another_css}
@@ -81,6 +82,7 @@
 
     <script src="{base_url}assets/dist/master.min.js"></script>
 
+    <script src="{base_url}assets/g_template/js/moment.js"></script>
 
     <!-- Main java Script -->
     <script src="{base_url}assets/js/ci_utilities.js?ft=<?= date('His') ?>"></script>

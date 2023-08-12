@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control" id="email" placeholder="อีเมลล์">
                             </div>
                         </div>
-                        <button class="btn btn-primary  btn-block mb-4" type="button">ขอรหัสผ่านใหม่</button>
+                        <button class="btn btn-primary  btn-block mb-4" id="sendemail" type="button">ขอรหัสผ่านใหม่</button>
                     </div>
                 </div>
             </div>

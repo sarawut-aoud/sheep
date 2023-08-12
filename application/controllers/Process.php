@@ -29,20 +29,38 @@ class Process extends MY_Controller
     {
         $post = $this->input->post();
         $id = $this->regis->register($post);
-        // if ($id) {
-        //     self::SetEmailSend($id);
-        // }
+        if ($id['id']) {
+            self::SetEmailSend($id);
+        }
         echo json_encode(['status' => true, 'ลงทะเบียนสำเร็จ']);
     }
 
+    public function checkemail()
+    {
+        $post = (object) $this->input->post();
 
+        $result = $this->db->query("SELECT email FROM db_sheep.personaldocument WHERE email = '{$post->email}' ")->num_rows();
+
+        if ($result == 0) {
+            $msg = 'ไม่พบอีเมลล์ในระบบ';
+            $status = false;
+        } else {
+            $msg = '';
+            $status = true;
+        }
+        echo json_encode(['status' => $status, 'msg' => $msg]);
+    }
 
     private function SetEmailSend($id)
     {
-        $mailsend = '';
-        $mailto = '';
-        $subject = '';
-        $bodyhtml = '';
+        $result = $this->db->get_where('db_sheep.personaldocument', ['pd_id' => $id['id']])->row();
+        $mailsend = 'noreply@noreply.com';
+        $mailto = $result->email;
+        $subject = 'สมัครสมาชิก';
+        $bodyhtml = " สมัครสมาชิกสำเสร็จโปรดตรวจสอบชื่อเข้าใช้งานและรหัสผ่าน" . "\n";
+        $bodyhtml = "username :" . $result->username . "\n";
+        $bodyhtml = "password :" . $id['pass'] . "\n\n\n\n";
+        $bodyhtml = "<a href='" . base_url() . "'>คลิกเพื่อเข้าสู่ระบบ</a>";
 
         $sendmail_result = $this->sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = '');
 

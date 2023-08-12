@@ -937,7 +937,6 @@ String.prototype.toHHMMSS = function () {
 };
 
 function setDatePickerHoliday(el) {
-	loadCompanyHoliday();
 	$(el).datepicker({
 		dateFormat: "dd-M-yy",
 		changeMonth: true,
@@ -1055,8 +1054,11 @@ $(document).on("click", ".btngoback", async (e) => {
 });
 
 function Getnoti() {
-	let url = location.pathname?.split("/")[2]?.toLowerCase();
-	if (url == "home") return;
+	let url = location.pathname?.split("/")[2]
+		? location.pathname.split("/")[2].toLowerCase()
+		: location.pathname.split("/")[1];
+
+	if (url == "home" || "forgetpassword") return;
 	$.ajax({
 		type: "GET",
 		dataType: "json",
@@ -1104,7 +1106,9 @@ function Getnoti() {
 }
 function activemenu() {
 	let link = window.location.href;
-	let url = location.pathname?.split("/")[2]?.toLowerCase();
+	let url = location.pathname?.split("/")[2]
+		? location.pathname.split("/")[2].toLowerCase()
+		: location.pathname.split("/")[1];
 	let tag = "";
 	console.log(url);
 	if ($("#is_mobile").val()) {
@@ -1113,7 +1117,11 @@ function activemenu() {
 				tag = ".navi-profile";
 				break;
 			}
-			case url == "dashboard" || url == "reports": {
+			case url == "dashboard" ||
+				url == "reports" ||
+				url == "sale_purchase" ||
+				url == "farm" ||
+				url == "create_sheep": {
 				tag = ".navi-home ";
 				break;
 			}

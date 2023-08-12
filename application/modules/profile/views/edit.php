@@ -72,7 +72,12 @@
                     </div>
                     <label class="labels">Token Line Notification</label>
                     <input class="form-control" type="text" value="" id="tokenNotifications">
-                    <a href="https://notify-bot.line.me/th/" target="_blank" class="btn btn-success mt-2">คลิกที่นี่เพื่อเข้าสู่หน้าเว็บ <i class="fab fa-line"></i> Line Notify </a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="https://notify-bot.line.me/th/" target="_blank" class="btn btn-success mt-2">คลิกที่นี่เพื่อเข้าสู่หน้าเว็บ <i class="fab fa-line"></i> Line Notify </a>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showexamplelinenoti">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="col-md-12 mb-3">
                     <div class="d-flex justify-content-between w-100">
@@ -141,3 +146,5 @@
         </div>
     </div>
 <?php endif; ?>
+
+<?php $this->load->view('modal_line') ?>

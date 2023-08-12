@@ -37,7 +37,7 @@ class Farm extends CRUD_Controller
     }
     public function sale_purchase()
     {
-        $this->setJs('/assets/js_modules/sale_purchase.js?ft=' . time());
+        $this->setJs('/assets/js_modules/sale.js?ft=' . time());
 
         $this->setBread(
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
@@ -47,8 +47,10 @@ class Farm extends CRUD_Controller
     }
     public function get_typesheep()
     {
+        $post = (object)$this->input->get(NULL, false);
+
         try {
-            $result = $this->sheep->get_type_sheep();
+            $result = $this->sheep->get_type_sheep($post);
             $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
@@ -98,6 +100,26 @@ class Farm extends CRUD_Controller
         try {
             $result = $this->farm->savesheep($post);
             $this->setRes($result, ['msg' => ''], 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function save_sale()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->save_sale($post);
+            $this->setRes($result, ['msg' => ''], 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_datasale()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->get_datasale($post);
+            $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
         }

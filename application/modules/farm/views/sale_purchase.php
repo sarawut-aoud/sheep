@@ -84,84 +84,112 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .contents {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem
+    }
+
+    .input-contents {
+        display: flex;
+        flex-direction: column;
+        border-radius: 1em;
+        box-shadow: var(--box-shadow);
+        padding: 1rem;
+    }
+
+    .text-contents {
+        display: flex;
+        justify-content: center;
+    }
+
+    .contents-showdatable {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: var(--box-shadow);
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .contents-showdatable-item {
+        width: 100%;
+    }
+
+    .contents-showdatable-item:not(:last-child) {
+        border-right: 1px solid var(--dark-small-color);
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+    }
 </style>
 <div class="homepage">
     <div class="container-fluid pb-4 page-rlt overflow-auto ">
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="row">
-                
-            </div>
-            <div class="pt-5 pb-5">
-                <div class="card-contents">
-                    <?php for($i=0;$i<20;$i++) :?>
-                    <div class="card-items">
-                        <div class="header-content purchase">รับซื้อ</div>
-                        <div class="contents-body">
-                            <div class="d-flex gap-2 align-items-center justify-content-between">
-                                <div class="text-value-small">ผู้ประกาศ</div>
-                                <div class="text-value-small">วันที่ 7-Aug-2023</div>
+                <div class="d-flex justify-content-end justify-content-lg-between align-items-center">
+                    <div class="d-flex justify-content-start mt-3 mb-3 button-goback ">
+                        <button type="button" class="btn btn-dark btngoback">
+                            <div class="icon"><i class="fas fa-chevron-left"></i></div>
+                            <div class="text-value">
+                                ย้อนกลับ
                             </div>
-                            <div class="text-value">นายทดสอบ ทดสอบ</div>
-                            <div class="text-value">ฟาร์มทดสอบ</div>
-                        </div>
-                        <div class="contents-sheep">
-                            <div class="position-relative">
-                                <div class="text-topic">
-                                    <span>รายละเอียดแพะ</span>
-                                </div>
-                                <div class="line-topic"></div>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center justify-content-between">
-                                <div class="text-value">ประเภทแพะขุน</div>
-                                <div class="text-value">แพะตัวผู้ <i style="font-size:26px" class="fas fa-mars text-info"></i></div>
-                            </div>
-                            <div class="text-value">อายุุ 10 เดือน ถึง 12 เดือน</div>
-                            <div class="d-flex gap-2 align-items-center justify-content-between">
-                                <div class="text-value">น้ำหนัก 144 กิโลกรัม</div>
-                                <div class="text-value">สูง 120 เซนติเมตร</div>
-                            </div>
-                        </div>
-                        <div class="contents-button">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-phone-alt"></i> ติดต่อ </button>
-                            <button type="button" class="btn btn-info"><i class="fas fa-search"></i> ดูรายละเอียด </button>
-                        </div>
+                        </button>
                     </div>
-                    <div class="card-items">
-                        <div class="header-content sale">ขาย</div>
-                        <div class="contents-body">
-                            <div class="d-flex gap-2 align-items-center justify-content-between">
-                                <div class="text-value-small">ผู้ประกาศ</div>
-                                <div class="text-value-small">วันที่ 7-Aug-2023</div>
-                            </div>
-                            <div class="text-value">นายทดสอบ ทดสอบ</div>
-                            <div class="text-value">ฟาร์มทดสอบ</div>
-                        </div>
-                        <div class="contents-sheep">
-                            <div class="position-relative">
-                                <div class="text-topic">
-                                    <span>รายละเอียดแพะ</span>
-                                </div>
-                                <div class="line-topic"></div>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center justify-content-between">
-                                <div class="text-value">ประเภทแพะขุน</div>
-                                <div class="text-value">แพะตัวผู้ <i style="font-size:26px" class="fas fa-mars text-info"></i></div>
-                            </div>
-                            <div class="text-value">อายุุ 10 เดือน ถึง 12 เดือน</div>
-                            <div class="d-flex gap-2 align-items-center justify-content-between">
-                                <div class="text-value">น้ำหนัก 144 กิโลกรัม</div>
-                                <div class="text-value">สูง 120 เซนติเมตร</div>
-                            </div>
-                        </div>
-                        <div class="contents-button">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-phone-alt"></i> ติดต่อ </button>
-                            <button type="button" class="btn btn-info"><i class="fas fa-search"></i> ดูรายละเอียด </button>
-                        </div>
-                    </div>
-                    <?php endfor;?>
+                    <button class="btn btn-info " data-action="create" type="button" data-bs-toggle="offcanvas" data-bs-target="#createsale" aria-controls="createsale">
+                        <i class="fas fa-plus-circle"></i> เพิ่มรายการซื้อ-ขาย
+                    </button>
+                </div>
 
+            </div>
+            <hr>
+            <div class=" pb-5">
+                <div class="card p-3">
+                    <div class="table-responsive">
+                        <table id="tb-sheepsale" class="table table-striped
+                    table-hover	
+                    table-borderless
+                    align-middle" style="width: 100%;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width:20%">วัน เดือน ปี</th>
+                                    <th>#</th>
+                                    <th style="width:10%">รวมเงิน(บาท)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end v-offcanvas " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="createsale" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvas-head"></h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4">
+        <div class="mb-3">
+            <label for="" class="form-label">วันที่</label>
+            <input type="text" name="" id="sale-date" class="form-control datepicker" value="<?= date('d-M-Y') ?>" placeholder="">
+        </div>
+        <div class="contents">
+
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">ยกเลิก</button>
+        <button type="button" class="btn btn-success " id="save-sale">บันทึกข้อมูล</button>
     </div>
 </div>

@@ -407,6 +407,7 @@ a:hover {
 	justify-content: space-between;
 	gap: 10px;
 	padding: 1rem 10px !important;
+	text-wrap: balance !important;
 }
 .v-collapse .collapse-item .text {
 	text-align: end;
@@ -444,4 +445,32 @@ a:hover {
 #topnoti-content .dropdown-header {
 	position: sticky;
 	top: 0;
+}
+/* ส่วนที่ใช้สำหรับการเลื่อนข้อความที่แสดงเป็นจุด ----------------------------------------------------- */
+.text-ellipsis-scroll {
+	width: 100%;
+	/* important */
+	white-space: nowrap;
+	overflow: hidden;
+	/* when not hovering show ellipsis */
+	/* animate on either hover or focus */
+	/* define the animation */
+}
+
+.text-ellipsis-scroll:not(:hover) {
+	text-overflow: ellipsis;
+}
+
+.text-ellipsis-scroll:hover span,
+.text-ellipsis-scroll:focus span {
+	display: inline-block;
+	animation-name: scroll-text;
+	animation-duration: 5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	/* FYI this would be the shorthand: animation: scroll-text 5s ease 0s 2 normal;*/
+}
+.table tbody tr td {
+	vertical-align: middle;
 }

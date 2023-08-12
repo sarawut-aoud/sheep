@@ -139,7 +139,7 @@
 
     <script src="{base_url}assets/dist/master.min.js"></script>
 
-
+    <script src="{base_url}assets/g_template/js/moment.js"></script>
     <!-- Main java Script -->
     <script src="{base_url}assets/js/ci_utilities.js?ft=<?= date('His') ?>"></script>
 

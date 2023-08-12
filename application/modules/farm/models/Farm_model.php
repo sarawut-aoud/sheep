@@ -105,4 +105,60 @@ class Farm_model extends MY_Model
         }
         return $this->status;
     }
+    public function get_datasale($post)
+    {
+        $where = '';
+        if ($post->date_start || $post->date_end) {
+            $where .= "";
+        }
+        $result = $this->db->query(
+            "SELECT t1.saledate,
+                    t1.rowscoulumn,
+                    SUM(t1.pricetotal) as pricetotal
+            FROM db_sheep.sheep_sale t1
+            WHERE 
+            pd_id = {$this->pd_id}
+            $where 
+            GROUP BY t1.saledate"
+        )->result();
+        $data = [];
+        foreach ($result as $key => $val) {
+            $data[$key] = $val;
+            $data[$key]->rowdata = $this->db->query(
+                "SELECT *
+                FROM db_sheep.sheep_sale t1
+                LEFT JOIN db_sheep.sheep_type t2 ON t2.id = t1.sheep_type
+                WHERE 
+                pd_id = {$this->pd_id} AND
+                DATE(t1.saledate) = '{$val->saledate}'
+                "
+            )->result();
+            
+        }
+        return $data;
+    }
+    public function save_sale($post)
+    {
+        $row = $this->db->query(
+            "SELECT MAX(rowscoulumn) as rowscoulumn  db_sheep.sheep_sale WHERE pd_id = {$this->pd_id}"
+        )->row('rowscoulumn');
+        $rowdata = $post->data;
+        foreach ($rowdata as $key => $val) {
+            if ($val['amount'] != '') {
+
+                $data = [
+                    'rowscoulumn'   => $row ? $row + 1 : 1,
+                    'pd_id'         => $this->pd_id,
+                    'sheep_type'    => $val['type_id'],
+                    'weight'        => $val['weight'] ? $val['weight'] : 0,
+                    'price'         => $val['price'],
+                    'amount'        => $val['amount'],
+                    'saledate'      => date('Y-m-d', strtotime($val['date'])),
+                    'pricetotal'    =>  str_replace(',', '', $val['total']),
+                ];
+                $this->db->insert('db_sheep.sheep_sale', $data);
+            }
+        }
+        return true;
+    }
 }
