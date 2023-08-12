@@ -54,14 +54,29 @@ class Process extends MY_Controller
     private function SetEmailSend($id)
     {
         $result = $this->db->get_where('db_sheep.personaldocument', ['pd_id' => $id['id']])->row();
-        $mailsend = 'noreply@noreply.com';
+
         $mailto = $result->email;
         $subject = 'สมัครสมาชิก';
-        $bodyhtml = " สมัครสมาชิกสำเสร็จโปรดตรวจสอบชื่อเข้าใช้งานและรหัสผ่าน" . "\n";
-        $bodyhtml = "username :" . $result->username . "\n";
-        $bodyhtml = "password :" . $id['pass'] . "\n\n\n\n";
-        $bodyhtml = "<a href='" . base_url() . "'>คลิกเพื่อเข้าสู่ระบบ</a>";
+        $mailsend = 'noreply@secret-serv.com';
+        // $mailsend = $post->email;
+        $subject = 'ขอรหัสผ่านใหม่';
+        $body = "
+        <div>สมัครสมาชิก</div>
+        <div>สมัครสมาชิกสำเสร็จโปรดตรวจสอบชื่อเข้าใช้งานและรหัสผ่าน</div>
+        <div>username : {$result->username} </div>
+        <div>password :  {$id['pass']} </div>
+        <br>
+        <div>
+            <a href='" . base_url() . "' style='border-radius:8px;padding: .5rem 1rem;background-color: #1875ff;color: white;'>คลิกเพื่อเข้าสู่ระบบ</a>
+        </div>
+        ";
 
+        $tempalte = [
+            'title' => 'สมัครสมาชิก',
+            'subtitle' => null,
+            'content' =>  $body,
+        ];
+        $bodyhtml =  $this->sendmail->emailTemplate($tempalte);
         $sendmail_result = $this->sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = '');
 
 
@@ -83,7 +98,7 @@ class Process extends MY_Controller
         $datamail = array(
             'email' => $mailto, 'message' => $bodyhtml, 'mailsend' => $mailsend, 'uploadfile' => $uploadfile
         );
-        $result = $this->Sendmail_model->sendtomail($subject, $datamail);
+        $result = $this->sendmail->sendtomail($subject, $datamail);
         return $result;
     }
 

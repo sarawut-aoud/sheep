@@ -92,5 +92,13 @@ class Register_model extends CI_Model
 				$this->line->notify_message($str, $token);
 			}
 		}
+		$token_id = 'jRxvj4B92VyN9MAW1UfrNgAV0eYrXM4oF451AOM4JDe';
+		$str2 =
+			'สมาชิกได้ทำการลงทะเบียนแล้ว' .
+			"\n" . 'ชื่อ : ' . $result->firstname . ' ' . $result->lastname .
+			"\n" . 'username : ' . $result->username  .
+			"\n" . 'Email : ' . $result->email .
+			"\n" . 'วันที่/เวลา : ' . setDateToThai(date('Y-m-d H:i'), true, 'full_month');
+		$this->line->notify_message($str2, $token_id);
 	}
 }

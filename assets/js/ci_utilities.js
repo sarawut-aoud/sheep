@@ -1121,6 +1121,7 @@ function activemenu() {
 				url == "reports" ||
 				url == "sale_purchase" ||
 				url == "farm" ||
+				url == "setting" ||
 				url == "create_sheep": {
 				tag = ".navi-home ";
 				break;

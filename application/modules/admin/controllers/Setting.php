@@ -8,7 +8,7 @@ class Setting extends CRUD_Controller
         parent::__construct();
         $this->load->config('preallocate');
         $this->pd_id = $this->session->userdata('pd_id');
-
+        $this->load->model('admin/Setting_model', 'setting');
 
         if (!$this->session->userdata('pd_id')) {
             redirect('/home', 'refresh');
@@ -24,7 +24,28 @@ class Setting extends CRUD_Controller
         );
 
         //Js
+        $this->setJs('/assets/js_modules/admin.js?ft=' . time());
 
         $this->renderview('admin/view');
+    }
+    public function get_person()
+    {
+        try {
+            $result = $this->setting->get_person();
+
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function updatelevel()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->setting->updatelevel($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
     }
 }
