@@ -3,7 +3,7 @@
 
 class Profile_model extends MY_Model
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->pd_id = $this->session->userdata('pd_id');

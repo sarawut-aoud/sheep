@@ -149,6 +149,31 @@
             </div>
             <hr>
             <div class=" pb-5">
+                <div class="d-flex flex-column gap-2 w-100 justify-content-center mb-3">
+                    <div class="d-flex gap-2 justify-content-end   rounded-pill">
+                        <div data-action="daynow" class="btn btn-dark btnfilter-data active">วันนี้</div>
+                        <div data-action="weeknow" class="btn btn-dark btnfilter-data">สัปดาห์นี้</div>
+                        <div data-action="monthnow" class="btn btn-dark btnfilter-data">เดือนนี้</div>
+                        <div data-action="quarternow" class="btn btn-dark btnfilter-data">ไตรมาสนี้</div>
+                        <div data-action="yearnow" class="btn btn-dark btnfilter-data">ปีนี้</div>
+                        <div class="date-range-show btn btn-dark  btnfilter-data position-relative">เลือกวันที่ <i class="fas fa-caret-down"></i>
+                            <input type="text" name="" id="datepicker" style="width:-webkit-fill-available;opacity: 0; position: absolute; right: 0px; z-index:-1;">
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <div class="mb-3  w-100">
+                            <label for="" class="form-label">วันที่</label>
+                            <input readonly type="text" name="" id="date_start" class="form-control" placeholder=""></input>
+                        </div>
+                        <div class="mb-3  w-100">
+                            <label for="" class="form-label">ถึง</label>
+                            <input readonly type="text" name="" id="date_end" class="form-control" placeholder=""></input>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-info" id="search"><i class="fas fa-search"></i> ค้นหา</button>
+                    </div>
+                </div>
                 <div class="card p-3">
                     <div class="table-responsive">
                         <table id="tb-sheepsale" class="table table-striped
@@ -157,6 +182,7 @@
                     align-middle" style="width: 100%;">
                             <thead class="table-light">
                                 <tr>
+                                    <th>#</th>
                                     <th style="width:20%">วัน เดือน ปี</th>
                                     <th>#</th>
                                     <th style="width:10%">รวมเงิน(บาท)</th>

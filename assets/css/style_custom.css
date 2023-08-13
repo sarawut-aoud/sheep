@@ -400,7 +400,7 @@ a:hover {
 	height: auto !important;
 }
 .v-offcanvas {
-	width: 50%;
+	width: 50% !important;
 }
 .v-collapse .collapse-item {
 	display: flex !important;
@@ -524,4 +524,16 @@ a:hover {
 	background: #f8da4e url(images/ui-bg_glass_55_f8da4e_1x400.png) 50% 50%
 		repeat-x !important;
 	color: #915608 !important;
+}
+.btn-group .btn {
+	border-radius: 0 !important;
+}
+.btn-group .btn:only-child {
+	border-radius: 1em !important;
+}
+.btn-group .btn:first-child {
+	border-radius: 1em 0 0 1em !important;
+}
+.btn-group .btn:last-child {
+	border-radius: 0 1em 1em 0 !important;
 }

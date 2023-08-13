@@ -24,9 +24,15 @@
     <!-- select2 -->
     <link rel="stylesheet" href="{base_url}assets/g_template/vendor/bs-select/bs-select.css" />
 
+    <!-- datatable -->
+    <link rel="stylesheet" href="{base_url}assets/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
 
     <link rel="stylesheet" href="{base_url}assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
+    <link rel="stylesheet" href="{base_url}assets/plugins/daterangepicker/daterangepicker.css">
     <!-- Main Css -->
 
     <link rel="stylesheet" href="{base_url}assets/css/_var_main.css">
@@ -130,9 +136,13 @@
 
     <!-- DataTables -->
     <script src="{base_url}assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="{base_url}assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{base_url}assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{base_url}assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="{base_url}assets/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+
 
     <!-- Sortable -->
     <script src="{base_url}assets/js/Sortable.js"></script>
@@ -140,6 +150,8 @@
     <script src="{base_url}assets/dist/master.min.js"></script>
 
     <script src="{base_url}assets/g_template/js/moment.js"></script>
+    <script src="{base_url}assets/plugins/daterangepicker/daterangepicker.js?ft=<?= filemtime('assets/plugins/daterangepicker/daterangepicker.js') ?>"></script>
+
     <!-- Main java Script -->
     <script src="{base_url}assets/js/ci_utilities.js?ft=<?= date('His') ?>"></script>
 

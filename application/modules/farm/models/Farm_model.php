@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Farm_model extends MY_Model
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->pd_id = $this->session->userdata('pd_id');
@@ -105,9 +105,13 @@ class Farm_model extends MY_Model
     }
     public function get_datasale($post)
     {
+        $post = (object) $post->data;
+
         $where = '';
         if ($post->date_start || $post->date_end) {
-            $where .= "";
+            $start = date('Y-m-d', strtotime($post->date_start));
+            $end = date('Y-m-d', strtotime($post->date_end));
+            $where .= " AND DATE(t1.saledate) BETWEEN '{$start}' AND '{$end}'";
         }
         $result = $this->db->query(
             "SELECT t1.saledate,
@@ -117,7 +121,8 @@ class Farm_model extends MY_Model
             WHERE 
             pd_id = {$this->pd_id}
             $where 
-            GROUP BY t1.saledate"
+            GROUP BY rowscoulumn
+            "
         )->result();
         $data = [];
         foreach ($result as $key => $val) {
@@ -128,18 +133,18 @@ class Farm_model extends MY_Model
                 LEFT JOIN db_sheep.sheep_type t2 ON t2.id = t1.sheep_type
                 WHERE 
                 pd_id = {$this->pd_id} AND
-                DATE(t1.saledate) = '{$val->saledate}'
+                rowscoulumn = '{$val->rowscoulumn}'
                 "
             )->result();
-            
         }
         return $data;
     }
     public function save_sale($post)
     {
         $row = $this->db->query(
-            "SELECT MAX(rowscoulumn) as rowscoulumn  db_sheep.sheep_sale WHERE pd_id = {$this->pd_id}"
+            "SELECT MAX(rowscoulumn) as rowscoulumn FROM db_sheep.sheep_sale WHERE pd_id = {$this->pd_id}"
         )->row('rowscoulumn');
+
         $rowdata = $post->data;
         foreach ($rowdata as $key => $val) {
             if ($val['amount'] != '') {
