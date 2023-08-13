@@ -481,3 +481,47 @@ a:hover {
 	display: flex;
 	justify-content: end;
 }
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+	background: #000000 !important;
+	border: none !important;
+}
+.ui-widget-header {
+	border: 1px solid #000000 !important;
+	background: #000000 !important;
+	color: #eaf5f7;
+	font-weight: bold;
+}
+.ui-widget-content {
+	border: 1px solid #000000 !important;
+}
+.ui-datepicker-current-day.ui-datepicker-today .ui-state-default,
+.ui-datepicker-current-day.ui-datepicker-today
+	.ui-widget-content
+	.ui-state-default,
+.ui-datepicker-current-day.ui-datepicker-today
+	.ui-widget-header
+	.ui-state-default {
+	border: 1px solid #fcd113 !important;
+	background: #f8da4e url(images/ui-bg_glass_55_f8da4e_1x400.png) 50% 50%
+		repeat-x !important;
+	color: #915608 !important;
+}
+.ui-datepicker-current-day .ui-state-active,
+.ui-datepicker-current-day .ui-widget-content .ui-state-active,
+.ui-datepicker-current-day .ui-widget-header .ui-state-active {
+	border: 1px solid #acdd4a !important;
+	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50%
+		repeat-x !important;
+	font-weight: normal !important;
+	color: #fff !important;
+}
+.ui-datepicker-today .ui-state-highlight,
+.ui-datepicker-today .ui-widget-content .ui-state-highlight,
+.ui-datepicker-today .ui-widget-header .ui-state-highlight {
+	border: 1px solid #fcd113 !important;
+	background: #f8da4e url(images/ui-bg_glass_55_f8da4e_1x400.png) 50% 50%
+		repeat-x !important;
+	color: #915608 !important;
+}

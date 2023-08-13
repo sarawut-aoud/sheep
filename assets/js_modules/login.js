@@ -37,7 +37,7 @@ const login = {
 						if (results.status) {
 							Swal.fire({
 								icon: "success",
-								title: results.message,
+								title: 'ล็อกอินสำเร็จ',
 								showConfirmButton: false,
 								timer: 1500,
 							}).then(() => {
@@ -46,7 +46,7 @@ const login = {
 						} else {
 							Swal.fire({
 								icon: "error",
-								title:'ไม่สามารถบันทึกข้อมูลได้',
+								title:'ล็อกอินไม่สำเร็จสำเร็จ',
 								showConfirmButton: false,
 								timer: 1500,
 							});
