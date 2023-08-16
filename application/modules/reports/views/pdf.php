@@ -12,7 +12,7 @@ function dot($param)
         echo '.';
     }
 }
-$img = FCPATH .  './assets/images/sheep.png';
+
 
 ?>
 <style>
@@ -21,11 +21,11 @@ $img = FCPATH .  './assets/images/sheep.png';
     }
 
     #paper {
-        width: 21cm;
-        padding-left: 1.5cm;
-        padding-right: 1.5cm;
+        padding-left: 1cm;
+        padding-right: 1cm;
         padding-bottom: 0cm;
         position: relative;
+
     }
 
     .w-100 {
@@ -83,9 +83,141 @@ $img = FCPATH .  './assets/images/sheep.png';
     .boldderr {
         font-weight: bold;
     }
+
+    .b {
+        border: 1px solid #000
+    }
+    .item-data{
+        padding: .5rem 1rem;
+    }
 </style>
-<div id="paper">
-    <div class="w-100 text-center">
-        <img alt="Image " style="width:100px" src="<?= $img ?>">
-    </div>
+<div id="paper" class="w-100 text-center ">
+    <!-- cellpadding="0" cellspacing="0" -->
+    <table class="w-100" autosize="1" style="page-break-inside:avoid" border="0" cellspacing="0">
+        <thead>
+            <tr style="text-align:center;width:100%;">
+                <th class="b" colspan="20" style="width:100%;">บัญชีการซื้อขายแพะ - มูลแพะปี <?= Datethai(date('Y-m-d'), 'Y') ?></th>
+            </tr>
+            <tr>
+                <th class="b" rowspan="2">วัน / เดือน /ปี</th>
+                <th class="b" rowspan="2">ชื่อ - สกุล</th>
+                <th class="b" colspan="3">พ่อพันธุ์</th>
+                <th class="b" colspan="3">แม่พันธุ์</th>
+                <th class="b" colspan="4">แพะปลด พ่อ แม่</th>
+                <th class="b" colspan="4">แพะขุน</th>
+                <th class="b" colspan="3">มูลแพะ</th>
+                <th class="b" rowspan="2">รวมเงิน</th>
+            </tr>
+            <tr>
+                <th class="b">จำนวน</th>
+                <th class="b">ราคา</th>
+                <th class="b">รวม</th>
+                <th class="b">จำนวน</th>
+                <th class="b">ราคา</th>
+                <th class="b">รวม</th>
+                <th class="b">จำนวน</th>
+                <th class="b">กิโลกรัม</th>
+                <th class="b">ราคา</th>
+                <th class="b">รวม</th>
+                <th class="b">จำนวน</th>
+                <th class="b">กิโลกรัม</th>
+                <th class="b">ราคา</th>
+                <th class="b">รวม</th>
+                <th class="b">จำนวน</th>
+                <th class="b">ราคา</th>
+                <th class="b">รวม</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+            </tr>
+            <tr>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+            </tr>
+            <tr>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+                <td class="b item-data"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="b text-center" colspan="2">รวมยอด</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+                <td class="b text-end">0</td>
+            </tr>
+        </tfoot>
+    </table>
 </div>

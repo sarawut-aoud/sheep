@@ -51,7 +51,7 @@ class Reports extends CRUD_Controller
             $post = $this->input->get(NULL, false);
         }
         $id = urldecode(decrypt($post->encrypt_id));
-        $$orientation = $post->page ? $post->page : "";
+        $$orientation = $post->page ? $post->page : "L";
 
 
 
@@ -64,11 +64,13 @@ class Reports extends CRUD_Controller
 
         $message = preg_replace('/<a class="(.*?)">(.*?)<\/a>/', '<p class="$1">$2</p>', $message); //สำหรับเปลี่ยน tag a เป็น p เพราะ mpdf ไม่รองรับสีตัวอักษรบน tag a
         $message = preg_replace('/<label class="(.*?)">(.*?)<\/label>/', '<span>$2</span>', $message); //สำหรับเปลี่ยน tag label เป็น span เพราะ mpdf ไม่รองรับการจัดตำแหน่ง inline
-
+        $img = FCPATH .  './assets/images/sheep.png';
         $this->header = '<table style="margin-top:0;padding:0 35px; width:100%">
                         <tr>
-                            
-                            <td valign="top" style="padding-left:10px;">
+                            <td style="width:10%;vertical-align:middle">
+                                <img alt="Image " style="width:100px" src="' . $img . '">
+                            </td>
+                            <td valign="top" style="padding-left:10px;vertical-align:middle">
                                 <span style="font-size:22px; font-weight:bold;">SHEEP Online<br>
                                 <span style="font-size:18px; font-weight:bold;"> ________________________<br>
                                 <span style="font-size:18px; font-weight:bold;">' . $header . '<br>
@@ -96,7 +98,7 @@ class Reports extends CRUD_Controller
 
         ob_clean();
         $this->m_pdf->load([
-            'orientation' => $orientation,
+            'orientation' => 'L',
             'mode' => 'utf-8',
             'format' => 'A4',
             'default_font_size' => '16px',
@@ -115,6 +117,7 @@ class Reports extends CRUD_Controller
             'defaultfooterline' => 0,
             'margin_footer' => 0
         ]);
+
         $this->m_pdf->use_kwt = true;
 
         $this->m_pdf->SetHTMLHeader($this->header);
