@@ -87,16 +87,20 @@ function dot($param)
     .b {
         border: 1px solid #000
     }
-    .item-data{
+
+    .item-data {
         padding: .5rem 1rem;
     }
 </style>
+<?php
+
+?>
 <div id="paper" class="w-100 text-center ">
     <!-- cellpadding="0" cellspacing="0" -->
     <table class="w-100" autosize="1" style="page-break-inside:avoid" border="0" cellspacing="0">
         <thead>
             <tr style="text-align:center;width:100%;">
-                <th class="b" colspan="20" style="width:100%;">บัญชีการซื้อขายแพะ - มูลแพะปี <?= Datethai(date('Y-m-d'), 'Y') ?></th>
+                <th class="b" colspan="20" style="width:100%;">บัญชีการซื้อขายแพะ - มูลแพะประระหว่างวันที่ <?= Datethai($datestart, '') ?>-<?= Datethai($dateend, '') ?></th>
             </tr>
             <tr>
                 <th class="b" rowspan="2">วัน / เดือน /ปี</th>

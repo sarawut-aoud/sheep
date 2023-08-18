@@ -157,6 +157,19 @@ const report = {
 			],
 			order: [[0, "asc"]],
 		});
+		$(".all-report-wrapper .dt-buttons.btn-group").append(
+			'<button class="btn btn-secondary " id="exportpdf" data-bs-toggle="modal" data-bs-target="#showpdfview" type="button"><span>PDF</span></button>'
+		);
+		$(document).on("show.bs.modal", "#showpdfview", async (e) => {
+			let date_start = $("#date_start").val();
+			let date_end = $("#date_end").val();
+			let data = "?date_start=" + date_start;
+			data += "&date_end=" + date_end;
+			pdf_viewer({
+				url: site_url("reports/exportpdf" + data),
+				canvas: $("#showpdfview #showpdf")[0],
+			});
+		});
 	},
 };
 report.init();

@@ -46,14 +46,15 @@ class Reports extends CRUD_Controller
         $this->load->library('m_pdf');
         $this->data['m_pdf'] = true;
         if (count($_POST) > 0) {
-            $post = $this->input->post(NULL, false);
+            $post = (object)$this->input->post(NULL, false);
         } else {
-            $post = $this->input->get(NULL, false);
+            $post =  (object)$this->input->get(NULL, false);
         }
         $id = urldecode(decrypt($post->encrypt_id));
-        $$orientation = $post->page ? $post->page : "L";
+        $orientation = $post->page ? $post->page : "L";
 
-
+        $this->data['datestart'] = date('Y-m-d', strtotime($post->date_start));
+        $this->data['dateend'] = date('Y-m-d', strtotime($post->date_end));
 
         // $status_document = $this->db->
         $message = ob_get_contents();
@@ -98,7 +99,7 @@ class Reports extends CRUD_Controller
 
         ob_clean();
         $this->m_pdf->load([
-            'orientation' => 'L',
+            'orientation' => $orientation,
             'mode' => 'utf-8',
             'format' => 'A4',
             'default_font_size' => '16px',
