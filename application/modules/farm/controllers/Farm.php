@@ -35,6 +35,20 @@ class Farm extends CRUD_Controller
         );
         $this->renderview('farm/create_sheep');
     }
+    public function sheep_import()
+    {
+        $this->setJs('assets/lib/jspreadsheet-ce/index.js');
+        $this->setJs('assets/lib/jsuites/jsuites.js');
+        $this->setJs('assets/js_modules/import.js?ft=' . time());
+        $this->setCss('assets/lib/jspreadsheet-ce/jspreadsheet.css');
+        $this->setCss('assets/lib/jsuites/jsuites.css');
+        $this->setBread(
+            ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
+            ['class' => '', 'ref' => base_url('farm/create_sheep'), 'name' => 'เพิ่มข้อมูลแพะ'],
+            ['class' => 'active', 'ref' => '#', 'name' => 'นำเข้าข้อมูลแพะ'],
+        );
+        $this->renderview('farm/viewimport');
+    }
     public function sale_purchase()
     {
         $this->setJs('/assets/js_modules/sale.js?ft=' . time());

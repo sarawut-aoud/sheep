@@ -55,6 +55,7 @@ class Reports extends CRUD_Controller
 
         $this->data['datestart'] = date('Y-m-d', strtotime($post->date_start));
         $this->data['dateend'] = date('Y-m-d', strtotime($post->date_end));
+        $this->data['data'] = $this->report->get_data((object)['data' => ['date_start' => $post->date_start, 'date_end' => $post->date_end]]);
 
         // $status_document = $this->db->
         $message = ob_get_contents();
@@ -71,12 +72,17 @@ class Reports extends CRUD_Controller
                             <td style="width:10%;vertical-align:middle">
                                 <img alt="Image " style="width:100px" src="' . $img . '">
                             </td>
-                            <td valign="top" style="padding-left:10px;vertical-align:middle">
+                            <td valign="top" style="width:10%;padding-left:10px;vertical-align:middle">
                                 <span style="font-size:22px; font-weight:bold;">SHEEP Online<br>
                                 <span style="font-size:18px; font-weight:bold;"> ________________________<br>
                                 <span style="font-size:18px; font-weight:bold;">' . $header . '<br>
                             </td>
-                            <td valign="center"  width="80px" style="padding-left:10px;text-align:right;">
+                            <td class="text-center" style="width:60%;font-size:22px; font-weight:bold;">
+                                บัญชีการซื้อขายแพะ - มูลแพะ
+                                <br>
+                                ระหว่างวันที่ ' . Datethai($post->date_start, '') . '-' . Datethai($post->date_end, '') . '
+                            </td>
+                            <td valign="center"  style="width:20%;padding-left:10px;text-align:right;">
                                 <b>{PAGENO}/ {nb}</b><br>
                             </td>
                               
@@ -126,5 +132,57 @@ class Reports extends CRUD_Controller
         $this->m_pdf->WriteHTML($message);
         $pdfFilePath = $filename . ".pdf";
         $this->m_pdf->Output($pdfFilePath, "I");
+    }
+    public function get_data()
+    {
+        $post = (object) $this->input->post();
+        try {
+
+            $result = $this->report->get_data($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_countsheep()
+    {
+        $post = (object) $this->input->post();
+
+        try {
+            $result  = $this->report->get_countsheep($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_countsheep_gender()
+    {
+        $post = (object) $this->input->post();
+        try {
+            $result  = $this->report->get_countsheep_gender($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_sumtotalprice()
+    {
+        $post = (object) $this->input->post();
+        try {
+            $result  = $this->report->get_sumtotalprice($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_sumprice()
+    {
+        $post = (object) $this->input->post();
+        try {
+            $result  = $this->report->get_sumprice($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
     }
 }

@@ -26,9 +26,9 @@
 
     <!-- datatable -->
     <link rel="stylesheet" href="{base_url}assets/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="{base_url}assets/js/table5/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{base_url}assets/js/table5/buttons.bootstrap5.min.css">
 
     <link rel="stylesheet" href="{base_url}assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
@@ -137,11 +137,11 @@
     <!-- DataTables -->
     <script src="{base_url}assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{base_url}assets/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+    <script src="{base_url}assets/js/table5/dataTables.buttons.min.js"></script>
+    <script src="{base_url}assets/js/table5/buttons.bootstrap5.min.js"></script>
+    <script src="{base_url}assets/js/table5/buttons.html5.min.js"></script>
+    <script src="{base_url}assets/js/table5/buttons.print.min.js"></script>
+    <script src="{base_url}assets/js/table5/buttonsvis.min.js"></script>
 
 
     <!-- Sortable -->

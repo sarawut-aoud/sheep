@@ -31,6 +31,13 @@ const report = {
 	},
 	jquery: {
 		main() {
+			if (mobile) {
+				$("#showfilter").css("display", "none");
+				$("#show-filterbtn").css("display", "unset");
+			} else {
+				$("#show-filterbtn").css("display", "none");
+				$("#showfilter").css("display", "unset");
+			}
 			let data = report.data.filterdate.filter(
 				(ev, i) => ev.text == "daynow"
 			)[0];
@@ -109,12 +116,66 @@ const report = {
 			});
 		},
 	},
-	components: {},
-	methods: {},
-	ajax: {},
+	components: {
+		text(data) {
+			return `<div class="text-ellipsis-scroll"><span>${data}</span></div>`;
+		},
+	},
+	methods: {
+		async rendertable(data) {
+			report.data.table.clear().draw();
+			if (!data) return;
+			data.forEach((ev, i) => {
+				report.data.table.row
+					.add([
+						report.components.text(i + 1),
+						report.components.text(moment(ev.saledate).format("DD-MMM-YYYY")),
+						report.components.text(
+							`${ev.rowdata[0].amount} / ${formatCurrency(ev.rowdata[0].price)}`
+						),
+						report.components.text(
+							`${ev.rowdata[1].amount} / ${formatCurrency(ev.rowdata[1].price)}`
+						),
+						report.components.text(
+							`${ev.rowdata[2].amount} / ${formatCurrency(ev.rowdata[2].price)}`
+						),
+						report.components.text(
+							`${ev.rowdata[3].amount} / ${formatCurrency(ev.rowdata[3].price)}`
+						),
+						report.components.text(
+							`${ev.rowdata[4].amount} / ${formatCurrency(ev.rowdata[4].price)}`
+						),
+						report.components.text(formatCurrency(ev.pricetotal)),
+					])
+					.draw(false);
+			});
+		},
+	},
+	ajax: {
+		async get_data(data) {
+			await $.ajax({
+				type: "post",
+				dataType: "json",
+				url: site_url("reports/get_data"),
+				data: {
+					data,
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: async (results) => {
+					await report.methods.rendertable(results.data);
+				},
+			});
+		},
+	},
 	async init() {
 		this.jquery.main();
-
+		$(document).on("click", "#show-filterbtn", (e) => {
+			if ($("#showfilter")[0].style.display == "") {
+				$("#showfilter").slideUp();
+			} else {
+				$("#showfilter").slideDown();
+			}
+		});
 		$(document).on("click", ".show-all-rows", async (e) => {
 			$(".dataTables_length select").val(-1).trigger("change");
 		});
@@ -131,14 +192,6 @@ const report = {
 			// "bPaginate": false,
 			buttons: [
 				{
-					extend: "copy",
-					title: $(`tb-report`).data("title"),
-				},
-				{
-					extend: "csv",
-					title: $(`tb-report`).data("title"),
-				},
-				{
 					extend: "excel",
 
 					title: $(`tb-report`).data("title"),
@@ -150,16 +203,10 @@ const report = {
 						).attr("s", "51");
 					},
 				},
-				{
-					extend: "print",
-					title: $(`tb-report`).data("title"),
-				},
 			],
 			order: [[0, "asc"]],
 		});
-		$(".all-report-wrapper .dt-buttons.btn-group").append(
-			'<button class="btn btn-secondary " id="exportpdf" data-bs-toggle="modal" data-bs-target="#showpdfview" type="button"><span>PDF</span></button>'
-		);
+
 		$(document).on("show.bs.modal", "#showpdfview", async (e) => {
 			let date_start = $("#date_start").val();
 			let date_end = $("#date_end").val();
@@ -169,6 +216,21 @@ const report = {
 				url: site_url("reports/exportpdf" + data),
 				canvas: $("#showpdfview #showpdf")[0],
 			});
+		});
+
+		$(document).on("click", "#search", async (e) => {
+			$("#exportpdf").remove();
+			let date_start = $("#date_start").val();
+			let date_end = $("#date_end").val();
+			let data = {
+				date_start: date_start,
+				date_end: date_end,
+			};
+
+			$(".all-report-wrapper .dt-buttons.btn-group").append(
+				'<button class="btn btn-secondary " id="exportpdf" data-bs-toggle="modal" data-bs-target="#showpdfview" type="button"><span>PDF</span></button>'
+			);
+			await this.ajax.get_data(data);
 		});
 	},
 };

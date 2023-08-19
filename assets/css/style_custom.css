@@ -77,7 +77,7 @@ body {
 }
 .btn {
 	padding: 0.5rem 1rem;
-	border-radius: 1em !important;
+	border-radius: 1em;
 }
 .btngoback {
 	display: flex;
@@ -525,15 +525,13 @@ a:hover {
 		repeat-x !important;
 	color: #915608 !important;
 }
-.btn-group .btn {
-	border-radius: 0 !important;
-}
-.btn-group .btn:only-child {
+
+.dt-buttons.btn-group > .btn:only-child  {
 	border-radius: 1em !important;
 }
-.btn-group .btn:first-child {
-	border-radius: 1em 0 0 1em !important;
+.dt-buttons.btn-group > .btn:first-child {
+	border-radius: 1em 0 0 1em;
 }
-.btn-group .btn:last-child {
-	border-radius: 0 1em 1em 0 !important;
+.dt-buttons.btn-group > .btn:last-child {
+	border-radius: 0 1em 1em 0;
 }

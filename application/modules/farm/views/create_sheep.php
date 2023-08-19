@@ -39,7 +39,7 @@
                 <div class="row-sticky">
                     <div class="row mb-3 mt-3 ">
                         <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
-                            <button type="button" class="btn btn-success"><i class="fas fa-file-import"></i> นำเข้าข้อมูล</button>
+                           <a href="{base_url}farm/sheep_import"><button type="button" class="btn btn-success"><i class="fas fa-file-import"></i> นำเข้าข้อมูล</button></a> 
                             <div class="d-flex flex-column flex-lg-row gap-2">
                                 <button type="button" class="btn btn-warning" id="addboxContent"><i class="fas fa-plus-circle"></i> เพิ่มแถว</button>
                                 <button type="button" class="btn btn-success" id="savesheep">บันทึกข้อมูล</button>

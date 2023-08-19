@@ -553,7 +553,7 @@ function RGBToHSL($RGB)
 
 	return (object) array('hue' => $h, 'saturation' => $s, 'lightness' => $l);
 }
-function DateThai($strDate, $type = null)
+function DateThai($strDate, $type = NULL, $format = NULL)
 {
 	$strYear = date("Y", strtotime($strDate)) + 543;
 	$strMonth = date("n", strtotime($strDate));
@@ -573,7 +573,26 @@ function DateThai($strDate, $type = null)
 		"พฤศจิกายน",
 		"ธันวาคม",
 	);
-	$strMonthThai = $strMonthCut[$strMonth];
+	$strMonthCut_short = array(
+		"",
+		"ม.ค.",
+		"ก.พ.",
+		"มี.ค.",
+		"เม.ย.",
+		"พ.ค.",
+		"มิ.ย.",
+		"ก.ค.",
+		"ส.ค.",
+		"ก.ย.",
+		"ต.ค.",
+		"พ.ย.",
+		"ธ.ค.",
+	);
+	if ($format == NULL) {
+		$strMonthThai = $strMonthCut[$strMonth];
+	} else {
+		$strMonthThai = $strMonthCut_short[$strMonth];
+	}
 
 	if ($type == NULL) {
 		return "$strDay $strMonthThai $strYear";
