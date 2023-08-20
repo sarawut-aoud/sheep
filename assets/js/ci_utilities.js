@@ -1113,19 +1113,21 @@ function activemenu() {
 	console.log(url);
 	if ($("#is_mobile").val()) {
 		switch (true) {
-			case url == "profile": {
+			case url == "profile":
 				tag = ".navi-profile";
 				break;
-			}
 			case url == "dashboard" ||
 				url == "reports" ||
 				url == "sale_purchase" ||
 				url == "farm" ||
 				url == "setting" ||
-				url == "create_sheep": {
+				url == "virtualization" ||
+				url == "create_sheep":
 				tag = ".navi-home ";
 				break;
-			}
+			case url == "Message":
+				tag = ".navi-message";
+				break;
 		}
 		$(tag).addClass("nav-active");
 	}

@@ -164,4 +164,29 @@ class Farm_model extends MY_Model
         }
         return true;
     }
+
+    public function savesheep_import($post)
+    {
+        $post = (object)$post->data;
+       
+        foreach ($post as $key => $val) {
+            $data = [
+                'sheepcode'     => $val['sheepcode'],
+                'sheepname'     => $val['sheepname'],
+                'sheep_type'    => $val['sheep_type'],
+                'gender'        => $val['gender'],
+                'old'           => $val['old'],
+                'weight'        => $val['weight'],
+                'height'        => $val['height'],
+                'farm_id'       => $val['farm_id'],
+                'pd_id'         => $this->pd_id,
+            ];
+
+            $this->db->insert('db_sheep.sheep_keep', $data);
+        }
+        if ($this->db->affected_rows() > 0) {
+            $this->status = true;
+        }
+        return $this->status;
+    }
 }

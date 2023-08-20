@@ -138,4 +138,14 @@ class Farm extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function savesheep_import()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->savesheep_import($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
 }

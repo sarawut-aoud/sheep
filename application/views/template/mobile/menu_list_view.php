@@ -7,19 +7,19 @@
         </a>
     </li>
     <li class="navi-message">
-        <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="">
+        <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="{base_url}Message">
             <i class="m-color--text g-icon fas fa-comment-alt"></i>
             <span class="m-color--text g-text">Messages</span>
         </a>
     </li>
-    <li class="navi-notification">
+    <!-- <li class="navi-notification">
         <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="">
             <i class="m-color--text g-icon fas fa-bell position-relative">
                 <div class="noti-unread-count"></div>
             </i>
             <span class="m-color--text g-text">Notification</span>
         </a>
-    </li>
+    </li> -->
     <li class="navi-profile ">
         <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="{base_url}profile">
             <i class="m-color--text g-icon fas fa-user-alt"></i>
