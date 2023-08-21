@@ -1125,7 +1125,7 @@ function activemenu() {
 				url == "create_sheep":
 				tag = ".navi-home ";
 				break;
-			case url == "Message":
+			case url == "message":
 				tag = ".navi-message";
 				break;
 		}

@@ -7,7 +7,7 @@
         </a>
     </li>
     <li class="navi-message">
-        <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="{base_url}Message">
+        <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="{base_url}message">
             <i class="m-color--text g-icon fas fa-comment-alt"></i>
             <span class="m-color--text g-text">Messages</span>
         </a>

@@ -59,6 +59,20 @@ const sale = {
 	},
 	jquery: {
 		main() {
+			if (mobile) {
+				$("#showfilter").css("display", "none");
+				$("#show-filterbtn").css("display", "unset");
+			} else {
+				$("#show-filterbtn").css("display", "none");
+				$("#showfilter").css("display", "unset");
+			}
+			$(document).on("click", "#show-filterbtn", (e) => {
+				if ($("#showfilter")[0].style.display == "") {
+					$("#showfilter").slideUp();
+				} else {
+					$("#showfilter").slideDown();
+				}
+			});
 			$(document).on("show.bs.offcanvas", "#createsale", async (e) => {
 				let btn = $(e.relatedTarget);
 				let action = btn.data("action");

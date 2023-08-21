@@ -76,7 +76,7 @@
 	margin-top: 0 !important;
 }
 .v-offcanvas {
-	width: 100%;
+	width: 100% !important;
 }
 
 .contents-farm-view {
