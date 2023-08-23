@@ -19,7 +19,7 @@ $bg-content: #e2e2e2;
 
     & .content-message {
 
-        height: 100%;
+        height: 85vh;
         opacity: 1;
         border-radius: 1em 1em 0 0;
         display: flex;
@@ -29,6 +29,7 @@ $bg-content: #e2e2e2;
         background: white;
         transition: all 500ms;
         max-height: 100%;
+        margin-bottom: 90px;
 
         & .content-bar {
             display: flex;
@@ -148,8 +149,7 @@ $bg-content: #e2e2e2;
 
             overflow: auto;
             background: $bg-content;
-            max-height: 505px;
-            height: fit-content;
+            height: inherit;
 
             & .chat {
                 display: flex;
@@ -259,14 +259,15 @@ $bg-content: #e2e2e2;
 
 
         & .content-input {
+            margin-top: auto;
             display: flex;
             align-items: flex-start;
             width: 100%;
-            margin: auto;
-            //background-color: white;
-            justify-content: center;
+            /* align-items: center; */
+            /* margin: auto; */
+            justify-content: space-around;
             border-radius: 0 0 8px 8px;
-            height: auto;
+            height: 100px;
 
             & .content-option-right,
             & .content-option-left {
@@ -309,7 +310,7 @@ $bg-content: #e2e2e2;
             flex-direction: column;
             // height: 530px;
             overflow: auto;
-            margin-bottom: 79px;
+            // margin-bottom: 79px;
 
             & .person-item {
                 display: flex;

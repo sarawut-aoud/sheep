@@ -39,7 +39,7 @@
             <label for="" class="form-label">ที่อยู่</label>
             <textarea class="form-control" name="" id="address" placeholder="กรอกที่อยู่............"></textarea>
         </div>
-        <div class="d-flex gap-3 mb-3">
+        <div class="flex-column flex-lg-row d-flex gap-3 mb-3">
             <div class="mb-3  w-100">
                 <label for="province" class="form-label">จังหวัด</label>
                 <select class="form-control select2" name="" id="province"></select>

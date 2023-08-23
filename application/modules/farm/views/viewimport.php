@@ -6,10 +6,8 @@
     .button-save-warpper {
         justify-content: end;
         display: flex;
-        position: fixed;
-        bottom: 60px;
         background: white;
-        width: 85%;
+        width: 100%;
         z-index: 20;
         /* border-radius: 1em; */
         padding: 0.5rem 1rem;
@@ -37,13 +35,14 @@
                     <button type="button" class="btn btn-primary addrows">เพิ่มแถว</button>
                     <button type="button" class="btn btn-danger delrows">ลบแถว</button>
                 </div>
-                <div class="d-flex justify-content-center w-100">
-                    <div id="spreadsheet" class=" spreadsheet"></div>
+                <div class="d-flex justify-content-center flex-column w-100">
+                    <div id="spreadsheet" class=" spreadsheet overflow-auto" style="height: 60vh;"></div>
+                    <div class="button-save-warpper">
+                        <button type="button" class="btn btn-success " id="saveimport">บันทึกข้อมูล</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="button-save-warpper">
-        <button type="button" class="btn btn-success " id="saveimport">บันทึกข้อมูล</button>
-    </div>
+
 </div>

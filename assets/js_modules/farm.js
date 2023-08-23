@@ -6,12 +6,12 @@ const farm = {
 	},
 	components: {
 		content: (data) => {
-			return `<div class="contents-farm-view-box">
+			return `<div class="row mb-3 ">
 						<div class="d-flex justify-content-end">
-							<button type="button" class="btn btn-warning font-m" data-farm-id="${data.id}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
+							<button type="button" class=" mb-3 btn btn-warning font-m" data-farm-id="${data.id}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
 						</div>
-						<div class="contents-farm-view-item mb-3">
-							<div class="">
+						<div class="row mb-3">
+							<div class=" mb-3">
 								<div class="v-label h-100  w-icon">
 									<div class="icon">
 										<i class="fas fa-warehouse"></i>
@@ -22,7 +22,7 @@ const farm = {
 									</div>
 								</div>
 							</div>
-							<div class="">
+							<div class=" mb-3">
 								<div class="v-label h-100  w-icon">
 									<div class="icon">
 										<i class="fas fa-tag"></i>
@@ -33,7 +33,7 @@ const farm = {
 									</div>
 								</div>
 							</div>
-							<div class="">
+							<div class=" mb-3">
 								<div class="v-label h-100  w-icon">
 									<div class="icon">
 										<i class="fas fa-map-marker-alt"></i>
@@ -47,7 +47,7 @@ const farm = {
 							${farm.methods.rendersheep(data.sheep)}
 						</div>	
 					</div>
-				
+					<hr>
 			`;
 		},
 	},
@@ -108,7 +108,7 @@ const farm = {
 			let item = "";
 			if (!data) return;
 			data.forEach((ev, i) => {
-				item += `<div class="">
+				item += `<div class=" mb-3">
 				<div class="v-label h-100  w-icon">
 					<div class="icon">
 						<i class="icon-sheep-icon"></i>
