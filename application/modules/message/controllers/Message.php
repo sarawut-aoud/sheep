@@ -30,4 +30,34 @@ class Message extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function get_messageall()
+    {
+        try {
+            $result = $this->message->get_messageall();
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_messageid()
+    {
+        $post = (object)$this->input->post();
+
+        try {
+            $result = $this->message->get_messageid($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function savechat()
+    {
+        $post = (object)$this->input->post();
+        try {
+            $result = $this->message->savechat($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
 }

@@ -27,7 +27,6 @@
   height: auto;
   padding: 0.5rem;
   gap: 10px;
-  max-width: 375px;
   width: 100%;
 }
 #chat-messages .content-message .content-bar .back {
