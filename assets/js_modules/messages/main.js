@@ -1,6 +1,7 @@
 import { emoji } from "./emoji.js";
 const message = {
 	data: {
+		files: null,
 		image: base_url("/assets/images/blank_person.jpg"),
 		message_id: "",
 	},
@@ -87,9 +88,7 @@ const message = {
 			let person = data.person;
 			let img = person.picture ? base_url(person.picture) : message.data.image;
 			message.data.message_id = data.message_id;
-			let item = `<div class="content-bar " data-pd-id="${
-				person.pd_id
-			}">
+			let item = `<div class="content-bar " data-pd-id="${person.pd_id}">
             <div class="back" id="backtolist"><i class="fas fa-bars"></i></div>
             <div class="image">
                 <img src="${img}">
@@ -102,11 +101,13 @@ const message = {
 		${message.components.contentchat(data)}
         <div class="content-input">
             <div class="content-option-left">
-                <div class="icon"><i class="fas fa-camera"></i></div>
+                <div class="icon camera"><i class="fas fa-camera"></i>
+					<input type="file" hidden id="file-inputcamera"  accept="image/*">
+				</div>
                 <div class="icon showEmoji"><i class="fas fa-laugh-beam"></i></div>
                 <div class="icon fileclip"><i class="fas fa-paperclip"></i>
-                    <input type="file" hidden id="file-input"  accept="image/*,.pdf">
-                    </div>
+                    <input type="file" hidden id="file-input"  accept="*">
+                </div>
             </div>
             <div class="data-input">
                 <div contenteditable="true" type="text" class="form-control input-message" id="chat_message"
@@ -121,14 +122,9 @@ const message = {
 		},
 		contentchat(data) {
 			return `<div class="content-chat ">
-            <div class="chat">
-                <div class="today">
-                    <div class="text">Today at ${data.today}</div>
-                </div>
-                <div class="messages">
+           
                    ${message.components.message_data(data.message)}
-                </div>
-            </div>
+               
         </div>`;
 		},
 		message_load() {
@@ -147,35 +143,53 @@ const message = {
 
 			data.forEach((elem, index) => {
 				let self = elem.chat_in;
+				item += `
+				<div class="chat">
+					<div class="today">
+						<div class="text">${elem.datetime}</div>
+					</div>
+					<div class="messages">`;
 				for (const [i, ev] of Object.entries(elem.content_chat)) {
-					item += `<div class="content-messages">
-							<div class="d-flex gap-2 align-items-end ${	self == i.split("_")[1] ? "justify-content-end" : "justify-content-start"} ">
-								${
-									ev.status == "read"
-										? `<div class="read-right "><i class="fas fa-check"></i></div>`
-										: ""
-								}
-								<div class="messages--shadow ${
-									self == i.split("_")[1] ? "m-right" : "m-left"
-								}">
-									${ev.text}
+					let img = ev.files
+						? `<div class="text-center"><img style="width:100px" 
+								src="${base_url(ev.files)}"></div>`
+						: "";
+					item += `
+							<div class="content-messages">
+								<div class="d-flex gap-2 align-items-end 
+								${self == i.split("_")[1] ? "justify-content-end" : "justify-content-start"} 
+								">
+									${
+										ev.status == "read"
+											? `<div class="read-right "><i class="fas fa-check"></i></div>`
+											: ""
+									}
+									<div class="messages--shadow ${self == i.split("_")[1] ? "m-right" : "m-left"}">
+									<div style="line-break: anywhere;"> ${ev.text}</div>
+										${img}
+									</div>
+								</div>
+								<div class="${self == i.split("_")[1] ? "time-right" : "time-left"}">
+									${ev.time}
 								</div>
 							</div>
-							<div class="${self == i.split("_")[1] ? "time-right" : "time-left"}">${ev.time}</div>
-						</div>`;
+						
+						`;
 				}
+				item += `</div>
+						</div>`;
 			});
 			return item;
 		},
 		allperson(data) {
 			let img = data.picture ? base_url(data.picture) : message.data.image;
-			let item = ` <div class="person-item " data-pd-id="${data.chat_id}">
+			let item = ` <div class="person-item " data-pd-id="${data.pd_id}">
                         <div class="image-person"><img src="${img}"></div>
-                        <div class="text new">
+                        <div class="text ${data.read=="unread"?'new':''}">
                             <div class="name">${data.fullname}</div>
                             <div class="sub-text">
-                                <div class="messages">มีอะไรหรอป่าว</div>
-                                <div class="time-content">22:42</div>
+                                <div class="messages">${data.last_message}</div>
+                                <div class="time-content">${data.last_datetime}</div>
                             </div>
                         </div>
                         </div>`;
@@ -234,20 +248,29 @@ const message = {
 					if (results.data) {
 						let item = message.components.messagebyid(results.data);
 						$(".content-message").html(item);
+						$(".content-messages").last()[0].scrollIntoView({
+							behavior: "smooth",
+							block: "end",
+							inline: "nearest",
+						});
 					}
 				},
 			});
 		},
-		async savechat(data, id, pd_id) {
+		async savechat(data, id, pd_id, files) {
+			let fdata = new FormData();
+			fdata.append("file", files);
+			fdata.append("message_id", id);
+			fdata.append("data", data);
+			fdata.append("csrf_token_ci_gen", $.cookie(csrf_cookie_name));
 			await $.ajax({
 				type: "POST",
 				dataType: "json",
 				url: site_url("message/savechat"),
-				data: {
-					message_id: id,
-					data: data,
-					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
-				},
+				data: fdata,
+				enctype: "multipart/form-data",
+				processData: false,
+				contentType: false,
 				success: async (results) => {
 					// await message.ajax.get_messageid(pd_id);
 				},
@@ -272,18 +295,7 @@ const message = {
 			let pd_id = $(e.target).closest(".person-item").data("pd-id");
 			await this.ajax.get_messageid(pd_id);
 		});
-		$(document).on("click", ".fileclip", async (e) => {
-			$("#file-input")[0].click();
-		});
-		$("#file-input").on("click", function (e) {
-			e.stopPropagation();
-		});
-		$(document).on("change", "#file-input", async (e) => {
-			let files = e.target.files[0];
-			let size = (files.size / 1024).toFixed(2);
-			let type = files.type.split("/");
-			let type_length = files.type.split("/").length;
-		});
+
 		$(document).on("click", ".showEmoji", async (e) => {
 			let item = `<div class="content-emoji">
                     <div class="emoji-item">
@@ -304,6 +316,7 @@ const message = {
 			let text2 = $("#chat_message").text();
 			$("#chat_message").text(text2.replaceAll(",", ""));
 		});
+
 		$(document).on("click", "#sendmessage", async (e) => {
 			let pd_id = $(e.target)
 				.closest(".content-message")
@@ -315,13 +328,36 @@ const message = {
 				$("#chat_message").focus();
 				return;
 			}
-			await this.ajax.savechat(data, this.data.message_id, pd_id);
+			let file = $("#file-input").val()
+				? $("#file-input").val()
+				: $("#file-inputcamera").val();
+			let filedata = "";
+			let img = "";
+			let reader = new FileReader();
+			if (file) {
+				filedata = file;
+				reader.readAsDataURL(this.data.files);
+				reader.onload = function (e) {
+					let image = new Image();
+	
+					img += `<div class="text-center"><img style="width:100px" 
+					src="${e.target.result}"></div>`;
+				};
+			}
+
+			await this.ajax.savechat(
+				data,
+				this.data.message_id,
+				pd_id,
+				this.data.files
+			);
 			let date = new Date();
 			let item = `
                             <div class="content-messages">
                                 <div class="d-flex gap-2 align-items-end justify-content-end">
                                     <div class="messages--shadow m-right">
-                                        ${data}
+                                       <div  style="line-break: anywhere;"> ${data}</div>
+										${img}
                                     </div>
                                 </div>
                                 <div class="time-right">${date.getHours()}:${date.getMinutes()}</div>
@@ -330,7 +366,16 @@ const message = {
 			$(".content-chat .chat .messages").append(item);
 			$("#chat_message").text("");
 			item_emo = [];
-			$(".content-messages").last()[0].scrollIntoView({ behavior: "smooth" });
+			setTimeout(() => {
+				$(".content-messages").last()[0].scrollIntoView({
+					behavior: "smooth",
+					block: "end",
+					inline: "nearest",
+				});
+				this.data.files = null;
+				$("#file-input").val("");
+				$("#file-inputcamera").val("");
+			}, 300);
 		});
 		$(document).on("focus", "#chat_message", (e) => {
 			$(".content-emoji").remove();
@@ -361,6 +406,36 @@ const message = {
 			setTimeout(() => {
 				$(".content-wrapper-scroll #chat-messages").remove();
 			}, 200);
+		});
+
+		$(document).on("click", ".fileclip", async (e) => {
+			$("#file-input")[0].click();
+		});
+		$("#file-input").on("click", function (e) {
+			e.stopPropagation();
+		});
+		$(document).on("change", "#file-input", async (e) => {
+			let files = e.target.files[0];
+			let size = (files.size / 1024).toFixed(2);
+			let type = files.type.split("/");
+			let type_length = files.type.split("/").length;
+			$("#chat_message").text(files.name);
+			this.data.files = files;
+		});
+
+		$(document).on("click", ".camera", async (e) => {
+			$("#file-inputcamera")[0].click();
+		});
+		$("#file-inputcamera").on("click", function (e) {
+			e.stopPropagation();
+		});
+		$(document).on("change", "#file-inputcamera", async (e) => {
+			let files = e.target.files[0];
+			let size = (files.size / 1024).toFixed(2);
+			let type = files.type.split("/");
+			let type_length = files.type.split("/").length;
+			this.data.files = files;
+			$("#chat_message").text(files.name);
 		});
 	},
 };
