@@ -1,11 +1,24 @@
-import { emoji } from "./emoji.js";
+// import { emoji } from "./emoji.js";
+// const domain = base_url();
+// const socket = new WebSocket("wss://sheep.local:3000");
+
+const socket = io.connect("http://" + document.domain + ":2022", {
+	secure: true,
+	reconnect: true,
+	rejectUnauthorized: false,
+});
+socket.on("connect", function () {
+	socket.emit("newmessage", "dasdasda");
+});
 const message = {
 	data: {
 		files: null,
 		image: base_url("/assets/images/blank_person.jpg"),
 		message_id: "",
 	},
-	methods: {},
+	methods: {
+		
+	},
 	components: {
 		main: () => {
 			let item = `
@@ -185,11 +198,13 @@ const message = {
 			let img = data.picture ? base_url(data.picture) : message.data.image;
 			let item = ` <div class="person-item " data-pd-id="${data.pd_id}">
                         <div class="image-person"><img src="${img}"></div>
-                        <div class="text ${data.read=="unread"?'new':''}">
+                        <div class="text ${data.read == "unread" ? "new" : ""}">
                             <div class="name">${data.fullname}</div>
                             <div class="sub-text">
                                 <div class="messages">${data.last_message}</div>
-                                <div class="time-content">${data.last_datetime}</div>
+                                <div class="time-content">${
+																	data.last_datetime
+																}</div>
                             </div>
                         </div>
                         </div>`;
@@ -278,6 +293,7 @@ const message = {
 		},
 	},
 	async init() {
+		// this.methods.webSocketSupport();
 		await this.ajax.getperson();
 		await this.ajax.get_messageall();
 
@@ -318,6 +334,7 @@ const message = {
 		});
 
 		$(document).on("click", "#sendmessage", async (e) => {
+			return;
 			let pd_id = $(e.target)
 				.closest(".content-message")
 				.find(".content-bar")
@@ -339,7 +356,7 @@ const message = {
 				reader.readAsDataURL(this.data.files);
 				reader.onload = function (e) {
 					let image = new Image();
-	
+
 					img += `<div class="text-center"><img style="width:100px" 
 					src="${e.target.result}"></div>`;
 				};
@@ -351,6 +368,7 @@ const message = {
 				pd_id,
 				this.data.files
 			);
+
 			let date = new Date();
 			let item = `
                             <div class="content-messages">
