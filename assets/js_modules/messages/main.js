@@ -5,20 +5,27 @@
 const message = {
 	data: {
 		files: null,
+		pd_id: "",
 		image: base_url("/assets/images/blank_person.jpg"),
 		message_id: "",
 	},
 	methods: {
-		noti(data) {
-			let fullname = "";
-			new Notification(fullname + "ส่งข้อความถึงคุณ", {
-				body: data.message,
-			});
+		noti(topic, content) {
+			if (topic && content) {
+				let noti = new Notification(topic, {
+					body: content,
+				});
+			}
 		},
 		load_message() {
 			setInterval(async () => {
-				await message.ajax.aftersend();
-			}, 2000);
+				if ($(".content-chat").length > 0) {
+					await message.ajax.aftersend(message.data.message_id);
+					await message.ajax.getnotijs();
+				} else {
+					await message.ajax.get_messageall();
+				}
+			}, 5000);
 		},
 	},
 	components: {
@@ -293,29 +300,79 @@ const message = {
 				},
 			});
 		},
-		async typing(pd_id) {
+		async typing(pd_id, type) {
 			await $.ajax({
 				type: "POST",
 				dataType: "json",
 				url: site_url("message/typing"),
 				data: {
 					pd_id: pd_id,
+					type: type,
+					message_id: message.data.message_id,
 					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
 				},
 				success: (results) => {},
 			});
 		},
-		async aftersend() {
+		async getnotijs() {
+			await $.ajax({
+				type: "get",
+				dataType: "json",
+				url: site_url("message/getnotijs"),
+				success: (results) => {
+					if (results.data) {
+						let data = results.data;
+						message.methods.noti(data.topic, data.content);
+					}
+				},
+			});
+		},
+		async aftersend(id) {
 			await $.ajax({
 				type: "POST",
 				dataType: "json",
-				url: site_url(),
-				success: (results) => {},
+				url: site_url("message/get_messageid_after"),
+				data: {
+					id: id,
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (results.data) {
+						let data = results.data;
+						let obj = "";
+						if (data.content) {
+							if (data.content.text) {
+								let img = "";
+								if (data.content.file) {
+									let file = base_url(data.content.file);
+									img += `<div class="text-center"><img style="width:100px" 
+									src="${file}"></div>`;
+								}
+								obj = `<div class="content-messages">
+										<div class="d-flex gap-2 align-items-end justify-content-start ">
+											<div class="messages--shadow m-left">
+											<div style="line-break: anywhere;">${data.content.text}</div>
+												${img}
+											</div>
+										</div>
+										<div class="time-left">
+											${data.content.time}
+										</div>
+									</div>`;
+								$(".content-chat")
+									.find(".chat")
+									.last()
+									.find(".messages")
+									.append(obj);
+							}
+						}
+					}
+				},
 			});
 		},
 	},
 	async init() {
-		// this.methods.webSocketSupport();
+		this.methods.load_message();
 		await this.ajax.getperson();
 		await this.ajax.get_messageall();
 
@@ -328,10 +385,12 @@ const message = {
 		$(document).on("click", ".all-person .images", async (e) => {
 			let pd_id = $(e.target).closest(".images").data("pd-id");
 			await this.ajax.get_messageid(pd_id);
+			this.data.pd_id = pd_id;
 		});
 		$(document).on("click", ".person-item", async (e) => {
 			let pd_id = $(e.target).closest(".person-item").data("pd-id");
 			await this.ajax.get_messageid(pd_id);
+			this.data.pd_id = pd_id;
 		});
 
 		$(document).on("click", ".showEmoji", async (e) => {
@@ -391,6 +450,10 @@ const message = {
 			);
 
 			let date = new Date();
+			let t1 = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+			let t2 =
+				date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+			let time = `${t1}:${t2}`;
 			let item = `
                             <div class="content-messages">
                                 <div class="d-flex gap-2 align-items-end justify-content-end">
@@ -399,7 +462,7 @@ const message = {
 										${img}
                                     </div>
                                 </div>
-                                <div class="time-right">${date.getHours()}:${date.getMinutes()}</div>
+                                <div class="time-right">${time}</div>
                             </div>
                             `;
 			$(".content-chat .chat .messages").append(item);
@@ -476,13 +539,20 @@ const message = {
 			this.data.files = files;
 			$("#chat_message").text(files.name);
 		});
-		$(document).on("focus", "#chat_message", async (e) => {
-			let pd_id = $(e.target)
-				.closest(".content-message")
-				.find(".content-bar")
-				.data("pd-id");
-			await this.ajax.typing(pd_id);
-		});
+		// $(document).on("focusin", "#chat_message", async (e) => {
+		// 	let pd_id = $(e.target)
+		// 		.closest(".content-message")
+		// 		.find(".content-bar")
+		// 		.data("pd-id");
+		// 	await this.ajax.typing(pd_id, 1);
+		// });
+		// $(document).on("focusout", "#chat_message", async (e) => {
+		// 	let pd_id = $(e.target)
+		// 		.closest(".content-message")
+		// 		.find(".content-bar")
+		// 		.data("pd-id");
+		// 	await this.ajax.typing(pd_id, 0);
+		// });
 	},
 };
 message.init();

@@ -53,6 +53,16 @@ class Message extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function get_messageid_after()
+    {
+        $post = (object)$this->input->post();
+        try {
+            $result = $this->message->get_messageid_after($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
     public function savechat()
     {
         $post = (object)$this->input->post();
@@ -68,6 +78,15 @@ class Message extends CRUD_Controller
         $post = (object)$this->input->post();
         try {
             $result = $this->message->typing($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function getnotijs()
+    {
+        try {
+            $result = $this->message->getnotijs();
             $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
