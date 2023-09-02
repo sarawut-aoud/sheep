@@ -2,14 +2,6 @@
 // const domain = base_url();
 // const socket = new WebSocket("wss://sheep.local:3000");
 
-const socket = io.connect("http://" + document.domain + ":2022", {
-	secure: true,
-	reconnect: true,
-	rejectUnauthorized: false,
-});
-socket.on("connect", function () {
-	socket.emit("newmessage", "dasdasda");
-});
 const message = {
 	data: {
 		files: null,
@@ -17,7 +9,17 @@ const message = {
 		message_id: "",
 	},
 	methods: {
-		
+		noti(data) {
+			let fullname = "";
+			new Notification(fullname + "ส่งข้อความถึงคุณ", {
+				body: data.message,
+			});
+		},
+		load_message() {
+			setInterval(async () => {
+				await message.ajax.aftersend();
+			}, 2000);
+		},
 	},
 	components: {
 		main: () => {
@@ -291,6 +293,26 @@ const message = {
 				},
 			});
 		},
+		async typing(pd_id) {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("message/typing"),
+				data: {
+					pd_id: pd_id,
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {},
+			});
+		},
+		async aftersend() {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url(),
+				success: (results) => {},
+			});
+		},
 	},
 	async init() {
 		// this.methods.webSocketSupport();
@@ -334,7 +356,6 @@ const message = {
 		});
 
 		$(document).on("click", "#sendmessage", async (e) => {
-			return;
 			let pd_id = $(e.target)
 				.closest(".content-message")
 				.find(".content-bar")
@@ -454,6 +475,13 @@ const message = {
 			let type_length = files.type.split("/").length;
 			this.data.files = files;
 			$("#chat_message").text(files.name);
+		});
+		$(document).on("focus", "#chat_message", async (e) => {
+			let pd_id = $(e.target)
+				.closest(".content-message")
+				.find(".content-bar")
+				.data("pd-id");
+			await this.ajax.typing(pd_id);
 		});
 	},
 };

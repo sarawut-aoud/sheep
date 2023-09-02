@@ -63,4 +63,14 @@ class Message extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function typing()
+    {
+        $post = (object)$this->input->post();
+        try {
+            $result = $this->message->typing($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
 }

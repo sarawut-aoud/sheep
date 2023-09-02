@@ -9,6 +9,7 @@ class Message_model extends MY_Model
         $this->date  = date('Y-m-d H:i:s');
         $this->upload_store_path = './assets/images/messages/';
         $this->load->model('FilesUpload_model', 'FileUpload');
+        $this->load->model('Linenoti_model', 'line');
     }
     public function getperson($pd_id = NULl)
     {
@@ -203,6 +204,10 @@ class Message_model extends MY_Model
             'files' => $file_temp,
             'status' => 'unread'
         ];
+        echo '<pre>';
+        print_r($post->data);
+        die;
+        self::lineresponse($this->pd_id, $post->data);
         $obj = array_merge($data, $item);
 
         $this->db->update('db_sheep.chat_content', ['content_chat' => json_encode($obj)], ['id' => $row->content_id]);
@@ -255,5 +260,19 @@ class Message_model extends MY_Model
             }
         }
         return $data;
+    }
+    private function lineresponse($pd_id_to, $message, $picture = null)
+    {
+        $result = $this->db->get_where('db_sheep.personaldocument', ['pd_id' => $pd_id_to])->row();
+
+        $token_id = 'jRxvj4B92VyN9MAW1UfrNgAV0eYrXM4oF451AOM4JDe';
+        $str2 =
+            $result->firstname . ' ได้ส่งข้อความถึงคุณ' .
+            "\n" . 'วันที่/เวลา : ' . setDateToThai(date('Y-m-d H:i'), true, 'full_month') .
+            "\n" .  $message;
+        $this->line->notify_message($str2, $token_id);
+    }
+    public function typing($post)
+    {
     }
 }
