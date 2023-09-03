@@ -39,4 +39,7 @@ class Setting_model extends MY_Model
         $this->db->update('db_sheep.personalsecret', $set, $where);
         return true;
     }
+    public function saveuser($post)
+    {
+    }
 }

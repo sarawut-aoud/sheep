@@ -36,7 +36,7 @@ const regis = {
 			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
 			if (pass) {
 				if (!$("#password").val().match(passw)) {
-					$("#password").addClass("request");
+					$("#password").removeClass("active").addClass("request");
 					regis.data.password = true;
 				} else {
 					$("#password").removeClass("request").addClass("active");

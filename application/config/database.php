@@ -146,7 +146,7 @@ $active_group = 'default';
 
 $query_builder = TRUE;
 $localhost = ['localhost', '127.0.0.1', 'sheep.local'];
-if (!in_array($_SERVER['SERVER_NAME'], $localhost)) {
+if (!in_array($_SERVER['SERVER_ADDR'], $localhost)) {
 
 	// ON Production Server
 	// $hostname = 'localhost';

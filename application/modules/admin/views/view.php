@@ -19,6 +19,7 @@
 <div class="homepage">
 
     <div class="row">
+
         <div class="d-flex justify-content-start mt-3 mb-3 button-goback ">
             <button type="button" class="btn btn-dark btngoback">
                 <div class="icon"><i class="fas fa-chevron-left"></i></div>
@@ -28,6 +29,7 @@
             </button>
         </div>
     </div>
+
     <div class="row mb-3">
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -70,6 +72,12 @@
             </div>
         </div>
     </div>
+    <!-- pock create  -->
+    <div class="row mb-3">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-info " type="button" data-bs-toggle="offcanvas" data-bs-target="#AddUser" aria-controls="offcanvasExample"><i class="fas fa-user-plus"></i> เพิ่มผู้ใช้งาน</button>
+        </div>
+    </div>
     <div class="row">
         <div class="card p-3">
             <div class="table-responsive">
@@ -88,6 +96,55 @@
             </div>
 
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="offcanvas offcanvas-end v-offcanvas" tabindex="-1" id="AddUser" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">เพิ่มผู้ใช้งาน</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="input-form">
+            <div class="mb-3">
+                <label for="title" class="form-label">คำนำหน้า</label>
+                <select class="form-control" id="title">
+                    <?php foreach ($title as $key => $val) : ?>
+                        <option value="<?= $val['value'] ?>"><?= $val['label'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="firstname" class="form-label">ชื่อ : <span style="color:red"> * </span></label>
+                <input type="text" class="form-control" id="firstname" placeholder="ชื่อ">
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">นามสกุล : <span style="color:red"> * </span></label>
+                <input type="text" class="form-control" id="lastname" placeholder="นามสกุล">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">ชื่อเข้าใช้งาน : <span style="color:red"> * <span class="checkusername"></span></span></label>
+                <input type="text" class="form-control" id="username" placeholder="ชื่อเข้าใช้งาน">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">อีเมลล์ : <span style="color:red"> * <span class="checkemail"></span></span></label>
+                <input type="text" class="form-control" id="email" placeholder="อีเมลล์">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">รหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
+                <input type="password" class="form-control" id="password" placeholder="รหัสเข้าใช้งาน">
+                <small class="mt-2">รหัสผ่านต้องมีตัวอักษร A-z และมากกว่า 6 หลักขึ้นไป</small>
+            </div>
+            <div class="mb-3">
+                <label for="checkpassword" class="form-label">ยืนยันรหัสเข้าใช้งาน : <span style="color:red"> * </span></label>
+                <input type="password" class="form-control" id="checkpassword" placeholder="ยืนยันรหัสเข้าใช้งาน">
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <button class="btn btn-dark" type="button" data-bs-dismiss="offcanvas" aria-label="Close">ปิด</button>
+        <button class="btn btn-success" type="button" id="saveuser">บันทึก</button>
     </div>
 </div>
 

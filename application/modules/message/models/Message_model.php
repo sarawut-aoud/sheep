@@ -75,30 +75,38 @@ class Message_model extends MY_Model
                     WHERE (t1.chat_in = {$val->pd_id} AND t1.chat_to = {$this->pd_id} )
                             OR  (t1.chat_to = {$val->pd_id} AND t1.chat_in = {$this->pd_id} )
                 ")->row('last_id');
+                $obj = [];
+                if ($last_id) {
+                    $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id])->row();
 
-                $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id])->row();
-
-                $last_chat = self::setchat(json_decode($chat->content_chat));
-                if (end($last_chat)->text) {
-                    $last_msg =  end($last_chat);
-                } else {
-                    $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id - 1])->row();
                     $last_chat = self::setchat(json_decode($chat->content_chat));
-                    $last_msg =  end($last_chat);
+                    if (end($last_chat)->text) {
+                        $last_msg =  end($last_chat);
+                    } else {
+                        $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id - 1])->row();
+                        $last_chat = self::setchat(json_decode($chat->content_chat));
+                        $last_msg =  end($last_chat);
+                    }
+                    $obj = (object)array_merge((array) $val, [
+                        // 'chat_id' => urlencode(encrypt($val->chat_id))
+                        'chat_id'       =>  $chat->id,
+                        'last_message'  =>  $last_msg->files ? 'ได้ส่งไฟล์ <i class="fas fa-paperclip"></i>' : $last_msg->text,
+                        'read'          =>  $last_msg->status,
+                        'last_datetime' => self::settime($chat->date_no),
+                    ]);
                 }
-
-
-                return (object)array_merge((array) $val, [
-                    // 'chat_id' => urlencode(encrypt($val->chat_id))
-                    'chat_id'       =>  $chat->id,
-                    'last_message'  =>  $last_msg->files ? 'ได้ส่งไฟล์ <i class="fas fa-paperclip"></i>' : $last_msg->text,
-                    'read'          =>  $last_msg->status,
-                    'last_datetime' => self::settime($chat->date_no),
-                ]);
+                return $obj;
             }, $result);
         }
+        $result_value = [];
 
-        return $result;
+        foreach ($result as $key => $value) {
+
+            if (!empty($value)) {
+                $result_value[$key] =  $value;
+            }
+        }
+        return $result_value;
     }
     public function get_messageid($post)
     {
@@ -267,7 +275,7 @@ class Message_model extends MY_Model
         ];
         self::notijs($row->content_id, $post->data, $file_temp);
 
-        // self::lineresponse($this->pd_id, $post->data, $file_temp);
+        self::lineresponse($row->content_id, $post->data, $file_temp);
         $obj = array_merge($data, $item);
 
         $this->db->update('db_sheep.chat_content', ['content_chat' => json_encode($obj)], ['id' => $row->content_id]);
@@ -321,9 +329,17 @@ class Message_model extends MY_Model
         }
         return $data;
     }
-    private function lineresponse($pd_id, $message, $picture = null)
+    private function lineresponse($id, $message, $picture = null)
     {
         $file = null;
+        $row = $this->db->query("SELECT * FROM db_sheep.chat_group WHERE content_id = ? ", [$id])->row();
+
+        if ($row->chat_in != $this->pd_id) {
+            $pd_id = $row->chat_in;
+        }
+        if ($row->chat_to != $this->pd_id) {
+            $pd_id = $row->chat_to;
+        }
         $result = $this->db->query(
             "SELECT 
             t2.id,
@@ -335,6 +351,7 @@ class Message_model extends MY_Model
             ",
             [$pd_id]
         )->row();
+
         if ($result->id) {
             if ($picture != null) {
                 $file = base_url($picture);
@@ -362,7 +379,7 @@ class Message_model extends MY_Model
 
     private function notijs($id, $text, $file)
     {
-        $row = $this->db->query("SELECT * FROM db_sheep.chat_group WHERE content_id", [$id])->row();
+        $row = $this->db->query("SELECT * FROM db_sheep.chat_group WHERE content_id = ?", [$id])->row();
         if ($row->chat_in != $this->pd_id) {
             $check = $row->chat_in;
         }
@@ -414,7 +431,7 @@ class Message_model extends MY_Model
         $result = $this->db->query(
             "SELECT *, MIN(id) as id FROM db_sheep.chat_log WHERE   status_append = 0 $check ",
         )->row();
-      
+
         $message = json_decode($result->message_log);
         if ($message->text) {
             $message->time = date('H:i', strtotime($result->create_at));

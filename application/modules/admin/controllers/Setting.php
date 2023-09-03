@@ -17,6 +17,7 @@ class Setting extends CRUD_Controller
 
     public function index()
     {
+        $this->data['title']   =  $this->config->item('title_option_th');
         $this->setBread(
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'ตั้งค่า'],
@@ -43,6 +44,16 @@ class Setting extends CRUD_Controller
         $post = (object)$this->input->post(NULL, false);
         try {
             $result = $this->setting->updatelevel($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function saveuser()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->setting->saveuser($post);
             $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
