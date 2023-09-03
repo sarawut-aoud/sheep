@@ -82,26 +82,7 @@ const message = {
                 </div>
             </div>
             <div class="content-person ">
-                <div class="person-item">
-                    <div class="image-person"><img src="${message.data.image}"></div>
-                    <div class="text new">
-                        <div class="name">Sarawut Aoudkla</div>
-                        <div class="sub-text">
-                            <div class="messages">มีอะไรหรอป่าว</div>
-                            <div class="time-content">22:42</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="person-item">
-                    <div class="image-person"><img src="${message.data.image}"></div>
-                    <div class="text">
-                        <div class="name">Sarawut Aoudkla</div>
-                        <div class="sub-text">
-                            <div class="messages">มีอะไรหรอป่าว</div>
-                            <div class="time-content">22:42</div>
-                        </div>
-                    </div>
-                </div>
+                
     
             </div>
     `;
@@ -390,11 +371,7 @@ const message = {
 									block: "end",
 									inline: "nearest",
 								});
-								$("#chat-messages")[0].scrollIntoView({
-									behavior: "smooth",
-									block: "start",
-									inline: "nearest",
-								});
+								
 							}
 						}
 					}
@@ -408,7 +385,7 @@ const message = {
 		await this.ajax.get_messageall();
 
 		$(document).on("click", "#backtolist", async (e) => {
-			let item = await this.components.messagelist();
+			 let item = await this.components.messagelist();
 			$(".content-message").html(item);
 			await this.ajax.getperson();
 			await this.ajax.get_messageall();
@@ -505,11 +482,7 @@ const message = {
 					block: "end",
 					inline: "nearest",
 				});
-				$("#chat-messages")[0].scrollIntoView({
-					behavior: "smooth",
-					block: "start",
-					inline: "nearest",
-				});
+				
 				this.data.files = null;
 				$("#file-input").val("");
 				$("#file-inputcamera").val("");
@@ -522,7 +495,7 @@ const message = {
 		$(document).on("click", ".sidebaropenmessage", async (e) => {
 			$(".content-wrapper-scroll").css("position", "relative");
 			if ($(".content-wrapper-scroll #chat-messages").length == 0) {
-				$(".content-wrapper-scroll").prepend(this.components.main());
+				// $(".content-wrapper-scroll").prepend(this.components.main());
 				setTimeout(() => {
 					$(".content-wrapper-scroll #chat-messages .content-message").addClass(
 						"show"

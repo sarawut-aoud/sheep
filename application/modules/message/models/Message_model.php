@@ -126,6 +126,7 @@ class Message_model extends MY_Model
         } else {
             $filter = " (t1.chat_in = {$post_pd_id} AND t1.chat_to = {$this->pd_id} )
             OR  (t1.chat_to = {$post_pd_id} AND t1.chat_in = {$this->pd_id} )";
+
             if ($row->chat_in != $this->pd_id) {
                 $check1 = "t1.chat_in = $post_pd_id  AND t1.chat_to = {$this->pd_id}";
             }
@@ -173,6 +174,13 @@ class Message_model extends MY_Model
             'time'      => $this->date,
             'today'     => date('H:i', strtotime($this->date))
         ];
+
+        $log = $this->db->query("SELECT * FROM db_sheep.chat_log WHERE sendto = {$this->pd_id} AND (status_log = 0 OR status_append = 0 )")->result();
+        foreach ($log as $key => $value) {
+            $this->db->update('db_sheep.chat_log', ['status_append' => 1, 'status_log' => 1], ['id' => $value->id]);
+        }
+
+
         return  $data;
     }
 
