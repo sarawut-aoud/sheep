@@ -91,9 +91,9 @@ const regis = {
 						if (results.status) {
 							Swal.fire({
 								icon: "success",
-								title: results.data,
+								title: `ลงทะเบียนสำเร็จ`,
 								showConfirmButton: false,
-								timer: 1500,
+								timer: 2500,
 							}).then(() => {
 								window.location.href = base_url("home");
 							});

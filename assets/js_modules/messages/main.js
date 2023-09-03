@@ -1,4 +1,4 @@
-// import { emoji } from "./emoji.js";
+import { emoji } from "./emoji.js";
 // const domain = base_url();
 // const socket = new WebSocket("wss://sheep.local:3000");
 
@@ -25,7 +25,10 @@ const message = {
 				} else {
 					await message.ajax.get_messageall();
 				}
-			}, 5000);
+			}, 10000);
+			setInterval(async () => {
+				await message.ajax.getperson();
+			}, 60 * 1000);
 		},
 	},
 	components: {
@@ -121,7 +124,7 @@ const message = {
             </div>
         </div>
 		${message.components.contentchat(data)}
-        <div class="content-input">
+        <div class="content-input align-items-center">
             <div class="content-option-left">
                 <div class="icon camera"><i class="fas fa-camera"></i>
 					<input type="file" hidden id="file-inputcamera"  accept="image/*">
@@ -132,7 +135,7 @@ const message = {
                 </div>
             </div>
             <div class="data-input">
-                <div contenteditable="true" type="text" class="form-control input-message" id="chat_message"
+                <div contenteditable="true" type="text" class="form-control input-message " id="chat_message"
                     required placeholder="Type your message !"></div>
             </div>
             <div class="content-option-right">
@@ -271,12 +274,30 @@ const message = {
 				success: (results) => {
 					if (results.data) {
 						let item = message.components.messagebyid(results.data);
+
 						$(".content-message").html(item);
-						$(".content-messages").last()[0].scrollIntoView({
-							behavior: "smooth",
-							block: "end",
-							inline: "nearest",
+
+						OverlayScrollbars($(".content-chat")[0], {
+							overflow: {
+								y: "hidden",
+							},
 						});
+
+						let scroll = setTimeout(() => {
+							$(".content-messages").last()[0].scrollIntoView({
+								behavior: "smooth",
+								block: "end",
+								inline: "nearest",
+							});
+						}, 200);
+
+						setTimeout(() => {
+							$("#chat-messages")[0].scrollIntoView({
+								behavior: "smooth",
+								block: "start",
+								inline: "nearest",
+							});
+						}, 100 * scroll);
 					}
 				},
 			});
@@ -364,6 +385,16 @@ const message = {
 									.last()
 									.find(".messages")
 									.append(obj);
+								$(".content-messages").last()[0].scrollIntoView({
+									behavior: "smooth",
+									block: "end",
+									inline: "nearest",
+								});
+								$("#chat-messages")[0].scrollIntoView({
+									behavior: "smooth",
+									block: "start",
+									inline: "nearest",
+								});
 							}
 						}
 					}
@@ -474,6 +505,11 @@ const message = {
 					block: "end",
 					inline: "nearest",
 				});
+				$("#chat-messages")[0].scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+					inline: "nearest",
+				});
 				this.data.files = null;
 				$("#file-input").val("");
 				$("#file-inputcamera").val("");
@@ -539,6 +575,7 @@ const message = {
 			this.data.files = files;
 			$("#chat_message").text(files.name);
 		});
+
 		// $(document).on("focusin", "#chat_message", async (e) => {
 		// 	let pd_id = $(e.target)
 		// 		.closest(".content-message")

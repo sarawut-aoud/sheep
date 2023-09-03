@@ -19,8 +19,8 @@ class Message extends CRUD_Controller
     public function index()
     {
         $this->setJs('/assets/plugins/socket.io/socket.io.js');
-        $this->setJs('assets/js_modules/messages/main.js?ft=' . time());
-        // $this->another_js .= '<script type="module" src="' . base_url('assets/js_modules/messages/main.js?ft=' . time()) . '"></script>';
+        // $this->setJs('assets/js_modules/messages/main.js?ft=' . time());
+        $this->another_js .= '<script type="module" src="' . base_url('assets/js_modules/messages/main.js?ft=' . time()) . '"></script>';
         $this->setCss('assets/css/messages/main.css?ft=' . time());
         $this->renderview('message/view');
     }
