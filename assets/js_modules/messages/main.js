@@ -449,14 +449,14 @@ const message = {
 					src="${e.target.result}"></div>`;
 				};
 			}
-
+			$("#chat_message").text("");
 			await this.ajax.savechat(
 				data,
 				this.data.message_id,
 				pd_id,
 				this.data.files
 			);
-
+			
 			let date = new Date();
 			let t1 = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
 			let t2 =
@@ -474,7 +474,7 @@ const message = {
                             </div>
                             `;
 			$(".content-chat .chat .messages").append(item);
-			$("#chat_message").text("");
+		
 			item_emo = [];
 			setTimeout(() => {
 				$(".content-messages").last()[0].scrollIntoView({
@@ -487,6 +487,7 @@ const message = {
 				$("#file-input").val("");
 				$("#file-inputcamera").val("");
 			}, 300);
+			
 		});
 		$(document).on("focus", "#chat_message", (e) => {
 			$(".content-emoji").remove();
