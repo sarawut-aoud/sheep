@@ -27,9 +27,9 @@
         </a>
     </li>
     <li class="navi-settings">
-        <a class="d-flex flex-column gap-1 justify-content-center align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#settingmenu" aria-controls="settingmenu">
-            <i class="m-color--text g-icon fas fa-cog"></i>
-            <span class="m-color--text g-text">Setting</span>
+        <a class="d-flex flex-column gap-1 justify-content-center align-items-center" href="{base_url}process/logout">
+            <i class="m-color--text text-danger g-icon fas fa-sign-out-alt"></i>
+            <span class="m-color--text text-danger g-text">ออกจากระบบ</span>
         </a>
     </li>
 

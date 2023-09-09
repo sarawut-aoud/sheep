@@ -194,10 +194,12 @@ const message = {
                         <div class="text ${data.read == "unread" ? "new" : ""}">
                             <div class="name">${data.fullname}</div>
                             <div class="sub-text">
-                                <div class="messages">${data.last_message}</div>
-                                <div class="time-content">${
-																	data.last_datetime
-																}</div>
+                                <div class="messages">
+									${data.last_message ? data.last_message : "เริ่มแชทเลย"}
+								</div>
+                                <div class="time-content">	
+									${data.last_datetime ? data.last_datetime : ""}
+								</div>
                             </div>
                         </div>
                         </div>`;
@@ -371,7 +373,6 @@ const message = {
 									block: "end",
 									inline: "nearest",
 								});
-								
 							}
 						}
 					}
@@ -385,7 +386,7 @@ const message = {
 		await this.ajax.get_messageall();
 
 		$(document).on("click", "#backtolist", async (e) => {
-			 let item = await this.components.messagelist();
+			let item = await this.components.messagelist();
 			$(".content-message").html(item);
 			await this.ajax.getperson();
 			await this.ajax.get_messageall();
@@ -456,7 +457,7 @@ const message = {
 				pd_id,
 				this.data.files
 			);
-			
+
 			let date = new Date();
 			let t1 = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
 			let t2 =
@@ -473,8 +474,8 @@ const message = {
                                 <div class="time-right">${time}</div>
                             </div>
                             `;
-			$(".content-chat .chat .messages").append(item);
-		
+			$(".content-chat ").find(".chat").last().find(" .messages").append(item);
+
 			item_emo = [];
 			setTimeout(() => {
 				$(".content-messages").last()[0].scrollIntoView({
@@ -482,12 +483,11 @@ const message = {
 					block: "end",
 					inline: "nearest",
 				});
-				
+
 				this.data.files = null;
 				$("#file-input").val("");
 				$("#file-inputcamera").val("");
 			}, 300);
-			
 		});
 		$(document).on("focus", "#chat_message", (e) => {
 			$(".content-emoji").remove();

@@ -73,33 +73,36 @@ class Message_model extends MY_Model
                 $last_id = $this->db->query("SELECT MAX(content_id) AS last_id 
                     FROM db_sheep.chat_group  t1
                     WHERE (t1.chat_in = {$val->pd_id} AND t1.chat_to = {$this->pd_id} )
-                            OR  (t1.chat_to = {$val->pd_id} AND t1.chat_in = {$this->pd_id} )
+                            OR  (t1.chat_to = {$val->pd_id} AND t1.chat_in = {$this->pd_id} ) 
                 ")->row('last_id');
-                $obj = [];
-                if ($last_id) {
-                    $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id])->row();
 
-                    $last_chat = self::setchat(json_decode($chat->content_chat));
-                    if (end($last_chat)->text) {
-                        $last_msg =  end($last_chat);
-                    } else {
-                        $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id - 1])->row();
-                        $last_chat = self::setchat(json_decode($chat->content_chat));
-                        $last_msg =  end($last_chat);
-                    }
+                $obj = [];
+
+                if ($last_id) {
+                    $item  = self::get_chat_lastid($last_id, $val->pd_id);
+                    // $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id, 'content_chat !=' => NULL])->row();
+                    // $last_msg  = self::get_chat_lastid($last_id);
+                    // $last_chat = self::setchat(json_decode($chat->content_chat));
+                    // if (end($last_chat)->text) {
+                    //     $last_msg =  end($last_chat);
+                    // } else {
+                    //     $chat = $this->db->get_where('db_sheep.chat_content', ['id' => $last_id - 1, 'content_chat !=' => NULL])->row();
+                    //     $last_chat = self::setchat(json_decode($chat->content_chat));
+                    //     $last_msg =  end($last_chat);
+                    // }
                     $obj = (object)array_merge((array) $val, [
                         // 'chat_id' => urlencode(encrypt($val->chat_id))
-                        'chat_id'       =>  $chat->id,
-                        'last_message'  =>  $last_msg->files ? 'ได้ส่งไฟล์ <i class="fas fa-paperclip"></i>' : $last_msg->text,
-                        'read'          =>  $last_msg->status,
-                        'last_datetime' => self::settime($chat->date_no),
+                        'chat_id'       =>  $last_id,
+                        'last_message'  =>  $item->last_msg->files ? 'ได้ส่งไฟล์ <i class="fas fa-paperclip"></i>' :  $item->last_msg->text,
+                        'read'          =>  $item->last_msg->status,
+                        'last_datetime' => self::settime($item->date_no),
                     ]);
                 }
                 return $obj;
             }, $result);
         }
-        $result_value = [];
 
+        $result_value = [];
         foreach ($result as $key => $value) {
 
             if (!empty($value)) {
@@ -107,6 +110,26 @@ class Message_model extends MY_Model
             }
         }
         return $result_value;
+    }
+    private function get_chat_lastid($last_id, $pd_id)
+    {
+
+
+        $chat = $this->db->query(
+            "SELECT * FROM db_sheep.chat_content WHERE id = {$last_id}  AND (pd_id_keep = '{$this->pd_id},{$pd_id}' OR pd_id_keep = '{$pd_id},{$this->pd_id}' )"
+        )->row();
+       
+        if ($chat->id) {
+            $last_chat = self::setchat(json_decode($chat->content_chat));
+
+            if (end($last_chat)->text) {
+                return (object) ['date_no' => $chat->date_no, 'id' => $chat->id, 'last_msg' => end($last_chat)];
+            } else {
+                return self::get_chat_lastid($last_id - 1, $pd_id);
+            }
+        } else {
+            return [];
+        }
     }
     public function get_messageid($post)
     {
@@ -127,11 +150,11 @@ class Message_model extends MY_Model
             $filter = " (t1.chat_in = {$post_pd_id} AND t1.chat_to = {$this->pd_id} )
             OR  (t1.chat_to = {$post_pd_id} AND t1.chat_in = {$this->pd_id} )";
 
-            if ($row->chat_in != $this->pd_id) {
-                $check1 = "t1.chat_in = $post_pd_id  AND t1.chat_to = {$this->pd_id}";
+            if ($row->chat_in == $this->pd_id) {
+                $check1 = "t1.chat_in = {$this->pd_id}  AND t1.chat_to =$post_pd_id  ";
             }
-            if ($row->chat_to != $this->pd_id) {
-                $check1 = "t1.chat_to = $post_pd_id  AND t1.chat_in = {$this->pd_id}";
+            if ($row->chat_to == $this->pd_id) {
+                $check1 = "t1.chat_to ={$this->pd_id}   AND t1.chat_in =  $post_pd_id";
             }
         }
 
@@ -141,7 +164,7 @@ class Message_model extends MY_Model
         ")->row();
 
         // AND DATE(t2.date_no) = DATE('{$this->date}')
-        $last_message_id = $this->db->query("SELECT MAX(t1.id) AS last_id FROM db_sheep.chat_group t1 WHERE  $check1 ")->row('last_id');
+        $last_message_id = $this->db->query("SELECT MAX(t1.id) AS last_id FROM db_sheep.chat_group t1 WHERE $filter ")->row('last_id');
 
         if (!$check->m_id) {
 
@@ -202,13 +225,18 @@ class Message_model extends MY_Model
         if ($date == $date_chk) {
             $item = "Today at " . date('H:i', strtotime($this->date));
         } else {
-            $item = date("d-M-Y", strtotime($value));;
+            if ($value) {
+                $item = date("d-M-Y", strtotime($value));;
+            } else {
+                $item = '';
+            }
         }
         return $item;
     }
     private function create_chat($post_pd_id)
     {
-        $this->db->insert('db_sheep.chat_content', ['date_no' => $this->date]);
+        $pd_id_array = "{$this->pd_id},{$post_pd_id}";
+        $this->db->insert('db_sheep.chat_content', ['date_no' => $this->date, 'pd_id_keep' => $pd_id_array]);
 
         $data = [
             'chat_in' => $this->pd_id,
@@ -229,6 +257,7 @@ class Message_model extends MY_Model
             $filter = "(t1.chat_in = {$post_pd_id} AND t1.chat_to = {$this->pd_id} )
             OR  (t1.chat_to = {$post_pd_id} AND t1.chat_in = {$this->pd_id} )";
         }
+
         if (!$check_chat->id) {
             self::create_chat($post_pd_id);
             $result = $this->db->query("SELECT * FROM db_sheep.chat_group t1 
@@ -256,6 +285,7 @@ class Message_model extends MY_Model
 
         $chat =  $this->db->get_where('db_sheep.chat_content', ['id' => $row->content_id])->row();
         $rawchat = json_decode($chat->content_chat);
+
         foreach ($rawchat as $key => $value) {
             $data[$key] = [
                 'time' => $value->time,
@@ -281,6 +311,7 @@ class Message_model extends MY_Model
             'files' => $file_temp,
             'status' => 'unread'
         ];
+
         self::notijs($row->content_id, $post->data, $file_temp);
 
         self::lineresponse($row->content_id, $post->data, $file_temp);
