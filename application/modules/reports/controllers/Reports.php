@@ -73,7 +73,7 @@ class Reports extends CRUD_Controller
                                 <img alt="Image " style="width:100px" src="' . $img . '">
                             </td>
                             <td valign="top" style="width:10%;padding-left:10px;vertical-align:middle">
-                                <span style="font-size:22px; font-weight:bold;">SHEEP Online<br>
+                                <span style="font-size:22px; font-weight:bold;">แอปพลิเคชันบริหารจัดการข้อมูลแพะคอกกลาง<br>
                                 <span style="font-size:18px; font-weight:bold;"> ________________________<br>
                                 <span style="font-size:18px; font-weight:bold;">' . $header . '<br>
                             </td>

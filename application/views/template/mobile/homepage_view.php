@@ -57,7 +57,7 @@
         {page_content}
     </div>
     <div class="promote">
-        <p> Copyright © {application_varsion} </p>
+        <p> Copyright © {application_varsion_mobile} </p>
     </div>
     <div class="footer">
         {menu}

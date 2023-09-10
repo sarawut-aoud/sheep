@@ -21,10 +21,11 @@ class CRUD_Controller extends CI_Controller
 		$data['user_prefix_name']	= $this->session->userdata('user_prefix_name');
 		$data['user_fullname']		= $this->session->userdata('user_fullname');
 		$data['user_lastname']		= $this->session->userdata('user_lastname');
-		$data['title_html'] = 'Sheep : Online';
-		$data['application_name'] = 'Sheep';
-		$data['application_sub_name'] = 'Online';
-		$data['application_varsion'] = 'Sheep : Online ' . date('Y') . '  Version 1.0 ';
+		$data['title_html'] = 'Real-time Data Management Application for  Goat Collecting Stall';
+		$data['application_name'] = 'แอปพลิเคชันบริหารจัดการ';
+		$data['application_sub_name'] = 'ข้อมูลแพะคอกกลาง';
+		$data['application_varsion_mobile'] = 'แอปพลิเคชันบริหารจัดการข้อมูลแพะคอกกลาง';
+		$data['application_varsion'] = 'Real-time Data Management Application for  Goat Collecting Stall ' . date('Y') . '  Version 1.0 ';
 		$data['text_loading'] =  'L O A D I N G . . .';
 
 		$data['base_url'] = base_url();
@@ -112,7 +113,7 @@ class CRUD_Controller extends CI_Controller
 		$this->data['menu_list'] = $this->get_menu();
 		$this->data['another_css'] = $this->another_css;
 		$this->data['another_js'] = $this->another_js;
-		
+
 		if ($this->agent->is_mobile()) {
 			$this->data['top_navbar'] = $this->parser->parse('template/mobile/top_navbar_view', $this->top_navbar_data, TRUE);
 			$this->data['menu'] = $this->parser->parse('template/mobile/menu_list_view', $this->top_navbar_data, TRUE);

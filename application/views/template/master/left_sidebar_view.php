@@ -11,7 +11,7 @@ $progamelist = $menu['progamelist'];
             <img src="{base_url}/assets/images/application/s-icon.png" alt="" style="width: 50px;filter: invert(1);">
         </div>
         <div class="sidebar-brand-text mx-3" style="line-height: 14px;">
-            <strong style="font-size: 22px;">{application_name}</strong>
+            <span >{application_name}</span>
             <span>{application_sub_name}</span>
         </div>
     </div>

@@ -16,6 +16,7 @@
                             </div>
                             <div>
                                 <h3>เข้าสู่ระบบ</h3>
+                                <span>แอปพลิเคชันบริหารจัดการข้อมูลแพะคอกกลาง</span>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
