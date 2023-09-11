@@ -66,7 +66,7 @@ class Reports extends CRUD_Controller
 
         $message = preg_replace('/<a class="(.*?)">(.*?)<\/a>/', '<p class="$1">$2</p>', $message); //สำหรับเปลี่ยน tag a เป็น p เพราะ mpdf ไม่รองรับสีตัวอักษรบน tag a
         $message = preg_replace('/<label class="(.*?)">(.*?)<\/label>/', '<span>$2</span>', $message); //สำหรับเปลี่ยน tag label เป็น span เพราะ mpdf ไม่รองรับการจัดตำแหน่ง inline
-        $img = FCPATH .  './assets/images/sheep.png';
+        $img = FCPATH .  './assets/images/icon.png';
         $this->header = '<table style="margin-top:0;padding:0 35px; width:100%">
                         <tr>
                             <td style="width:10%;vertical-align:middle">

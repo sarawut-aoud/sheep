@@ -11,8 +11,8 @@
                     <div class="card-body p-5 text-center">
 
                         <div class="mb-5 d-flex justify-content-center w-100 align-items-center  gap-3">
-                            <div style="width: 85px;">
-                                <img src="{base_url}/assets/images/sheep.png" class="w-100">
+                            <div style="width: 150px;">
+                                <img src="{base_url}/assets/images/icon.png" class="w-100">
                             </div>
                             <div>
                                 <h3>เข้าสู่ระบบ</h3>

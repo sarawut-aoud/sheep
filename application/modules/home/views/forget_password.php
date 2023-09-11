@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-5 d-flex justify-content-center align-items-center w-100 gap-3">
                             <div style="width: 85px;">
-                                <img src="{base_url}/assets/images/sheep.png" class="w-100">
+                                <img src="{base_url}/assets/images/icon.png" class="w-100">
                             </div>
                             <div>
                                 <h3>ขอรหัสผ่านใหม่</h3>

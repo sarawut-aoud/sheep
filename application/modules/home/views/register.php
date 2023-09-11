@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-5 d-flex justify-content-center align-items-center gap-3 w-100 page-rlt ">
                             <div style="width: 85px;">
-                                <img src="{base_url}/assets/images/sheep.png" class="w-100 box-image rounded-circle">
+                                <img src="{base_url}/assets/images/icon.png" class="w-100 box-image rounded-circle">
                             </div>
                             <div>
                                 <h3>สมัครมาชิก</h3>

@@ -8,7 +8,7 @@ $progamelist = $menu['progamelist'];
     <!-- Sidebar - Brand -->
     <div class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
-            <img src="{base_url}/assets/images/application/s-icon.png" alt="" style="width: 50px;filter: invert(1);">
+            <img src="{base_url}/assets/images/icon.png" alt="" style="width: 50px;">
         </div>
         <div class="sidebar-brand-text mx-3" style="line-height: 14px;">
             <span >{application_name}</span>

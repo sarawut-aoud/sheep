@@ -4,7 +4,7 @@
             <div class="col-md-2 col-sm-3 col-4">
                 <div class="d-flex flex-column align-items-center">
                     <div class="image pl-1">
-                        <img src="{base_url}/assets/images/sheep.png" class="img-circle" style="width: 3rem;" alt="User Image">
+                        <img src="{base_url}/assets/images/icon.png" class="img-circle" style="width: 3rem;" alt="User Image">
                     </div>
                 </div>
             </div>
