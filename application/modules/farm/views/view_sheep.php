@@ -28,7 +28,7 @@
     }
 </style>
 <div class="homepage">
-    <div class="container pb-4 page-rlt  ">
+    <div class="container pb-4 page-rlt ">
 
         <div class="row ">
             <div class="d-flex justify-content-end justify-content-lg-between align-items-center">
@@ -46,8 +46,8 @@
             </div>
 
             <div class="card p-4">
-                <div class="table-responsive">
-                    <table id="tb-viewsheep" class="table table-striped
+                <div class="table-responsive overflow-hidden">
+                    <table id="tb-viewsheep" class="table table-striped 
                     table-hover	
                     table-borderless
                     align-middle" style="width: 100%;">

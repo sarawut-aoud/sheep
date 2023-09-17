@@ -12,6 +12,7 @@ class Home extends CRUD_Controller
 
     public function index()
     {
+       
         $this->setJs('/assets/js_modules/login.js?ft=' . time());
         $this->render_main('home/login');
     }
