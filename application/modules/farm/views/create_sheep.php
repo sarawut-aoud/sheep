@@ -24,22 +24,28 @@
     }
 </style>
 <div class="homepage">
-    <div class="container pb-4 page-rlt overflow-auto "style="height:80vh">
+    <div class="container pb-4 page-rlt overflow-auto " style="height:80vh">
 
-        <div class="row " >
-            <div class="d-flex justify-content-start mt-3 mb-3 button-goback ">
-                <button type="button" class="btn btn-dark btngoback">
-                    <div class="icon"><i class="fas fa-chevron-left"></i></div>
-                    <div class="text-value">
-                        ย้อนกลับ
-                    </div>
-                </button>
+        <div class="row ">
+            <div class="d-flex justify-content-end justify-content-lg-between align-items-center">
+                <div class="d-flex justify-content-start mt-3 mb-3 button-goback ">
+                    <button type="button" class="btn btn-dark btngoback">
+                        <div class="icon"><i class="fas fa-chevron-left"></i></div>
+                        <div class="text-value">
+                            ย้อนกลับ
+                        </div>
+                    </button>
+                </div>
+                <a class="btn btn-info " href="{base_url}farm/list_view">
+                    ข้อมูลแพะ
+                </a>
             </div>
+
             <div class="card positon-relative">
                 <div class="row-sticky">
                     <div class="row mb-3 mt-3 ">
                         <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
-                           <a href="{base_url}farm/sheep_import"><button type="button" class="btn btn-success"><i class="fas fa-file-import"></i> นำเข้าข้อมูล</button></a> 
+                            <a href="{base_url}farm/sheep_import"><button type="button" class="btn btn-success"><i class="fas fa-file-import"></i> นำเข้าข้อมูล</button></a>
                             <div class="d-flex flex-column flex-lg-row gap-2">
                                 <button type="button" class="btn btn-warning" id="addboxContent"><i class="fas fa-plus-circle"></i> เพิ่มแถว</button>
                                 <button type="button" class="btn btn-success" id="savesheep">บันทึกข้อมูล</button>

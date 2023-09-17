@@ -25,12 +25,23 @@ class Farm extends CRUD_Controller
 
         $this->renderview('farm/view');
     }
+    public function list_view()
+    {
+        $this->setJs('/assets/js_modules/sheep.js?ft=' . time());
+
+        $this->setBread(
+            ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
+            ['class' => 'active', 'ref' => '#', 'name' => 'ข้อมูลแพะ']
+        );
+        $this->renderview('farm/view_sheep');
+    }
     public function create_sheep()
     {
         $this->setJs('/assets/js_modules/createsheep.js?ft=' . time());
 
         $this->setBread(
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
+            ['class' => '', 'ref' => base_url('farm/list_view'), 'name' => 'ข้อมูลแพะ'],
             ['class' => 'active', 'ref' => '#', 'name' => 'เพิ่มข้อมูลแพะ']
         );
         $this->renderview('farm/create_sheep');
@@ -44,6 +55,7 @@ class Farm extends CRUD_Controller
         $this->setCss('assets/lib/jsuites/jsuites.css');
         $this->setBread(
             ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
+            ['class' => '', 'ref' => base_url('farm/list_view'), 'name' => 'ข้อมูลแพะ'],
             ['class' => '', 'ref' => base_url('farm/create_sheep'), 'name' => 'เพิ่มข้อมูลแพะ'],
             ['class' => 'active', 'ref' => '#', 'name' => 'นำเข้าข้อมูลแพะ'],
         );
@@ -144,6 +156,45 @@ class Farm extends CRUD_Controller
         try {
             $result = $this->farm->savesheep_import($post);
             $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function getall()
+    {
+        try {
+            $result = $this->farm->getall();
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function deletesheep()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->deletesheep($post);
+            $this->setRes($result, ['msg' => ''], 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function getsheepid()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->getsheepid($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function sheepupdate()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->sheepupdate($post);
+            $this->setRes($result,['msg'=>""] , 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
         }

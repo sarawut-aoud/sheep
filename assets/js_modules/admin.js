@@ -9,7 +9,12 @@ const admin = {
 			return `<div class="text-ellipsis-scroll"><span>${text}</span></div>`;
 		},
 		action(data) {
-			return `<button class="btn btn-warning" id="update_level" data-pd-id="${data.pd_id}"><i class="fas fa-user-cog"></i></button>`;
+			let item = "";
+			if (data.status_level == 2) {
+				item += `<button title="จัดการใก้สิทธิ์" class="btn btn-warning" id="update_level" data-pd-id="${data.pd_id}"><i class="fas fa-user-cog"></i></button>`;
+			}
+			item += `<button title="ดูข้อมูลส่วนตัว" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info" id="showdata" data-pd-id="${data.pd_id}"><i class="fas fa-search"></i></button>`;
+			return `<div class="d-flex gap-2 ">${item}</div>`;
 		},
 		copylink(data) {
 			return `
@@ -223,6 +228,38 @@ const admin = {
 				},
 			});
 		},
+		async showperson(id) {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("admin/setting/showdata"),
+				data: {
+					pdid: id,
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					let item = "";
+					if (results.data) {
+						let data = results.data;
+						item = `<div class="thumb-lg member-thumb mx-auto" style="width: 150px;">
+							<img src="${base_url(
+								data.picture
+							)}" class="rounded-circle img-thumbnail" alt="profile-image">
+						</div>
+						<div class="mt-2">
+							<h4>${data.fullname}</h4>
+						</div>
+						<div class="d-flex flex-column gap-2 align-items-start">
+							<a href="${data.website}" target="_blank"class="text-pink">${data.website?data.website:"-"}</a></span>
+							<span>Email : <a href="mailto: ${data.email}"  class="text-pink"> ${data.email ? data.email:"-"}</a></span>
+							<span>Line ID : <span  class="text-pink">${data.line ? data.line:"-"}</span></span>
+							<span>Phone :<span  class="text-pink"> ${data.phone ? data.phone:"-"}</span></span>
+						</div>`;
+					}
+					$('#showmember').html(item)
+				},
+			});
+		},
 	},
 	async init() {
 		this.data.table = $("#tbperson").DataTable({
@@ -304,6 +341,11 @@ const admin = {
 				$(ev).removeClass("request");
 				$(ev).removeClass("active");
 			});
+		});
+		$(document).on("show.bs.modal", "#exampleModal", async (e) => {
+			let btn = $(e.relatedTarget);
+			let id = btn.data("pd-id");
+			await this.ajax.showperson(id);
 		});
 	},
 };

@@ -13,7 +13,7 @@ class Setting_model extends MY_Model
             "SELECT * 
             FROM db_sheep.personaldocument t1
             LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
-            WHERE t2.status_level = 2"
+            "
         )->result();
         $data = [];
         foreach ($result as $key => $val) {
@@ -39,7 +39,21 @@ class Setting_model extends MY_Model
         $this->db->update('db_sheep.personalsecret', $set, $where);
         return true;
     }
-    public function saveuser($post)
+    public function showdata($post)
     {
+        $result = $this->db->query(
+            "SELECT * 
+            FROM db_sheep.personaldocument t1
+            LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
+            WHERE t1.pd_id = ?
+            ",
+            [$post->pdid]
+        )->row();
+
+        $data =  $result;
+        $data->picture = $result->picture ? $result->picture : '/assets/images/blank_person.jpg';
+        $data->fullname = $result->firstname . ' ' . $result->lastname;
+
+        return $data;
     }
 }

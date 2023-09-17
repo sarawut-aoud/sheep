@@ -59,4 +59,14 @@ class Setting extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function showdata()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->setting->showdata($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
 }

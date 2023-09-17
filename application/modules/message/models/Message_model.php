@@ -109,7 +109,7 @@ class Message_model extends MY_Model
                 $result_value[$key] =  $value;
             }
         }
-        return $result_value;
+        return array_values($result_value);
     }
     private function get_chat_lastid($last_id, $pd_id)
     {
@@ -118,7 +118,7 @@ class Message_model extends MY_Model
         $chat = $this->db->query(
             "SELECT * FROM db_sheep.chat_content WHERE id = {$last_id}  AND (pd_id_keep = '{$this->pd_id},{$pd_id}' OR pd_id_keep = '{$pd_id},{$this->pd_id}' )"
         )->row();
-       
+
         if ($chat->id) {
             $last_chat = self::setchat(json_decode($chat->content_chat));
 
@@ -250,14 +250,14 @@ class Message_model extends MY_Model
     {
 
         $check_chat = $this->db->query("SELECT * FROM db_sheep.chat_content WHERE id = {$id} AND DATE(date_no) = DATE('{$this->date}') ")->row();
-
+     
         if ($post_pd_id == $this->pd_id) {
             $filter = "t1.chat_in = {$this->pd_id}";
         } else {
             $filter = "(t1.chat_in = {$post_pd_id} AND t1.chat_to = {$this->pd_id} )
             OR  (t1.chat_to = {$post_pd_id} AND t1.chat_in = {$this->pd_id} )";
         }
-
+       
         if (!$check_chat->id) {
             self::create_chat($post_pd_id);
             $result = $this->db->query("SELECT * FROM db_sheep.chat_group t1 

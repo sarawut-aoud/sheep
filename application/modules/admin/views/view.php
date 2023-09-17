@@ -88,7 +88,7 @@
                             <th>ชื่อ-นามสกุล</th>
                             <th>เบอร์โทร</th>
                             <th>อีเมล</th>
-                            <th>จัดการให้สิทธิ์ Admin</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
 
@@ -148,4 +148,27 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade v-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ข้อมูลส่วนตัว</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                    <div class="text-center card-box">
+                        <div class="member-card pt-2 pb-2" id="showmember">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php $this->load->view('modal_line') ?>

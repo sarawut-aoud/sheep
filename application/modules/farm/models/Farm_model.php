@@ -38,6 +38,7 @@ class Farm_model extends MY_Model
             WHERE
                 pd_id = ?
                 AND farm_id = ?
+                AND is_active = 1
             GROUP BY
                 t1.sheep_type",
                 [$this->pd_id, $val->id]
@@ -94,6 +95,7 @@ class Farm_model extends MY_Model
                 'height'        => $val['height'],
                 'farm_id'       => $val['farm'],
                 'pd_id'         => $this->pd_id,
+
             ];
 
             $this->db->insert('db_sheep.sheep_keep', $data);
@@ -168,7 +170,7 @@ class Farm_model extends MY_Model
     public function savesheep_import($post)
     {
         $post = (object)$post->data;
-       
+
         foreach ($post as $key => $val) {
             $data = [
                 'sheepcode'     => $val['sheepcode'],
@@ -188,5 +190,48 @@ class Farm_model extends MY_Model
             $this->status = true;
         }
         return $this->status;
+    }
+    public function getall()
+    {
+        $result = $this->db->query("SELECT  * ,t1.id as s_id 
+        FROM db_sheep.sheep_keep t1 
+        LEFT JOIN db_sheep.sheep_type t2 ON t2.id = t1.sheep_type 
+        LEFT JOIN db_sheep.farms t3 ON t3.id = t1.farm_id
+        WHERE t1.pd_id = ? AND t1.is_active = 1 ", [$this->pd_id])->result();
+        return $result;
+    }
+    public function deletesheep($post)
+    {
+        $result = $this->db->update('db_sheep.sheep_keep', ['is_active' => 0], ['id' => $post->sid, 'pd_id' => $this->pd_id]);
+        return $result;
+    }
+    public function getsheepid($post)
+    {
+        $result = $this->db->query("SELECT  * ,t1.id as s_id 
+        FROM db_sheep.sheep_keep t1 
+        LEFT JOIN db_sheep.sheep_type t2 ON t2.id = t1.sheep_type 
+        LEFT JOIN db_sheep.farms t3 ON t3.id = t1.farm_id
+        WHERE t1.pd_id = ? AND t1.is_active = 1 AND t1.id = ? ", [$this->pd_id, $post->sid])->row();
+
+        return $result;
+    }
+    public function sheepupdate($post)
+    {
+        $data = [
+            'sheepcode'     => $post->sheepcode,
+            'sheepname'     => $post->sheepname,
+            'sheep_type'    => $post->sheeptype,
+            'gender'        => $post->gender,
+            'old'           => $post->old,
+            'weight'        => $post->weight,
+            'height'        => $post->height,
+            'farm_id'       => $post->farm,
+        ];
+        $where = [
+            'pd_id' => $this->pd_id,
+            'id'    => $post->sid,
+        ];
+        $result = $this->db->update('db_sheep.sheep_keep', $data, $where);
+        return $result;
     }
 }
