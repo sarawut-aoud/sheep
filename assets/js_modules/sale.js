@@ -351,6 +351,7 @@ const sale = {
 			initComplete: function (settings) {
 				initializeDataTables(settings);
 			},
+			responsive: true
 		});
 		await this.ajax.get_datasale();
 		await this.ajax.getsheeptype();

@@ -13,8 +13,8 @@ class Sendmail_model extends CI_Model
 			$mail->SMTPDebug = 0;
 			$mail->SMTPAuth = true;
 			$mail->SMTPAutoTLS = false;
-			$mail->Username = "noreply@secret-serv.com"; // account SMTP
-			$mail->Password = "@P@ssW0rd_0979284920"; // รหัสผ่าน SMTP 
+			$mail->Username = "info@goatgether.com"; // account SMTP
+			$mail->Password = "!P@ssw0rd8694"; // รหัสผ่าน SMTP 
 			$mail->Host = 'mail.secret-serv.com';
 			$mail->SMTPSecure = 'false';
 			$mail->Port = 587;
@@ -25,7 +25,7 @@ class Sendmail_model extends CI_Model
 					'allow_self_signed' => true
 				)
 			);
-			$mail->SetFrom('noreply@secret-serv.com', 'noreply@secret-serv.com');
+			$mail->SetFrom('info@goatgether.com', 'info@goatgether.com');
 			$mail->Subject = $subject;
 
 			$mail->MsgHTML($data['message']);
@@ -54,8 +54,8 @@ class Sendmail_model extends CI_Model
 			$mail->SMTPAuth = true;
 			$mail->SMTPAutoTLS = false;
 			$mail->SMTPSecure = 'false';
-			$mail->Username = "noreply@secret-serv.com"; // account SMTP
-			$mail->Password = "@P@ssW0rd_0979284920"; // รหัสผ่าน SMTP 
+			$mail->Username = "info@goatgether.com"; // account SMTP
+			$mail->Password = "!P@ssw0rd8694"; // รหัสผ่าน SMTP 
 			$mail->Host = 'mail.secret-serv.com';
 			$mail->Port = 25;
 			$mail->SMTPOptions = array(
@@ -69,7 +69,7 @@ class Sendmail_model extends CI_Model
 			if (!empty($data["mailsend"])) {
 				$mail->SetFrom($data["mailsend"], $data["mailsend"]);
 			} else {
-				$mail->SetFrom('noreply@secret-serv.com', 'noreply@secret-serv.com');
+				$mail->SetFrom('info@goatgether.com', 'info@goatgether.com');
 			}
 
 			$mail->Subject = $subject;

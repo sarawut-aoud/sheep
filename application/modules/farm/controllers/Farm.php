@@ -110,6 +110,16 @@ class Farm extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function updatefarm()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->farm->updatefarm($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
     public function get_farmbyid()
     {
         $post = (object)$this->input->post(NULL, false);
@@ -194,7 +204,7 @@ class Farm extends CRUD_Controller
         $post = (object)$this->input->post(NULL, false);
         try {
             $result = $this->farm->sheepupdate($post);
-            $this->setRes($result,['msg'=>""] , 200);
+            $this->setRes($result, ['msg' => ""], 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);
         }

@@ -400,7 +400,7 @@ a:hover {
 	height: auto !important;
 }
 .v-offcanvas {
-	width: 50% !important;
+	width: 50% ;
 }
 .v-collapse .collapse-item {
 	display: flex !important;
@@ -534,4 +534,7 @@ a:hover {
 }
 .dt-buttons.btn-group > .btn:last-child {
 	border-radius: 0 1em 1em 0;
+}
+table.dataTable>tbody>tr.even{
+	color: #000000;
 }

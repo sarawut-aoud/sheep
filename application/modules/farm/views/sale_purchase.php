@@ -127,6 +127,10 @@
         gap: 0.25rem;
 
     }
+
+    #tb-sheepsale {
+        font-size: 18px;
+    }
 </style>
 <div class="homepage">
     <div class="container-fluid pb-4 page-rlt overflow-auto ">

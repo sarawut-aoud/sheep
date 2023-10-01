@@ -3,12 +3,15 @@ const farm = {
 		rawsheeptype: null,
 		rawdatafarm: [],
 		action: "",
+		famrid: "",
 	},
 	components: {
 		content: (data) => {
 			return `<div class="row mb-3 ">
 						<div class="d-flex justify-content-end">
-							<button type="button" class=" mb-3 btn btn-warning font-m" data-farm-id="${data.id}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
+							<button type="button" class=" mb-3 btn btn-warning font-m" data-farm-id="${
+								data.id
+							}" data-action="update" data-bs-toggle="offcanvas" data-bs-target="#updatefarm" aria-controls="updatefarm">แก้ไขข้อมูลฟาร์ม</button>
 						</div>
 						<div class="row mb-3">
 							<div class=" mb-3">
@@ -61,6 +64,7 @@ const farm = {
 				let text = action == "create" ? "เพิ่มข้อมูลฟาร์ม" : "แก้ไขข้อมูลฟาร์ม";
 				$("#offcanvas-headerupdatefarm").text(text);
 				if (action == "update") {
+					farm.data.famrid = id;
 					farm.ajax.get_farmbyid(id);
 				}
 				$("#updatefarm")
@@ -307,7 +311,7 @@ const farm = {
 				},
 			});
 		},
-		async updatefarm() {
+		async updatefarm(id) {
 			let sheep = [];
 			$(".sheeptype").each((i, ev) => {
 				sheep.push({
@@ -318,8 +322,9 @@ const farm = {
 			await $.ajax({
 				type: "POST",
 				dataType: "json",
-				url: site_url("farm/savefarm"),
+				url: site_url("farm/updatefarm"),
 				data: {
+					farmid:id,
 					farmname: $("#farmname").val(),
 					farmername: $("#farmername").val(),
 					address: $("#address").val(),
@@ -358,7 +363,6 @@ const farm = {
 				dataType: "json",
 				url: site_url("farm/get_farm"),
 				success: (results) => {
-					console.log(results.data);
 					if (results.data) {
 						farm.data.rawdatafarm = results.data;
 					}
@@ -401,7 +405,7 @@ const farm = {
 			if (this.data.action == "create") {
 				this.ajax.savefarm();
 			} else {
-				this.ajax.updatefarm();
+				this.ajax.updatefarm(this.data.famrid);
 			}
 		});
 	},

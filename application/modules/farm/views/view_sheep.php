@@ -46,7 +46,7 @@
             </div>
 
             <div class="card p-4">
-                <div class="table-responsive overflow-hidden">
+                <div class="table-responsive ">
                     <table id="tb-viewsheep" class="table table-striped 
                     table-hover	
                     table-borderless

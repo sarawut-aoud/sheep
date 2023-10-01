@@ -57,7 +57,7 @@ class Process extends MY_Controller
 
         $mailto = $result->email;
         $subject = 'สมัครสมาชิก';
-        $mailsend = 'noreply@secret-serv.com';
+        $mailsend = 'info@goatgether.com';
         // $mailsend = $post->email;
         $subject = 'ขอรหัสผ่านใหม่';
         $body = "

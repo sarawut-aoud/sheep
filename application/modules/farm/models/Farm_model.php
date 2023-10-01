@@ -20,6 +20,25 @@ class Farm_model extends MY_Model
         ];
         $this->db->insert('db_sheep.farms', $data);
     }
+    public function updatefarm($post)
+    {
+        $data = [
+
+            'farmname'      => $post->farmname,
+            'farmer'        => $post->farmername,
+            'address'       => $post->address,
+            'distirct_id '  => $post->district,
+            'amphoe_id'     => $post->amphoe,
+            'province_id '  => $post->province,
+        ];
+        $where = [
+            'pd_id'         => $this->pd_id,
+            'id'            => $post->farmid
+        ];
+
+
+        return $this->db->update('db_sheep.farms', $data, $where);
+    }
     public function get_farm()
     {
         $result = $this->db->get_where('db_sheep.farms', ['pd_id' => $this->pd_id])->result();

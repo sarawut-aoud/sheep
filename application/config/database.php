@@ -152,8 +152,8 @@ if (!in_array($_SERVER['SERVER_ADDR'], $localhost)) {
 	// $hostname = 'localhost';
 	$hostname = 'localhost';
 	$mysql_port = 3306;
-	$DB_USER = 'tar'; //Database Username
-	$DB_PASS = 'P@ssw0rd1234';
+	$DB_USER = 'root'; //Database Username
+	$DB_PASS = '';
 	$DB_NAME = 'db_sheep'; // Database Name
 } else {
 
@@ -165,8 +165,8 @@ if (!in_array($_SERVER['SERVER_ADDR'], $localhost)) {
 	}
 	$hostname = 'localhost';
 	$DB_NAME = 'db_sheep';
-	$DB_USER = 'admin@tar';
-	$DB_PASS = 'P@ssw0rd0979284920';
+	$DB_USER = 'root';
+	$DB_PASS = '';
 }
 $db['default'] = array(
 	'dsn'	=> '',

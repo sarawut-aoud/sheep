@@ -75,6 +75,11 @@ const sheep = {
 				data: data,
 			});
 		},
+		renderselect() {
+			let el = $(`.sheeptype[data-index="0"]`);
+			let index = 0;
+			$(`.gender-type#male_${index}`).prop("checked", true);
+		},
 	},
 	ajax: {
 		getsheeptype: async () => {
@@ -191,10 +196,11 @@ const sheep = {
 		await this.ajax.get_farmlist();
 		this.methods.rendertype(0, this.data.rawsheeptype);
 		this.methods.renderfarm(0, this.data.rawfarm);
+		this.methods.renderselect();
 		$(document).on("click", "#addboxContent", async (e) => {
 			let index = $(".box-content").length;
 			this.components.item(index);
-
+			$(`.gender-type#male_${index}`).prop("checked", true);
 			$(".box-content").last()[0].scrollIntoView({
 				behavior: "smooth",
 				block: "end",
@@ -215,6 +221,18 @@ const sheep = {
 		});
 		$(document).on("click", "#savesheep", async (e) => {
 			this.ajax.save();
+		});
+		$(document).on("change", ".sheeptype", async (e) => {
+			let el = $(e.target);
+			let val = el.val();
+			let box = el.closest(".box-content");
+			let index = box.data("index");
+			$(`.gender-type[data-index="${index}"]`).prop("checked", false);
+			if (val == 1) {
+				$(`.gender-type#male_${index}`).prop("checked", true);
+			} else if (val == 2) {
+				$(`.gender-type#female_${index}`).prop("checked", true);
+			}
 		});
 	},
 };
