@@ -149,6 +149,46 @@
 </div>
 
 <!-- Modal -->
+<div class="offcanvas offcanvas-end v-offcanvas" tabindex="-1" id="getdata" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">แก้ไขข้อมูล</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="input-form">
+            <div class="mb-3">
+                <label for="title" class="form-label">คำนำหน้า</label>
+                <select class="form-control" id="title">
+                    <?php foreach ($title as $key => $val) : ?>
+                        <option value="<?= $val['value'] ?>"><?= $val['label'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="firstname" class="form-label">ชื่อ : <span style="color:red"> * </span></label>
+                <input type="text" class="form-control" id="firstname" placeholder="ชื่อ">
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">นามสกุล : <span style="color:red"> * </span></label>
+                <input type="text" class="form-control" id="lastname" placeholder="นามสกุล">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">ชื่อเข้าใช้งาน : </label>
+                <input type="text" class="form-control" id="username" placeholder="ชื่อเข้าใช้งาน" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">อีเมลล์ : <span style="color:red"> * <span class="checkemail"></span></span></label>
+                <input type="text" class="form-control" id="email" placeholder="อีเมลล์">
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <button class="btn btn-dark" type="button" data-bs-dismiss="offcanvas" aria-label="Close">ปิด</button>
+        <button class="btn btn-success" type="button" id="update">บันทึก</button>
+    </div>
+</div>
+
+<!-- Modal -->
 <div class="modal fade v-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -160,7 +200,7 @@
                 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
                     <div class="text-center card-box">
                         <div class="member-card pt-2 pb-2" id="showmember">
-                           
+
                         </div>
                     </div>
                 </div>

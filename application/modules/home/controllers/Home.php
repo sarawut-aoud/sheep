@@ -12,7 +12,7 @@ class Home extends CRUD_Controller
 
     public function index()
     {
-       
+
         $this->setJs('/assets/js_modules/login.js?ft=' . time());
         $this->render_main('home/login');
     }
@@ -31,14 +31,15 @@ class Home extends CRUD_Controller
     public function sendforgetpassword()
     {
         $post = (object)$this->input->post(NULL, false);
-        $result = $this->db->get_where('db_sheep.personaldocument', ['email' => $post->email])->row();
-        $pass = $this->db->get_where('db_sheep.log_pass_id', ['pd_id' => $result->pd_id])->row();
+        $result = $this->db->get_where('db_sheep.personaldocument', ['email' => $post->email, 'status' => 1])->row();
+        if ($result->pd_id) {
+            $pass = $this->db->get_where('db_sheep.log_pass_id', ['pd_id' => $result->pd_id])->row();
 
-        $mailsend = 'noreply@secret-serv.com';
-        // $mailsend = $post->email;
-        $mailto = $post->email;
-        $subject = 'ขอรหัสผ่านใหม่';
-        $body = "
+            $mailsend = 'info@goatgether.com';
+            // $mailsend = $post->email;
+            $mailto = $post->email;
+            $subject = 'ขอรหัสผ่านใหม่';
+            $body = "
         <div>รหัสผ่านของท่านคือ</div>
         <div>password : $pass->pass</div>
         <br>
@@ -47,22 +48,29 @@ class Home extends CRUD_Controller
         </div>
         ";
 
-        $tempalte = [
-            'title' => 'ขอรหัสผ่านใหม่',
-            'subtitle' => null,
-            'content' =>  $body,
-        ];
-        $bodyhtml =  $this->sendmail->emailTemplate($tempalte);
-        $sendmail_result = $this->sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = '');
+            $tempalte = [
+                'title' => 'ขอรหัสผ่านใหม่',
+                'subtitle' => null,
+                'content' =>  $body,
+            ];
+            $bodyhtml =  $this->sendmail->emailTemplate($tempalte);
+            $sendmail_result = $this->sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = '');
 
 
-        if ($sendmail_result['result'] != "success") {
-            $json =  '';
+            if ($sendmail_result['result'] != "success") {
+                $json =  '';
+            } else {
+                $json = json_encode(array(
+                    'status' => true,
+                    'message' => 'ส่งรหัสผ่านใหม่แล้ว โปรดตรวจสอบที่ Email',
+                    'response' => $sendmail_result
+                ));
+            }
         } else {
             $json = json_encode(array(
                 'status' => true,
-                'message' => 'ส่งรหัสผ่านใหม่แล้ว โปรดตรวจสอบที่ Email',
-                'response' => $sendmail_result
+                'message' => 'ไม่พบผู้ใช้งาน',
+                'response' => null
             ));
         }
 

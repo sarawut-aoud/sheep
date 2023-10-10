@@ -49,6 +49,7 @@ class Register_model extends CI_Model
 			'username' 			=> $post['username'],
 			'password' 			=> $this->secure_pass($post['password']),
 			'phone' 			=> NULL,
+			'status'			=> 1,
 		);
 		$this->db->insert('db_sheep.personaldocument', $data);
 		$last_id = $this->db->insert_id();

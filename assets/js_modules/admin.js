@@ -2,6 +2,7 @@ const admin = {
 	data: {
 		table: "",
 		password: true,
+		pd_id: "",
 	},
 	components: {
 		text(data) {
@@ -11,7 +12,9 @@ const admin = {
 		action(data) {
 			let item = "";
 			if (data.status_level == 2) {
-				item += `<button title="จัดการใก้สิทธิ์" class="btn btn-warning" id="update_level" data-pd-id="${data.pd_id}"><i class="fas fa-user-cog"></i></button>`;
+				item += `<button title="จัดการให้สิทธิ์" class="btn btn-warning" id="update_level" data-pd-id="${data.pd_id}"><i class="fas fa-user-cog"></i></button>`;
+				item += `<button title="แก้ไขข้อมูล" data-bs-toggle="offcanvas" data-bs-target="#getdata" aria-controls="getdata" class="btn btn-warning getdata" id="" data-pd-id="${data.pd_id}"><i class="fas fa-edit"></i></button>`;
+				item += `<button title="ลบผู้ใช้ง่าน" class="btn btn-danger deldata" id="" data-pd-id="${data.pd_id}"><i class="fas fa-trash-alt"></i></button>`;
 			}
 			item += `<button title="ดูข้อมูลส่วนตัว" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info" id="showdata" data-pd-id="${data.pd_id}"><i class="fas fa-search"></i></button>`;
 			return `<div class="d-flex gap-2 ">${item}</div>`;
@@ -44,8 +47,9 @@ const admin = {
 			});
 		},
 		addrequest: (tag) => {
-			$(tag).addClass("request");
-			$(tag).focus();
+			let off = $(".offcanvas.show");
+			off.find(tag).addClass("request");
+			off.find(tag).focus();
 		},
 		removeRequest: (tag) => {
 			$(tag).val().length > 0
@@ -54,7 +58,8 @@ const admin = {
 		},
 		checkinput: () => {
 			let check = true;
-			if (!$("#firstname").val()) {
+			let off = $(".offcanvas.show");
+			if (!off.find("#firstname").val()) {
 				Swal.fire({
 					icon: "error",
 					title: `กรอกชื่อ`,
@@ -156,18 +161,19 @@ const admin = {
 		register: async () => {
 			let chk = admin.methods.checkinput();
 			loading_on($("#saveuser"));
+			let off = $("#AddUser");
 			if (chk) {
 				await $.ajax({
 					type: "POST",
 					dataType: "json",
 					url: site_url("process/register"),
 					data: {
-						title: $("#title").val(),
-						firstname: $("#firstname").val(),
-						lastname: $("#lastname").val(),
-						email: $("#email").val(),
-						username: $("#username").val(),
-						password: $("#password").val(),
+						title: off.find("#title").val(),
+						firstname: off.find("#firstname").val(),
+						lastname: off.find("#lastname").val(),
+						email: off.find("#email").val(),
+						username: off.find("#username").val(),
+						password: off.find("#password").val(),
 						csrf_token_ci_gen: $.cookie(csrf_cookie_name),
 					},
 					success: (results) => {
@@ -194,21 +200,28 @@ const admin = {
 				dataType: "json",
 				url: site_url("process/usernamecheck"),
 				data: {
-					username: $("#username").val(),
+					username: $("#AddUser").find("#username").val(),
 					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
 				},
 				success: (results) => {
 					if (!results.status) {
-						$("#username").removeClass("active").addClass("request");
-						$(".checkusername").text(results.data);
+						$("#AddUser")
+							.find("#username")
+							.removeClass("active")
+							.addClass("request");
+						$("#AddUser").find(".checkusername").text(results.data);
 					} else {
-						$("#username").removeClass("request").addClass("active");
-						$(".checkusername").text("");
+						$("#AddUser")
+							.find("#username")
+							.removeClass("request")
+							.addClass("active");
+						$("#AddUser").find(".checkusername").text("");
 					}
 				},
 			});
 		},
 		emailcheck: async () => {
+			let off = $(".offcanvas.show");
 			await $.ajax({
 				type: "POST",
 				dataType: "json",
@@ -219,11 +232,11 @@ const admin = {
 				},
 				success: (results) => {
 					if (!results.status) {
-						$("#email").removeClass("active").addClass("request");
-						$(".checkemail").text(results.data);
+						off.find("#email").removeClass("active").addClass("request");
+						off.find(".checkemail").text(results.data);
 					} else {
-						$("#email").removeClass("request").addClass("active");
-						$(".checkemail").text("");
+						off.find("#email").removeClass("request").addClass("active");
+						off.find(".checkemail").text("");
 					}
 				},
 			});
@@ -250,15 +263,105 @@ const admin = {
 							<h4>${data.fullname}</h4>
 						</div>
 						<div class="d-flex flex-column gap-2 align-items-start">
-							<a href="${data.website}" target="_blank"class="text-pink">${data.website?data.website:"-"}</a></span>
-							<span>Email : <a href="mailto: ${data.email}"  class="text-pink"> ${data.email ? data.email:"-"}</a></span>
-							<span>Line ID : <span  class="text-pink">${data.line ? data.line:"-"}</span></span>
-							<span>Phone :<span  class="text-pink"> ${data.phone ? data.phone:"-"}</span></span>
+							<a href="${data.website}" target="_blank"class="text-pink">${
+							data.website ? data.website : "-"
+						}</a></span>
+							<span>Email : <a href="mailto: ${data.email}"  class="text-pink"> ${
+							data.email ? data.email : "-"
+						}</a></span>
+							<span>Line ID : <span  class="text-pink">${
+								data.line ? data.line : "-"
+							}</span></span>
+							<span>Phone :<span  class="text-pink"> ${
+								data.phone ? data.phone : "-"
+							}</span></span>
 						</div>`;
 					}
-					$('#showmember').html(item)
+					$("#showmember").html(item);
 				},
 			});
+		},
+		async delete(id) {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("admin/setting/delete"),
+				data: {
+					pdid: id,
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (results.status) {
+						Swal.fire({
+							icon: "success",
+							title: `ลบข้อมูลสำเร็จ`,
+							showConfirmButton: false,
+							timer: 2500,
+						}).then(async () => {
+							await admin.ajax.get_person();
+						});
+					}
+				},
+			});
+		},
+		async getdata(id) {
+			await $.ajax({
+				type: "POST",
+				dataType: "json",
+				url: site_url("admin/setting/getdata"),
+				data: {
+					pdid: id,
+					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+				},
+				success: (results) => {
+					if (results.status) {
+						let data = results.data;
+						let off = $("#getdata");
+						off.find("#title").val(data.title).trigger("change");
+						off.find("#firstname").val(data.firstname);
+						off.find("#lastname").val(data.lastname);
+						off.find("#username").val(data.username);
+						off.find("#email").val(data.email);
+					}
+				},
+			});
+		},
+		async update(id) {
+			let chk = admin.methods.checkinput();
+			loading_on($("#update"));
+			let off = $("#getdata");
+			if (chk) {
+				await $.ajax({
+					type: "POST",
+					dataType: "json",
+					url: site_url("admin/setting/update"),
+					data: {
+						pdid: id,
+						title: off.find("#title").val(),
+						firstname: off.find("#firstname").val(),
+						lastname: off.find("#lastname").val(),
+						email: off.find("#email").val(),
+						username: off.find("#username").val(),
+						password: off.find("#password").val(),
+						csrf_token_ci_gen: $.cookie(csrf_cookie_name),
+					},
+					success: (results) => {
+						if (results.status) {
+							Swal.fire({
+								icon: "success",
+								title: `แก้ไขข้อมูลสำเร็จ`,
+								showConfirmButton: false,
+								timer: 2500,
+							}).then(async () => {
+								$("#getdata").offcanvas("hide");
+								await admin.ajax.get_person();
+							});
+						}
+					},
+				});
+				loading_on_remove($("#update"));
+			}
+			loading_on_remove($("#update"));
 		},
 	},
 	async init() {
@@ -306,13 +409,13 @@ const admin = {
 		$(document).on("keyup focus", ".input-form input", async (e) => {
 			this.methods.removeRequest($(e.target));
 		});
-		$(document).on("blur", "#username", async (e) => {
+		$(document).on("blur", "#AddUser #username", async (e) => {
 			this.ajax.usernamecheck();
 		});
 		$(document).on("blur", "#email", async (e) => {
 			this.ajax.emailcheck();
 		});
-		$(document).on("blur ", "#password", async (e) => {
+		$(document).on("blur ", "AddUser #password", async (e) => {
 			let passw = /(?=.*[A-Za-z])\w{6,20}$/;
 			if (!e.target.value.match(passw)) {
 				$("#password").addClass("request");
@@ -346,6 +449,46 @@ const admin = {
 			let btn = $(e.relatedTarget);
 			let id = btn.data("pd-id");
 			await this.ajax.showperson(id);
+		});
+		$(document).on("click", ".deldata", async (e) => {
+			let btn = $(e.target).closest(".deldata");
+			let pd_id = btn.data("pd-id");
+			let name = $(btn.closest("tr").find("td")[1]).text();
+			Swal.fire({
+				title: `ต้องการลบผู้ใช้งาน ชื่อ ${name}?`,
+				text: `เมื่อลบข้อมูลแล้วจะไม่แสดงข้อมูลของ ${name} ในระบบ`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "ยืนยัน",
+				cancelButtonText: "ยกเลิก",
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					await this.ajax.delete(pd_id);
+				}
+			});
+		});
+		$(document).on("show.bs.offcanvas", "#getdata", async (e) => {
+			let btn = $(e.relatedTarget);
+			let pd = btn.data("pd-id");
+			this.data.pd_id = pd;
+			await this.ajax.getdata(pd);
+		});
+		$(document).on("click", "#update", async (e) => {
+			Swal.fire({
+				title: `ยืนยันการแก้ไขข้อมูลเบื้องต้น`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "ยืนยัน",
+				cancelButtonText: "ยกเลิก",
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					await this.ajax.update(this.data.pd_id);
+				}
+			});
 		});
 	},
 };

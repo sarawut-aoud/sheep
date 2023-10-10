@@ -15,7 +15,7 @@ class Profile_model extends MY_Model
         $result = $this->db->query("SELECT * 
         FROM db_sheep.personaldocument t1
         LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
-        WHERE t1.pd_id = ?", [$this->pd_id])->result_array();
+        WHERE t1.pd_id = ? AND t1.status = 1", [$this->pd_id])->result_array();
 
         foreach ($result as $key => $val) {
             $result[$key] = $val;

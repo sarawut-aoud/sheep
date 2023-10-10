@@ -142,9 +142,10 @@ class Farm_model extends MY_Model
             WHERE 
             pd_id = {$this->pd_id}
             $where 
-            GROUP BY rowscoulumn
+            GROUP BY saledate 
             "
         )->result();
+      
         $data = [];
         foreach ($result as $key => $val) {
             $data[$key] = $val;
@@ -153,10 +154,11 @@ class Farm_model extends MY_Model
                 FROM db_sheep.sheep_sale t1
                 LEFT JOIN db_sheep.sheep_type t2 ON t2.id = t1.sheep_type
                 WHERE 
-                pd_id = {$this->pd_id} AND
-                rowscoulumn = '{$val->rowscoulumn}'
+                t1.pd_id = {$this->pd_id} AND
+                DATE(t1.saledate) = '{$val->saledate}' GROUP BY t1.sheep_type
                 "
             )->result();
+           
         }
         return $data;
     }

@@ -28,7 +28,7 @@ class Message_model extends MY_Model
             t1.pd_id
             FROM db_sheep.personaldocument t1 
             LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
-            WHERE t2.private_profile = 0 AND t2.receive = 1 AND t1.pd_id != {$this->pd_id}  $where"
+            WHERE t2.private_profile = 0 AND t2.receive = 1 AND t1.status = 1 AND t1.pd_id != {$this->pd_id}  $where "
         )->result();
 
         $result = array_map(function ($val) {
@@ -66,7 +66,7 @@ class Message_model extends MY_Model
                 t1.pd_id
                 FROM db_sheep.personaldocument t1 
                 LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
-                WHERE t2.private_profile = 0 AND t2.receive = 1 AND t1.pd_id != {$this->pd_id} "
+                WHERE t2.private_profile = 0 AND t2.receive = 1 AND t1.status = 1 AND t1.pd_id != {$this->pd_id} "
             )->result();
 
             $result = array_map(function ($val) {
@@ -386,7 +386,7 @@ class Message_model extends MY_Model
             CONCAT(t1.firstname,' ',t1.lastname) as fullname
             FROM db_sheep.personaldocument t1 
             LEFT JOIN db_sheep.personalsecret t2 ON t2.pd_id = t1.pd_id
-            WHERE t2.receive = 1 AND t1.pd_id  = ? 
+            WHERE t2.receive = 1 AND t1.pd_id  = ?  AND t1.status = 1
             ",
             [$pd_id]
         )->row();
@@ -429,7 +429,7 @@ class Message_model extends MY_Model
             "SELECT 
             CONCAT(t1.firstname,' ',t1.lastname) as fullname
             FROM db_sheep.personaldocument t1 
-            WHERE t1.pd_id  = ? 
+            WHERE t1.pd_id  = ? AND t1.status = 1
             ",
             [$this->pd_id]
         )->row('fullname');

@@ -182,20 +182,20 @@ const sale = {
                 <div class="d-flex gap-2 w-100 ">
                     <div class="mb-3  w-100">
                         <label for="" class="form-label">จำนวน</label>
-                        <input type="text" name="" id="" class="form-control IsNumberOnly text-end amount" data-type="amount" placeholder="0">
+                        <input type="text" name="" id="" class="form-control isNumberOnly text-end amount" data-type="amount" placeholder="0">
                     </div>
                     <div class="mb-3  w-100">
                         <label for="" class="form-label">กิโลกรัม</label>
-                        <input type="text" name="" id="" class="form-control IsNumberOnly  text-end weight" data-type="weight" placeholder="00.00">
+                        <input type="text" name="" id="" class="form-control isNumberOnly  text-end weight" data-type="weight" placeholder="00.00">
                     </div>
                     <div class="mb-3  w-100">
                         <label for="" class="form-label">ราคา</label>
-                        <input type="text" name="" id="" class="form-control IsNumberOnly  text-end price" data-type="price" placeholder="ราคา 0">
+                        <input type="text" name="" id="" class="form-control isNumberOnly  text-end price" data-type="price" placeholder="ราคา 0">
                     </div>
                    
                 </div>  
                 <div class="mb-3  w-100">
-                    <input type="text" name="" id="" class="form-control IsNumberOnly  text-end total" placeholder="คำนวนอัตโนมัติ" readonly>
+                    <input type="text" name="" id="" class="form-control isNumberOnly  text-end total" placeholder="คำนวนอัตโนมัติ" readonly>
                 </div>
             </div>
             `;
@@ -260,12 +260,20 @@ const sale = {
 					month: "long",
 					day: "numeric",
 				});
+				let array = [];
+				ev.rowdata.forEach((el, index) => {
+					array.push(parseFloat(el.pricetotal));
+				});
+				let sum = array.reduce((accumulator, currentValue) => {
+					return accumulator + currentValue;
+				}, 0);
+				
 				sale.data.table.row
 					.add([
 						sale.components.text(i + 1),
 						sale.components.text(ev.saledate ? result : ""),
 						sale.components.items(ev.rowdata),
-						sale.components.text(formatCurrency(ev.pricetotal)),
+						sale.components.text(formatCurrency(sum)),
 					])
 					.draw(false);
 			});
@@ -351,7 +359,7 @@ const sale = {
 			initComplete: function (settings) {
 				initializeDataTables(settings);
 			},
-			responsive: true
+			responsive: true,
 		});
 		await this.ajax.get_datasale();
 		await this.ajax.getsheeptype();

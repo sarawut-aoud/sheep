@@ -32,14 +32,14 @@ class Process extends MY_Controller
         if ($id['id']) {
             self::SetEmailSend($id);
         }
-        echo json_encode(['status' => true, 'ลงทะเบียนสำเร็จ']);
+        echo json_encode(['status' => true, 'msg' => 'ลงทะเบียนสำเร็จ']);
     }
 
     public function checkemail()
     {
         $post = (object) $this->input->post();
 
-        $result = $this->db->query("SELECT email FROM db_sheep.personaldocument WHERE email = '{$post->email}' ")->num_rows();
+        $result = $this->db->query("SELECT email FROM db_sheep.personaldocument WHERE email = '{$post->email}' AND status = 1 ")->num_rows();
 
         if ($result == 0) {
             $msg = 'ไม่พบอีเมลล์ในระบบ';
@@ -80,17 +80,17 @@ class Process extends MY_Controller
         $sendmail_result = $this->sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = '');
 
 
-        if ($sendmail_result['result'] != "success") {
-            $json =  '';
-        } else {
-            $json = json_encode(array(
-                'status' => true,
-                'message' => 'สมัครสมาชิกสำเสร็จ โปรดตรวจสอบที่ Email',
-                'response' => $sendmail_result
-            ));
-        }
+        // if ($sendmail_result['result'] != "success") {
+        //     $json =  '';
+        // } else {
+        //     $json = json_encode(array(
+        //         'status' => true,
+        //         'message' => 'สมัครสมาชิกสำเสร็จ โปรดตรวจสอบที่ Email',
+        //         'response' => $sendmail_result
+        //     ));
+        // }
 
-        return $json;
+        // return $json;
     }
 
     private function sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = "")

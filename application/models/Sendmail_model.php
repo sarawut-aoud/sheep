@@ -4,7 +4,7 @@ class Sendmail_model extends CI_Model
 	public function sendtomail($subject, $data)
 	{
 		require_once 'assets/PHPMailer/class.phpmailer.php';
-		if ($_SERVER['HTTP_HOST'] == 'sheeps.secret-serv.com') {
+		if ($_SERVER['HTTP_HOST'] == 'www.goatgether.com') {
 			$mail = new PHPMailer();
 			$mail->CharSet = "utf-8";
 			$mail->Mailer = 'stmp';
@@ -15,7 +15,7 @@ class Sendmail_model extends CI_Model
 			$mail->SMTPAutoTLS = false;
 			$mail->Username = "info@goatgether.com"; // account SMTP
 			$mail->Password = "!P@ssw0rd8694"; // รหัสผ่าน SMTP 
-			$mail->Host = 'mail.secret-serv.com';
+			$mail->Host = 'mail.goatgether.com';
 			$mail->SMTPSecure = 'false';
 			$mail->Port = 587;
 			$mail->SMTPOptions = array(
@@ -56,7 +56,7 @@ class Sendmail_model extends CI_Model
 			$mail->SMTPSecure = 'false';
 			$mail->Username = "info@goatgether.com"; // account SMTP
 			$mail->Password = "!P@ssw0rd8694"; // รหัสผ่าน SMTP 
-			$mail->Host = 'mail.secret-serv.com';
+			$mail->Host = 'mail.goatgether.com';
 			$mail->Port = 25;
 			$mail->SMTPOptions = array(
 				'ssl' => array(

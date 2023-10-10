@@ -69,4 +69,45 @@ class Setting extends CRUD_Controller
             $this->response(__METHOD__);
         }
     }
+    public function delete()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->db->update('db_sheep.personaldocument', ['status' => 0], ['pd_id' => $post->pdid]);
+
+            $this->setRes($result, ['msg' => ""], 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function getdata()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $result = $this->db->get_where('db_sheep.personaldocument',  ['pd_id' => $post->pdid])->row();
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function update()
+    {
+        $post = (object)$this->input->post(NULL, false);
+        try {
+            $data = [
+                'title' => $post->title,
+                'email' => $post->email,
+                'firstname' => $post->firstname,
+                'lastname' => $post->lastname,
+                'update_at' => date('Y-m-d H:i:s')
+            ];
+            $where = [
+                'pd_id' => $post->pdid
+            ];
+            $result = $this->db->update('db_sheep.personaldocument', $data, $where);
+            $this->setRes($result, ['msg' => ''], 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
 }
