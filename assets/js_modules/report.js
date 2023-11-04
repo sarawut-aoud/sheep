@@ -6,8 +6,12 @@ pdfMake.fonts = {
 		bolditalics: "THSarabun-BoldItalic.ttf",
 	},
 };
+let l = window.location.pathname.split("/").length;
+const _path = window.location.pathname.split("/")[l - 1];
 const report = {
 	data: {
+		path: _path,
+
 		filterdate: [
 			{ text: "daynow", value: [moment(), moment()] },
 			{
@@ -28,6 +32,7 @@ const report = {
 			},
 		],
 		table: null,
+		table2: null,
 	},
 	jquery: {
 		main() {
@@ -150,25 +155,154 @@ const report = {
 					.draw(false);
 			});
 		},
+		async rendertableAll(data) {
+			report.data.table2.clear().draw();
+			if (!data) return;
+			data.forEach((ev, i) => {
+				if (ev.data.length > 0) {
+					ev.data.forEach((e, index) => {
+						report.data.table2.row
+							.add([
+								report.components.text(i + 1),
+								report.components.text(ev.fullname),
+								report.components.text(
+									moment(e.saledate).format("DD-MMM-YYYY")
+								),
+								report.components.text(
+									`${e.rowdata[0].amount} / ${formatCurrency(
+										e.rowdata[0].price
+									)}`
+								),
+								report.components.text(
+									`${e.rowdata[1].amount} / ${formatCurrency(
+										e.rowdata[1].price
+									)}`
+								),
+								report.components.text(
+									`${e.rowdata[2].amount} / ${formatCurrency(
+										e.rowdata[2].price
+									)}`
+								),
+								report.components.text(
+									`${e.rowdata[3].amount} / ${formatCurrency(
+										e.rowdata[3].price
+									)}`
+								),
+								report.components.text(
+									`${e.rowdata[4].amount} / ${formatCurrency(
+										e.rowdata[4].price
+									)}`
+								),
+								report.components.text(formatCurrency(e.pricetotal)),
+							])
+							.draw(false);
+					});
+				} else {
+					console.log(1);
+					report.data.table2.row
+						.add([
+							report.components.text(i + 1),
+							report.components.text(ev.fullname),
+							report.components.text("-"),
+							report.components.text("-"),
+							report.components.text("-"),
+							report.components.text("-"),
+							report.components.text("-"),
+							report.components.text("-"),
+							report.components.text(0),
+						])
+						.draw(false);
+				}
+			});
+		},
 	},
 	ajax: {
 		async get_data(data) {
+			let url = site_url("reports/get_data");
+			if (report.data.path == "sale_purchase_all") {
+				url = site_url("reports/get_dataReport");
+			}
 			await $.ajax({
 				type: "post",
 				dataType: "json",
-				url: site_url("reports/get_data"),
+				url: url,
 				data: {
 					data,
 					csrf_token_ci_gen: $.cookie(csrf_cookie_name),
 				},
 				success: async (results) => {
-					await report.methods.rendertable(results.data);
+					if (report.data.path == "sale_purchase_all") {
+						await report.methods.rendertableAll(results.data);
+					} else {
+						await report.methods.rendertable(results.data);
+					}
 				},
 			});
 		},
 	},
 	async init() {
 		this.jquery.main();
+		if (this.data.path == "sale_purchase_all") {
+			$("#tb-report2").css("display", "");
+			$("#tb-report").css("display", "none");
+			report.data.table2 = $("#tb-report2").DataTable({
+				initComplete: function (settings) {
+					initializeDataTables(settings);
+				},
+				lengthMenu: [
+					[10, 25, 50, -1],
+					["10 แถว", "25 แถว", "50 แถว", "ทั้งหมด"],
+				],
+				fixedColumns: true,
+				dom: "<'all-report-wrapper'<'left col-sm-12 col-12'Bl><'right'f>>rtip",
+				// "bPaginate": false,
+				buttons: [
+					{
+						extend: "excel",
+
+						title: $(`tb-report`).data("title"),
+						customize: function (xlsx) {
+							var sheet = xlsx.xl.worksheets["sheet1.xml"];
+							$(
+								'row c[r^="A"], row c[r^="B"], row c[r^="C"], row c[r^="D"],row c[r^="E"],row c[r^="F"],row c[r^="G"],row c[r^="H"]',
+								sheet
+							).attr("s", "51");
+						},
+					},
+				],
+				order: [[0, "asc"]],
+			});
+		} else {
+			report.data.table = $("#tb-report").DataTable({
+				initComplete: function (settings) {
+					initializeDataTables(settings);
+				},
+				lengthMenu: [
+					[10, 25, 50, -1],
+					["10 แถว", "25 แถว", "50 แถว", "ทั้งหมด"],
+				],
+				fixedColumns: true,
+				dom: "<'all-report-wrapper'<'left col-sm-12 col-12'Bl><'right'f>>rtip",
+				// "bPaginate": false,
+				buttons: [
+					{
+						extend: "excel",
+
+						title: $(`tb-report`).data("title"),
+						customize: function (xlsx) {
+							var sheet = xlsx.xl.worksheets["sheet1.xml"];
+							$(
+								'row c[r^="A"], row c[r^="B"], row c[r^="C"], row c[r^="D"],row c[r^="E"],row c[r^="F"],row c[r^="G"],row c[r^="H"]',
+								sheet
+							).attr("s", "51");
+						},
+					},
+				],
+				order: [[0, "asc"]],
+			});
+			$("#tb-report2").css("display", "none");
+			$("#tb-report").css("display", "");
+		}
 		$(document).on("click", "#show-filterbtn", (e) => {
 			if ($("#showfilter")[0].style.display == "") {
 				$("#showfilter").slideUp();
@@ -178,33 +312,6 @@ const report = {
 		});
 		$(document).on("click", ".show-all-rows", async (e) => {
 			$(".dataTables_length select").val(-1).trigger("change");
-		});
-		this.data.table = $("#tb-report").DataTable({
-			initComplete: function (settings) {
-				initializeDataTables(settings);
-			},
-			lengthMenu: [
-				[10, 25, 50, -1],
-				["10 แถว", "25 แถว", "50 แถว", "ทั้งหมด"],
-			],
-			fixedColumns: true,
-			dom: "<'all-report-wrapper'<'left col-sm-12 col-12'Bl><'right'f>>rtip",
-			// "bPaginate": false,
-			buttons: [
-				{
-					extend: "excel",
-
-					title: $(`tb-report`).data("title"),
-					customize: function (xlsx) {
-						var sheet = xlsx.xl.worksheets["sheet1.xml"];
-						$(
-							'row c[r^="A"], row c[r^="B"], row c[r^="C"], row c[r^="D"],row c[r^="E"],row c[r^="F"],row c[r^="G"],row c[r^="H"]',
-							sheet
-						).attr("s", "51");
-					},
-				},
-			],
-			order: [[0, "asc"]],
 		});
 
 		$(document).on("show.bs.modal", "#showpdfview", async (e) => {

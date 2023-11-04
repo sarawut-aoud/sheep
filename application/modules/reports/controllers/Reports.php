@@ -29,7 +29,16 @@ class Reports extends CRUD_Controller
         $this->setJs('/assets/js_modules/report.js?ft=' . time());
         $this->renderview('reports/view');
     }
-
+    public function sale_purchase_all()
+    {
+        $this->data['is_admin'] = true;
+        $this->setBread(
+            ['class' => '', 'ref' => base_url('dashboard'), 'name' => 'หน้าแรก'],
+            ['class' => 'active', 'ref' => '#', 'name' => 'รายงานข้อมูลการซื้อ-ขายทั้งหมด']
+        );
+        $this->setJs('/assets/js_modules/report.js?ft=' . time());
+        $this->renderview('reports/view');
+    }
     public function virtualization()
     {
         $this->setBread(
@@ -139,6 +148,17 @@ class Reports extends CRUD_Controller
         try {
 
             $result = $this->report->get_data($post);
+            $this->setRes(true, $result, 200);
+        } catch (Exception $e) {
+            $this->response(__METHOD__);
+        }
+    }
+    public function get_dataReport()
+    {
+        $post = (object) $this->input->post();
+        try {
+
+            $result = $this->report->get_dataReport($post);
             $this->setRes(true, $result, 200);
         } catch (Exception $e) {
             $this->response(__METHOD__);

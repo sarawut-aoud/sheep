@@ -105,6 +105,45 @@
                             </tbody>
 
                         </table>
+                        <table id="tb-report2" class="table table-striped
+                    table-hover	
+                    table-borderless
+                    align-middle" data-title="รายงานข้อมูลการซื้อ-ขาย" style="width: 100%;display:none">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>
+                                        ชื่อ-สกุล
+                                    </th>
+                                    <th>วัน เดือน ปี</th>
+                                    <th>
+                                        <div>พ่อพันธุ์</div>
+                                        <div><small>จำนวน / รวม</small></div>
+                                    </th>
+                                    <th>
+                                        <div>แม่พันธุ์ </div>
+                                        <div><small>จำนวน / รวม</small></div>
+                                    </th>
+                                    <th>
+                                        <div>แพะปลด พ่อ แม่</div>
+                                        <div><small>จำนวน / รวม</small></div>
+                                    </th>
+                                    <th>
+                                        <div>แพะขุน</div>
+                                        <div><small>จำนวน / รวม</small></div>
+                                    </th>
+                                    <th>
+                                        <div>มูลแพะ</div>
+                                        <div><small>จำนวน / รวม</small></div>
+                                    </th>
+                                    <th>รวมเงิน(บาท)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
             </div>

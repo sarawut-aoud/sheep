@@ -29,7 +29,7 @@ class Report_model extends MY_Model
                     t1.id as s_id
             FROM db_sheep.sheep_sale t1
             WHERE 
-            t1.id IS NOT NULL
+            t1.id IS NOT NULL  AND pd_id = {$this->pd_id} 
             $where 
             GROUP BY rowscoulumn
             "
@@ -183,5 +183,51 @@ class Report_model extends MY_Model
             "
         )->row('totalprice');
         return $result > 0 ? $result : 0;
+    }
+    public function get_dataReport($post)
+    {
+        $post = (object) $post->data;
+
+
+        $personal = $this->db->get_where('db_sheep.personaldocument', ['status' => 1])->result();
+        $_temp = [];
+        foreach ($personal as $key => $val) {
+            unset($val->username);
+            unset($val->password);
+            unset($val->create_at);
+            unset($val->update_at);
+            $_temp[$key] = $val;
+            $_temp[$key]->fullname = $val->firstname . ' ' . $val->lastname;
+            $_temp[$key]->data = self::ReportdataBypd($post, $val->pd_id);
+        }
+        return $_temp;
+    }
+    private function ReportdataBypd($post, $pd_id)
+    {
+        $where = '';
+        if ($post->date_start || $post->date_end) {
+            $start = date('Y-m-d', strtotime($post->date_start));
+            $end = date('Y-m-d', strtotime($post->date_end));
+            $where .= " AND DATE(t1.saledate) BETWEEN '{$start}' AND '{$end}'";
+        }
+        $result = $this->db->query(
+            "SELECT t1.saledate,
+                    t1.rowscoulumn,
+                    SUM(t1.pricetotal) as pricetotal,
+                    t1.id as s_id
+            FROM db_sheep.sheep_sale t1
+            WHERE 
+            t1.id IS NOT NULL AND pd_id = $pd_id
+            $where 
+            GROUP BY rowscoulumn
+            "
+        )->result();
+
+        $data = [];
+        foreach ($result as $key => $val) {
+            $data[$key] = $val;
+            $data[$key]->rowdata = self::get_typesheep($val);
+        }
+        return $data;
     }
 }

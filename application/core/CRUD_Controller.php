@@ -134,8 +134,8 @@ class CRUD_Controller extends CI_Controller
 		$menuadmin = [];
 		$menumember = [];
 		if ($login == 'admin') {
-			$menuadmin = $this->db->get_where('db_sheep.application', ['menu_show' => 1, 'menu_level' => 5])->result();
-			$menumember = $this->db->get_where('db_sheep.application',  ['menu_show' => 1, 'menu_level' => 1])->result();
+			$menuadmin = $this->db->order_by('id','asc')->get_where('db_sheep.application', ['menu_show' => 1, 'menu_level' => 5])->result();
+			$menumember = $this->db->order_by('id','asc')->get_where('db_sheep.application',  ['menu_show' => 1, 'menu_level' => 1])->result();
 		} else {
 			$where = [
 				'menu_show' => 1,
