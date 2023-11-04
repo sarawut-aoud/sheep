@@ -37,7 +37,7 @@ class Reports extends CRUD_Controller
             ['class' => 'active', 'ref' => '#', 'name' => 'รายงานข้อมูลการซื้อ-ขายทั้งหมด']
         );
         $this->setJs('/assets/js_modules/report.js?ft=' . time());
-        $this->renderview('reports/view');
+        $this->renderview('reports/preview');
     }
     public function virtualization()
     {

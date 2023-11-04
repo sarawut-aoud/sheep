@@ -12,6 +12,86 @@
     .all-report-wrapper .dt-buttons.btn-group {
         flex-wrap: nowrap !important;
     }
+
+    .d-item {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .d-item-nodata {
+        display: flex;
+        width: 100%;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: #c3c3c3;
+        padding: 0.25em;
+        border-radius: 0.5em;
+    }
+
+    .d-item.item-header {
+        background-color: #f7f7f7;
+        padding: 0.25em;
+        border-radius: 1em;
+        box-shadow: 2px 2px 0 0 #8b8b8b;
+    }
+
+    .d-item.item-header .item-topic {
+        padding: 5px;
+        font-size: 18px;
+    }
+
+    .d-list-item {
+        background: #c3c3c3;
+        padding: 0.25em;
+        border-radius: .5em;
+    }
+
+    .d-item .list-item {
+        border-radius: .5em;
+        padding: 0.25em;
+        background-color: #f7f7f7;
+        font-size: 16px;
+    }
+
+    .d-item-badge {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 1em;
+        width: 100%;
+        margin-block: 1em;
+    }
+
+    .item-badge {
+        width: 100%;
+        display: flex;
+        gap: 1em;
+        padding: 1em;
+        border-radius: .5em;
+        background-color: #f7f7f7;
+        box-shadow: 2px 2px 0 0 #8b8b8b;
+        transition: all 300ms ease;
+        border-left: 1.5em solid var(--info-color);
+    }
+
+    .item-badge .content {
+        display: flex;
+        gap: .5em;
+        flex-direction: column;
+        width: 100%;
+        text-align: end;
+    }
+
+    .item-badge .topiccontent {
+        display: flex;
+        width: 100%;
+        font-size: 22px;
+        flex-direction: column;
+    }
 </style>
 <div class="homepage">
     <div class="container-fluid pb-4 page-rlt overflow-auto ">
@@ -61,43 +141,83 @@
                         </div>
                     </div>
                 </div>
+                <div class="d-item-badge">
+                    <div class="item-badge">
+                        <div class="topiccontent">
+                            <div><small>รวม</small></div>
+                            <div> พ่อพันธุ์</div>
+                        </div>
+                        <div class="content">
+                            <div class="text-value" id="badge-item-v1"> 0 ตัว </div>
+                            <div class="label" id="badge-item-m1">0 บาท</div>
+                        </div>
+                    </div>
+                    <div class="item-badge">
+                        <div class="topiccontent">
+                            <div><small>รวม</small></div>
+                            <div> แม่พันธุ์</div>
+                        </div>
+                        <div class="content">
+                            <div class="text-value" id="badge-item-v2"> 0 ตัว </div>
+                            <div class="label" id="badge-item-m2">0 บาท</div>
+                        </div>
+                    </div>
+                    <div class="item-badge">
+                        <div class="topiccontent">
+                            <div><small>รวม</small></div>
+                            <div> แพะปลด พ่อ-แม่</div>
+                        </div>
+                        <div class="content">
+                            <div class="text-value" id="badge-item-v3"> 0 ตัว </div>
+                            <div class="label" id="badge-item-m3">0 บาท</div>
+                        </div>
+                    </div>
+                    <div class="item-badge">
+                        <div class="topiccontent">
+                            <div><small>รวม</small></div>
+                            <div>แพะขุน</div>
+                        </div>
+                        <div class="content">
+                            <div class="text-value" id="badge-item-v4"> 0 ตัว </div>
+                            <div class="label" id="badge-item-m4">0 บาท</div>
+                        </div>
+                    </div>
+                    <div class="item-badge">
+                        <div class="topiccontent">
+                            <div><small>รวม</small></div>
+                            <div>มูลแพะ</div>
+                        </div>
+                        <div class="content">
+                            <div class="text-value" id="badge-item-v5"> 0  </div>
+                            <div class="label" id="badge-item-m5">0 บาท</div>
+                        </div>
+                    </div>
+                    <div class="item-badge">
+                        <div class="topiccontent">รวมเงินทั้งหมด (บาท)</div>
+                        <div class="content justify-content-center">
+                            <div class="label" id="badge-item-t">0 บาท</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card p-3">
-                    <div class="d-flex gap-2 mb-3" style="font-size: 18px;">
+                    <!-- <div class="d-flex gap-2 mb-3" style="font-size: 18px;">
                         <div class="icon">
                             <i class="fas fa-info-circle"></i>
                         </div>
                         <div class="text-value">กรณีต้องการดาวน์โหลดข้อมูลทั้งหมด ให้ <a role="button" class="show-all-rows text-blue">คลิกที่นี้</a> หลังจากนั้นเลือกประเภทไฟล์ส่งออก </div>
-                    </div>
+                    </div> -->
                     <div class="table-responsive">
-                        <table id="tb-report" class="table table-striped
+                        <table id="tb-report2" class="table table-striped
                     table-hover	
                     table-borderless
-                    align-middle" data-title="รายงานข้อมูลการซื้อ-ขาย" style="width: 100%;">
+                    align-middle" data-title="รายงานข้อมูลการซื้อ-ขาย" style="width: 100%;display:none">
                             <thead class="table-light">
                                 <tr>
+                                    <th style="width:10%">#</th>
+                                    <th style="width:20%">
+                                        ชื่อ-สกุล
+                                    </th>
                                     <th>#</th>
-                                    <th>วัน เดือน ปี</th>
-                                    <th>
-                                        <div>พ่อพันธุ์</div>
-                                        <div><small>จำนวน / รวม</small></div>
-                                    </th>
-                                    <th>
-                                        <div>แม่พันธุ์ </div>
-                                        <div><small>จำนวน / รวม</small></div>
-                                    </th>
-                                    <th>
-                                        <div>แพะปลด พ่อ แม่</div>
-                                        <div><small>จำนวน / รวม</small></div>
-                                    </th>
-                                    <th>
-                                        <div>แพะขุน</div>
-                                        <div><small>จำนวน / รวม</small></div>
-                                    </th>
-                                    <th>
-                                        <div>มูลแพะ</div>
-                                        <div><small>จำนวน / รวม</small></div>
-                                    </th>
-                                    <th>รวมเงิน(บาท)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,7 +225,6 @@
                             </tbody>
 
                         </table>
-                        
                     </div>
                 </div>
             </div>
