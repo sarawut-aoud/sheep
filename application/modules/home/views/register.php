@@ -22,7 +22,7 @@
                                 <img src="{base_url}/assets/images/icon.png" class="w-100 box-image rounded-circle">
                             </div>
                             <div>
-                                <h3>สมัครมาชิก</h3>
+                                <h3>สมัครสมาชิก</h3>
                             </div>
                         </div>
                         <div class="input-form">

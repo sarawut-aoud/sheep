@@ -5,7 +5,7 @@ if (!empty($menu_list['menu_admin'])) {
 } else {
     $menu = $menu_list['progamelist'];
 }
-
+$show = false;
 ?>
 <div class="homepage">
     <div class="containner">
@@ -20,12 +20,14 @@ if (!empty($menu_list['menu_admin'])) {
                             </div>
                         </a>
                     <?php endforeach ?>
-                    <a href="<?= base_url('/message') ?>">
-                        <div class="contents">
-                            <div class="icon-value"><i class="fas fa-comments"></i></div>
-                            <div class="text-value">แชท</div>
-                        </div>
-                    </a>
+                    <?php if ($show) : ?>
+                        <a href="<?= base_url('/message') ?>">
+                            <div class="contents">
+                                <div class="icon-value"><i class="fas fa-comments"></i></div>
+                                <div class="text-value">แชท</div>
+                            </div>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
