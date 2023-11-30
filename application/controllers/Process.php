@@ -30,7 +30,7 @@ class Process extends MY_Controller
         $post = $this->input->post();
         $id = $this->regis->register($post);
         if ($id['id']) {
-            self::SetEmailSend($id);
+            // self::SetEmailSend($id);
         }
         echo json_encode(['status' => true, 'msg' => 'ลงทะเบียนสำเร็จ']);
     }
@@ -59,7 +59,7 @@ class Process extends MY_Controller
         $subject = 'สมัครสมาชิก';
         $mailsend = 'info@goatgether.com';
         // $mailsend = $post->email;
-        $subject = 'ขอรหัสผ่านใหม่';
+        // $subject = 'ขอรหัสผ่านใหม่';
         $body = "
         <div>สมัครสมาชิก</div>
         <div>สมัครสมาชิกสำเสร็จโปรดตรวจสอบชื่อเข้าใช้งานและรหัสผ่าน</div>
@@ -79,7 +79,9 @@ class Process extends MY_Controller
         $bodyhtml =  $this->sendmail->emailTemplate($tempalte);
         $sendmail_result = $this->sendEventmail($mailsend, $mailto, $subject, $bodyhtml, $uploadfile = '');
 
-
+        echo '<pre>';
+        print_r($sendmail_result);
+        die;
         // if ($sendmail_result['result'] != "success") {
         //     $json =  '';
         // } else {

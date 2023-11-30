@@ -145,7 +145,7 @@ class Sendmail_model extends CI_Model
 											</tr>
 											<tr align='center'>
 												<div style='".$decor['footer']."'>
-													<img style='".$decor['footer_image']."' src='https://sheeps.secret-serv.com/assets/images/sheep.png'>
+													<img style='".$decor['footer_image']."' src='https://www.goatgether.com/assets/images/sheep.png'>
 												</div>
 											</tr>
                                         </tbody>

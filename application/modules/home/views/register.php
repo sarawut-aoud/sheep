@@ -3,6 +3,7 @@
         font-weight: 400 !important;
     }
 </style>
+
 <section class="pb-3 overflow-auto vh-100" style="background-color: #508bfc;">
     <div class="container mt-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -61,7 +62,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block mb-4" type="button" id="btnregister">สมัครมาชิก</button>
+                        <button class="btn btn-primary btn-block mb-4" type="button" id="btnregister">สมัครสมาชิก</button>
 
                     </div>
                 </div>
