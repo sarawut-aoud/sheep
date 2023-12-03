@@ -52,6 +52,36 @@ body {
 	font-size: 20px !important;
 	height: 100%;
 }
+.form-control::-webkit-input-placeholder {
+	color: var(--placehoder);
+	opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+	color: var(--placehoder);
+	opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+	color: var(--placehoder);
+	opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+	color: var(--placehoder);
+	opacity: 1;
+}
+
+.form-control::placeholder {
+	color: var(--placehoder);
+	opacity: 1;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+	background-color: #eaecf4;
+	opacity: 1;
+}
 /* main */
 @keyframes page_rlt {
 	0% {
@@ -400,7 +430,7 @@ a:hover {
 	height: auto !important;
 }
 .v-offcanvas {
-	width: 50% ;
+	width: 50%;
 }
 .v-collapse .collapse-item {
 	display: flex !important;
@@ -526,7 +556,7 @@ a:hover {
 	color: #915608 !important;
 }
 
-.dt-buttons.btn-group > .btn:only-child  {
+.dt-buttons.btn-group > .btn:only-child {
 	border-radius: 1em !important;
 }
 .dt-buttons.btn-group > .btn:first-child {
@@ -535,6 +565,6 @@ a:hover {
 .dt-buttons.btn-group > .btn:last-child {
 	border-radius: 0 1em 1em 0;
 }
-table.dataTable>tbody>tr.even{
+table.dataTable > tbody > tr.even {
 	color: #000000;
 }

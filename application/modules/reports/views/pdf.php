@@ -107,13 +107,13 @@ function dot($param)
     <table class="w-100" autosize="1" style="page-break-inside:avoid" border="0" cellspacing="0">
         <thead>
             <tr style="text-align:center;width:100%;">
-                <th class="b" colspan="20" style="font-size:20px;width:100%;">บัญชีการซื้อขายแพะ - มูลแพะประระหว่างวันที่ <?= Datethai($datestart, '') ?>-<?= Datethai($dateend, '') ?></th>
+                <th class="b" colspan="25" style="font-size:20px;width:100%;">บัญชีการซื้อขายแพะ - มูลแพะประระหว่างวันที่ <?= Datethai($datestart, '') ?>-<?= Datethai($dateend, '') ?></th>
             </tr>
             <tr>
                 <th class="b" rowspan="2">วัน / เดือน /ปี</th>
                 <th class="b" rowspan="2">ชื่อ - สกุล</th>
-                <th class="b" colspan="3">พ่อพันธุ์</th>
-                <th class="b" colspan="3">แม่พันธุ์</th>
+                <th class="b" colspan="4">พ่อพันธุ์</th>
+                <th class="b" colspan="4">แม่พันธุ์</th>
                 <th class="b" colspan="4">แพะปลด พ่อ แม่</th>
                 <th class="b" colspan="4">แพะขุน</th>
                 <th class="b" colspan="3">มูลแพะ</th>
@@ -121,27 +121,29 @@ function dot($param)
             </tr>
             <tr>
                 <th class="b">จำนวน</th>
-                <th class="b">ราคา</th>
-                <th class="b">รวม</th>
-
-                <th class="b">จำนวน</th>
+                <th class="b">กิโลกรัม</th>
                 <th class="b">ราคา</th>
                 <th class="b">รวม</th>
 
                 <th class="b">จำนวน</th>
                 <th class="b">กิโลกรัม</th>
                 <th class="b">ราคา</th>
-
                 <th class="b">รวม</th>
+
                 <th class="b">จำนวน</th>
                 <th class="b">กิโลกรัม</th>
                 <th class="b">ราคา</th>
-
                 <th class="b">รวม</th>
+
+                <th class="b">จำนวน</th>
+                <th class="b">กิโลกรัม</th>
+                <th class="b">ราคา</th>
+                <th class="b">รวม</th>
+              
                 <th class="b">จำนวน</th>
                 <th class="b">ราคา</th>
-
                 <th class="b">รวม</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -178,10 +180,12 @@ function dot($param)
                     <td class="b item-data"><?= $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name') ?></td>
 
                     <td class="b item-data"><?= $val->rowdata[0]->amount > 0 ? $val->rowdata[0]->amount : '' ?></td>
+                    <td class="b item-data"><?= $val->rowdata[0]->weight > 0 ? number_format($val->rowdata[0]->weight, 2) : "" ?></td>
                     <td class="b item-data"><?= $val->rowdata[0]->price > 0 ? number_format($val->rowdata[0]->price, 2) : "" ?></td>
                     <td class="b item-data"><?= $val->rowdata[0]->totlal > 0 ? number_format($val->rowdata[0]->totlal, 2) : "" ?></td>
 
                     <td class="b item-data"><?= $val->rowdata[1]->amount > 0 ? $val->rowdata[1]->amount : '' ?></td>
+                    <td class="b item-data"><?= $val->rowdata[1]->weight > 0 ? number_format($val->rowdata[1]->weight, 2) : "" ?></td>
                     <td class="b item-data"><?= $val->rowdata[1]->price > 0 ? number_format($val->rowdata[1]->price, 2) : '' ?></td>
                     <td class="b item-data"><?= $val->rowdata[1]->totlal > 0 ? number_format($val->rowdata[1]->totlal, 2) : '' ?></td>
 
@@ -208,10 +212,12 @@ function dot($param)
                 <td class="b item-sum" colspan="2">รวมยอด</td>
 
                 <td class="b item-sum"><?= array_sum($sum0) ?></td>
+                <td class="b item-sum"><?= number_format(array_sum($weight0), 2)  ?></td>
                 <td class="b item-sum"><?= number_format(array_sum($price0), 2)  ?></td>
                 <td class="b item-sum"><?= number_format(array_sum($total0), 2)  ?></td>
 
                 <td class="b item-sum"><?= array_sum($sum1) ?></td>
+                <td class="b item-sum"><?= number_format(array_sum($weight1), 2)  ?></td>
                 <td class="b item-sum"><?= number_format(array_sum($price1), 2)  ?></td>
                 <td class="b item-sum"><?= number_format(array_sum($total1), 2)  ?></td>
 

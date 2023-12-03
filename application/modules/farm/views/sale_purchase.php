@@ -128,13 +128,13 @@
 
     }
 
-    #tb-sheepsale {
-        font-size: 18px;
+    .tb-sheepsale-item {
+        font-size: 16px;
     }
 </style>
 <div class="homepage">
-    <div class="container-fluid pb-4 page-rlt overflow-auto ">
-        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="container-fluid   page-rlt overflow-auto " style="padding-inline:1em">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding:0">
             <div class="row">
                 <div class="d-flex justify-content-end justify-content-lg-between align-items-center">
                     <div class="d-flex justify-content-start mt-3 mb-3 button-goback ">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="card p-3">
-                    <div class="table-responsive">
+                    <div class="table-responsive tb-sheepsale-item">
                         <table id="tb-sheepsale" class="table table-striped
                     table-hover	
                     table-borderless

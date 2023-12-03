@@ -15,7 +15,8 @@
 		"workerman/phpsocket.io": "^2.0",
 		"simplon/mysql": "*",
 		"workerman/workerman": "^4.1",
-		"cboden/ratchet": "^0.4.4"
+		"cboden/ratchet": "^0.4.4",
+		"phpoffice/phpspreadsheet": "^1.23"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
@@ -26,7 +27,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"MyApp\\": "src"
+			"MyApp\\": "src"	
 		}
-	}
+	},
+	"config": {
+        "platform": {
+            "php": "8.0"
+        }
+    }
 }

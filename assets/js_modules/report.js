@@ -146,7 +146,7 @@ const report = {
 				report.data.table.row
 					.add([
 						report.components.text(i + 1),
-						report.components.text(moment(ev.saledate).format("DD-MMM-YYYY")),
+						report.components.text(toThaiDateString(new Date(ev.saledate))),
 						report.components.text(
 							`${ev.rowdata[0].amount} / ${formatCurrency(ev.rowdata[0].price)}`
 						),
@@ -273,7 +273,7 @@ const report = {
 					total.push(parseFloat(ev.pricetotal));
 
 					item += `<div class="d-item list-item">
-								<div>${moment(ev.saledate).format("DD-MMM-YYYY")}</div>
+								<div>${toThaiDateString(new Date(ev.saledate))}</div>
 								<div class="d-flex flex-column gap-1">
 									<div class="text-end">${ev.rowdata[0].amount} / ${formatCurrency(
 						ev.rowdata[0].price
@@ -416,18 +416,17 @@ const report = {
 				dom: "<'all-report-wrapper'<'left col-sm-12 col-12'Bl><'right'f>>rtip",
 				// "bPaginate": false,
 				buttons: [
-					{
-						extend: "excel",
-
-						title: $(`tb-report`).data("title"),
-						customize: function (xlsx) {
-							var sheet = xlsx.xl.worksheets["sheet1.xml"];
-							$(
-								'row c[r^="A"], row c[r^="B"], row c[r^="C"], row c[r^="D"],row c[r^="E"],row c[r^="F"],row c[r^="G"],row c[r^="H"]',
-								sheet
-							).attr("s", "51");
-						},
-					},
+					// {
+					// 	extend: "excel",
+					// 	title: $(`tb-report`).data("title"),
+					// 	customize: function (xlsx) {
+					// 		var sheet = xlsx.xl.worksheets["sheet1.xml"];
+					// 		$(
+					// 			'row c[r^="A"], row c[r^="B"], row c[r^="C"], row c[r^="D"],row c[r^="E"],row c[r^="F"],row c[r^="G"],row c[r^="H"]',
+					// 			sheet
+					// 		).attr("s", "51");
+					// 	},
+					// },
 				],
 				order: [[0, "asc"]],
 			});
@@ -457,16 +456,19 @@ const report = {
 		});
 
 		$(document).on("click", "#search", async (e) => {
-			$("#exportpdf").remove();
+			$("#exportpdf,#exportexcel").remove();
 			let date_start = $("#date_start").val();
 			let date_end = $("#date_end").val();
 			let data = {
 				date_start: date_start,
 				date_end: date_end,
 			};
-
+			let url = base_url('reports/exportExcel?date_start=')+date_start+'&date_end='+date_end
 			$(".all-report-wrapper .dt-buttons.btn-group").append(
-				'<button class="btn btn-secondary " id="exportpdf" data-bs-toggle="modal" data-bs-target="#showpdfview" type="button"><span>PDF</span></button>'
+				`<div class="btn-group">
+				<a href="${url}" target="_blank" class="btn btn-secondary " id="exportexcel"><span>Excel</span></a>
+				<button class="btn btn-secondary " id="exportpdf" data-bs-toggle="modal" data-bs-target="#showpdfview" type="button"><span>PDF</span></button>
+				</div>`
 			);
 			await this.ajax.get_data(data);
 		});

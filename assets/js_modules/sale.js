@@ -271,7 +271,7 @@ const sale = {
 				sale.data.table.row
 					.add([
 						sale.components.text(i + 1),
-						sale.components.text(ev.saledate ? result : ""),
+						sale.components.text(toThaiDateString( new Date(ev.saledate))),
 						sale.components.items(ev.rowdata),
 						sale.components.text(formatCurrency(sum)),
 					])
